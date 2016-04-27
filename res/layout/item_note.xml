@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="110sp"
+        android:layout_height="110sp" >
+
+        <ImageView
+            android:id="@+id/item_img"
+            android:layout_width="95dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:background="@drawable/page_green" />
+
+        <com.fenghuo.LineTextView
+            android:id="@+id/item_tv_content"
+            android:layout_width="85sp"
+            android:layout_height="75sp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="9sp"
+            android:background="@null"
+            android:editable="false"
+            android:enabled="false"
+            android:ellipsize="end"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:gravity="top|left"
+            android:lines="3"
+            android:textColor="@color/blue"
+            android:textSize="14sp" />
+        <Button
+            android:id="@+id/item_btndelete"
+            android:layout_width="33sp"
+            android:layout_height="33sp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="-3sp"
+            android:background="@drawable/unipay_pic_wrong" >
+        </Button>
+
+        <ImageView
+            android:id="@+id/item_alarm"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="3sp"
+            android:background="@drawable/ic_alarm" />
+    </RelativeLayout>
+
+</RelativeLayout>

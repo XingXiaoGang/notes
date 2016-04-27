@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <Button
+        android:id="@+id/btn_add_things"
+        android:layout_width="200sp"
+        android:layout_height="35sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15sp"
+        android:layout_marginTop="5sp"
+        android:text="+写记事"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:background="@drawable/selector_btn_blue" />
+
+    <GridView
+        android:id="@+id/gv_list"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/btn_add_things"
+        android:layout_below="@id/rl_index"
+        android:horizontalSpacing="10sp"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10sp" >
+    </GridView>
+
+</RelativeLayout>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" 
+    android:background="@color/transparency">
+
+    <LinearLayout
+        android:layout_width="300sp"
+        android:layout_height="60dp"
+        android:background="@drawable/shap_pop_button"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/btn_compelete"
+            android:layout_width="200sp"
+            android:layout_height="40sp"
+            android:background="@drawable/selector_btn_blue"
+            android:text="完成"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

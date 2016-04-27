@@ -1,0 +1,156 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray">
+
+    <RelativeLayout
+        android:id="@+id/ln_top"
+        android:layout_width="fill_parent"
+        android:layout_height="40sp"
+        android:background="@drawable/title_bg"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="随心记"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+        <Button
+            android:layout_width="3sp"
+            android:layout_height="25sp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8sp"
+            android:layout_toLeftOf="@+id/btn_setting"
+            android:background="@drawable/divide_blue" />
+
+        <Button
+            android:id="@+id/btn_setting"
+            android:layout_width="20sp"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10sp"
+            android:background="@drawable/title_menu" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_index"
+        android:layout_width="fill_parent"
+        android:layout_height="34sp"
+        android:layout_below="@+id/ln_top"
+        android:background="@drawable/title_kind_bg">
+
+        <LinearLayout
+            android:id="@+id/ll_index_bar"
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:background="@drawable/title_kindbar_bg"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:padding="0dp">
+
+            <TextView
+                android:id="@+id/tv_things"
+                style="@style/menuTitle"
+                android:background="@drawable/title_kindbar_bg"
+                android:text="记事"
+                android:textColor="@color/bluedeep_text" />
+
+            <ImageView
+                android:layout_width="2sp"
+                android:layout_height="25sp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/devide" />
+
+            <TextView
+                android:id="@+id/tv_accounts"
+                style="@style/menuTitle"
+                android:background="@drawable/title_kindbar_bg"
+                android:text="记账"
+                android:textColor="@color/grey" />
+        </LinearLayout>
+
+        <com.fenghuo.notes.ViewPagerTab
+            android:id="@+id/vp_tab"
+            android:layout_width="match_parent"
+            android:layout_height="4sp"
+            android:layout_alignParentBottom="true">
+
+            <View
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@color/blue_text" />
+
+        </com.fenghuo.notes.ViewPagerTab>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_index">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/main_bg" />
+
+        <com.mine.view.menu.slide_section_menu.SlideSectionMenu
+            android:id="@+id/menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp"
+            android:background="@color/shadow"
+            android:visibility="gone">
+
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/shape_toast"
+                android:gravity="center"
+                android:text="1aaa" />
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/shape_toast"
+                android:gravity="center"
+                android:text="2aaa" />
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/shape_toast"
+                android:gravity="center"
+                android:text="3aaa" />
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/shape_toast"
+                android:gravity="center"
+                android:text="4aaa" />
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/shape_toast"
+                android:gravity="center"
+                android:text="5aaa" />
+
+        </com.mine.view.menu.slide_section_menu.SlideSectionMenu>
+
+
+    </FrameLayout>
+
+</RelativeLayout>

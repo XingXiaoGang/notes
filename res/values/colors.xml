@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#fff</color>
+     <color name="ivory">#FFFFF0</color><!--象牙色 --> 
+    <color name="black">#000</color>
+    <color name="green">#ff4f8c0b</color>
+    <color name="blue">#ff1869af</color>
+    <color name="transparency">#00000000</color>
+    <color name="shadow">#1e000000</color>
+    <color name="shadow_medium">#6e000000</color>
+    <color name="shadow_blue">#2e2669af</color>
+    <color name="shadow_deep">#bb000000</color>
+    <color name="grey">#ff5b5a5a</color>
+    <color name="light_gray">#ffebebeb</color>
+    <color name="light_grey">#DCDCDC</color><!-- 浅灰色 -->
+    <color name="deep_gray">#ff3b3b3b</color>
+	<color name="red_text">#f27e50</color>
+	<color name="bluedeep_text">#588bf2</color>
+	<color name="blue_text">#79b7f6</color>
+	<color name="gray_text">#9d9d9d</color>
+</resources>

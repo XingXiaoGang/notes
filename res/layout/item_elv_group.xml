@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50sp"
+        android:background="@drawable/selector_list_bg" >
+
+        <TextView
+            android:id="@+id/item_group_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15sp"
+            android:text="2014-08-19"
+            android:textColor="@color/red_text"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/item_group_in"
+            android:layout_width="wrap_content"
+            android:layout_height="25sp"
+            android:layout_marginRight="25sp"
+            android:layout_toLeftOf="@+id/item_group_img"
+            android:gravity="center_vertical"
+            android:text="支出：0.0元"
+            android:textColor="@color/bluedeep_text"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/item_group_out"
+            android:layout_width="wrap_content"
+            android:layout_height="25sp"
+            android:layout_alignLeft="@+id/item_group_in"
+            android:layout_below="@+id/item_group_in"
+            android:gravity="center_vertical"
+            android:text="收入：0.0元"
+            android:textColor="@color/bluedeep_text"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/item_group_img"
+            android:layout_width="25sp"
+            android:layout_height="25sp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8sp"
+            android:background="@drawable/ic_group" />
+    </RelativeLayout>
+
+</LinearLayout>

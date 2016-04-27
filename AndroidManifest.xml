@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.fenghuo.notes"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Black.NoTitleBar">
+        <activity
+            android:name="com.fenghuo.notes.Ac_Main"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.fenghuo.notes.Ac_Welcome">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.fenghuo.notes.Ac_addThing"></activity>
+        <activity android:name="com.fenghuo.notes.Ac_AccountAdd"></activity>
+        <activity android:name="com.fenghuo.notes.Ac_Alarm"></activity>
+        <!-- 开机广播 -->
+        <receiver
+            android:name="com.fenghuo.alarm.AlarmReciver"
+            android:process=":alarmreciver">
+            <intent-filter>
+                <action android:name="com.fenghuo.alarmstart" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <!-- 服务 -->
+        <service android:name="com.fenghuo.alarm.AlarmService">
+            <intent-filter>
+                <action android:name="com.fenghuo.alarmservice" />
+            </intent-filter>
+        </service>
+
+        <activity android:name="Ac_EditThing"></activity>
+        <activity android:name="Ac_About"></activity>
+    </application>
+
+</manifest>

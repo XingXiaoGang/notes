@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ivory"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/ln_top"
+        android:layout_width="fill_parent"
+        android:layout_height="45sp"
+        android:background="@drawable/title_bg"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_back_about"
+        android:layout_width="45sp"
+            android:layout_height="40sp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/select_back"
+            android:paddingLeft="6sp" />
+
+        <TextView
+            android:id="@+id/text_edit_acc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="随心记"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+    </RelativeLayout>
+
+    <!-- 主体 -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/white"
+        android:orientation="vertical" >
+
+        <!-- 第一行 金额 -->
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="160sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp" >
+
+            <ImageView
+                android:id="@+id/image_about"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_about" >
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/image_about_text"
+                android:layout_width="60sp"
+                android:layout_height="11sp"
+                android:layout_below="@+id/image_about"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="3sp"
+                android:background="@drawable/about_text" >
+            </ImageView>
+        </RelativeLayout>
+
+        <!-- 消费内容 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_funvtion"
+            android:layout_width="fill_parent"
+            android:layout_height="30sp"
+            android:layout_marginLeft="25sp"
+            android:layout_marginRight="25sp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="15sp"
+                android:text="功能介绍:"
+                android:textColor="@color/gray_text"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="40sp"
+                android:layout_height="25sp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/ic_right_about" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="5sp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:background="@drawable/about_divide" />
+
+        <RelativeLayout
+            android:id="@+id/rl_app"
+            android:layout_width="fill_parent"
+            android:layout_height="30sp"
+            android:layout_marginLeft="25sp"
+            android:layout_marginRight="25sp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="15sp"
+                android:text="程序:"
+                android:textColor="@color/gray_text"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="40sp"
+                android:layout_height="25sp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/ic_right_about" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="5sp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:background="@drawable/about_divide" />
+        <!-- 类型 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_art"
+            android:layout_width="fill_parent"
+            android:layout_height="30sp"
+            android:layout_marginLeft="25sp"
+            android:layout_marginRight="25sp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="15sp"
+                android:text="美工:"
+                android:textColor="@color/gray_text"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="40sp"
+                android:layout_height="25sp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/ic_right_about" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="5sp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:background="@drawable/about_divide" />
+        <!-- 类型 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_tjfh"
+            android:layout_width="fill_parent"
+            android:layout_height="30sp"
+            android:layout_marginLeft="25sp"
+            android:layout_marginRight="25sp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="15sp"
+                android:text="烽火征途科技"
+                android:textColor="@color/gray_text"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="40sp"
+                android:layout_height="25sp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/ic_right_about" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="5sp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:background="@drawable/about_divide" />
+
+        <RelativeLayout
+            android:id="@+id/rl_update"
+            android:layout_width="fill_parent"
+            android:layout_height="30sp"
+            android:layout_marginLeft="25sp"
+            android:layout_marginRight="25sp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="15sp"
+                android:text="版本更新"
+                android:textColor="@color/gray_text"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="40sp"
+                android:layout_height="25sp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/ic_right_about" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="5sp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:background="@drawable/about_divide" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ivory"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/ln_top"
+        android:layout_width="fill_parent"
+        android:layout_height="45sp"
+        android:background="@drawable/title_bg"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_back_accadd"
+            android:layout_width="45sp"
+            android:layout_height="40sp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/select_back"
+            android:paddingLeft="6sp" />
+
+        <TextView
+            android:id="@+id/text_edit_acc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="新增账单"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/btn_save_addacc"
+            android:layout_width="50sp"
+            android:layout_height="28sp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5sp"
+            android:background="@drawable/select_save" />
+    </RelativeLayout>
+
+    <!-- 主体 -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/main_bg"
+        android:orientation="vertical" >
+
+        <!-- 内主体 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="10sp"
+            android:layout_marginLeft="15sp"
+            android:layout_marginRight="15sp"
+            android:layout_marginTop="10sp"
+            android:background="@drawable/addacc_bg"
+            android:orientation="vertical" >
+
+            <!-- 第一行 金额 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="90sp" 
+                android:layout_marginRight="10sp"
+                android:layout_marginLeft="10sp">
+
+                <ImageView
+                    android:id="@+id/image_money"
+                    android:layout_width="80sp"
+                    android:layout_height="90sp"
+                    android:background="@drawable/ic_money" />
+
+                <TextView
+                    android:id="@+id/imageView1"
+                    android:layout_width="45sp"
+                    android:layout_height="45sp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30sp"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:gravity="bottom"
+                    android:textColor="@color/blue_text"
+                    android:text="元" />
+
+                <com.fenghuo.LineEditText
+                    android:id="@+id/et_money"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50sp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/imageView1"
+                    android:layout_toRightOf="@+id/image_money"
+                    android:background="@null"
+                    android:gravity="center_horizontal|bottom"
+                    android:numeric="decimal"
+                    android:selectAllOnFocus="true"
+                    android:text="0"
+                    android:singleLine="true"
+                    android:textColor="@color/blue_text"
+                    android:textSize="30sp"/>
+            </RelativeLayout>
+
+            <!-- 消费内容 -->
+
+            <RelativeLayout
+                android:id="@+id/ln_kinds_addacc"
+                android:layout_width="fill_parent"
+                android:layout_height="40sp"
+                android:layout_marginLeft="25sp"
+                android:layout_marginRight="25sp"
+                android:layout_marginTop="10sp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="15sp"
+                    android:text="内容:"
+                    android:textColor="@color/blue_text"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/tv_kinds_addacc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:text="点击选择 >"
+                    android:textSize="16sp" 
+                    android:textColor="@color/blue_text"/>
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="5sp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:background="@drawable/addacc_divide" />
+            <!-- 类型 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40sp"
+                android:layout_marginLeft="25sp"
+                android:layout_marginRight="25sp"
+                android:layout_marginTop="10sp" >
+
+                <TextView
+                    android:id="@+id/textviewkind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="15sp"
+                    android:text="类型:"
+                    android:textColor="@color/blue_text"
+                    android:textSize="22sp" />
+
+                <RadioGroup
+                    android:id="@+id/rg_kind"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@+id/textviewkind"
+                    android:orientation="horizontal" 
+                    android:gravity="right">
+
+                    <RadioButton
+                        android:id="@+id/rab_outcome"
+                        android:layout_width="80sp"
+                        android:layout_height="30sp"
+                        android:layout_marginRight="10sp"
+                        android:button="@drawable/check_box_change"
+                        android:text="支出"
+                        android:checked="true"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="5sp"
+                        android:textColor="@color/blue_text" />
+
+                    <RadioButton
+                        android:id="@+id/rab_income"
+                        android:layout_width="80sp"
+                        android:layout_height="30sp"
+                        android:button="@drawable/check_box_change"
+                        android:text="收入"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue_text" />
+                </RadioGroup>
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="5sp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:background="@drawable/addacc_divide" />
+            <!-- 类型 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40sp"
+                android:layout_marginLeft="25sp"
+                android:layout_marginRight="25sp"
+                android:layout_marginTop="10sp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="15sp"
+                    android:text="日期:"
+                    android:textColor="@color/blue_text"
+                    android:textSize="22sp"/>
+
+                <TextView
+                    android:id="@+id/tv_pickdate_acc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toLeftOf="@+id/tv_picktime_acc"
+                    android:text="2014-08-25"
+                    android:gravity="bottom"
+                    android:layout_marginRight="5sp"
+                    android:textSize="18sp" 
+                    android:textColor="@color/blue_text"/>
+                <TextView
+                    android:id="@+id/tv_picktime_acc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:gravity="bottom"
+                    android:text="21:00"
+                    android:textSize="18sp" 
+                    android:textColor="@color/blue_text" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="5sp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:background="@drawable/addacc_divide" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

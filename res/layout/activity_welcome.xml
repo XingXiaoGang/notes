@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/welc_bg"
+     >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="fill_parent"
+        android:layout_height="270sp"
+        android:layout_margin="20sp"
+        android:background="@drawable/welc_icon"
+     />
+
+    <ImageView
+        android:layout_width="160sp"
+        android:layout_height="20sp"
+        android:layout_below="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/welc_text" />
+
+</RelativeLayout>

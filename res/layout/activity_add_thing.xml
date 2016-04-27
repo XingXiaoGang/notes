@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/ln_top"
+        android:layout_width="fill_parent"
+        android:layout_height="45sp"
+        android:background="@drawable/title_bg"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_back_addthi"
+            android:layout_width="45sp"
+            android:layout_height="40sp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/select_back" />
+
+        <TextView
+            android:id="@+id/text_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="新增记事"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/btn_save_addthi"
+            android:layout_width="50sp"
+            android:layout_height="28sp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5sp"
+            android:background="@drawable/select_save" />
+    </RelativeLayout>
+
+    <com.fenghuo.NoteScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main_bg">
+
+        <com.fenghuo.LineEditText
+            android:id="@+id/et_text_addthi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:focusable="true"
+            android:gravity="left|top"
+            android:hint="请输入内容"
+            android:inputType="textMultiLine"
+            android:paddingLeft="5sp"
+            android:paddingRight="5sp"
+            android:paddingTop="5sp"
+            android:textColor="@color/gray_text" />
+    </com.fenghuo.NoteScrollView>
+
+</LinearLayout>

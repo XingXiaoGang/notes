@@ -125,7 +125,7 @@ public class AccountFragment extends FragmentExt implements OnClickListener,
 	@Override
 	public void onClick(View arg0) {
 
-		Intent intent = new Intent(getActivity(), Ac_AccountAdd.class);
+		Intent intent = new Intent(getActivity(), AddAccountActivity.class);
 		startActivity(intent);
 	}
 

@@ -17,7 +17,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Ac_addThing extends Activity implements View.OnClickListener {
+public class AddNoteActivity extends Activity implements View.OnClickListener {
 
     private Button btn_back;
     private Button btn_save;
@@ -38,8 +38,8 @@ public class Ac_addThing extends Activity implements View.OnClickListener {
         findviews();
 
         random = new Random();
-        helper = new PreferenceHelper(Ac_addThing.this);
-        noteHelper = new DBNoteHelper(Ac_addThing.this);
+        helper = new PreferenceHelper(AddNoteActivity.this);
+        noteHelper = new DBNoteHelper(AddNoteActivity.this);
 
         btn_back.setOnClickListener(this);
         btn_save.setOnClickListener(this);

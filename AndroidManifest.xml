@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
@@ -21,17 +21,25 @@
         android:theme="@android:style/Theme.Black.NoTitleBar">
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name="com.fenghuo.notes.Ac_Welcome">
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.fenghuo.notes.Ac_addThing"></activity>
-        <activity android:name="com.fenghuo.notes.Ac_AccountAdd"></activity>
-        <activity android:name="com.fenghuo.notes.Ac_Alarm"></activity>
+        <activity
+            android:name=".AddNoteActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AddAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AlarmActivity"
+            android:screenOrientation="portrait" />
         <!-- 开机广播 -->
         <receiver
             android:name="com.fenghuo.alarm.AlarmReciver"
@@ -48,8 +56,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name="Ac_EditThing"></activity>
-        <activity android:name="Ac_About"></activity>
+        <activity android:name=".EditNoteActivity"></activity>
+        <activity android:name=".AboutActivity"></activity>
     </application>
 
 </manifest>

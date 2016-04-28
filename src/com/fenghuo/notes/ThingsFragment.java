@@ -88,7 +88,7 @@ public class ThingsFragment extends FragmentExt implements OnClickListener,
         switch (arg0.getId()) {
             // 跳转界面
             case R.id.btn_add_things:
-                Intent intent = new Intent(getActivity(), Ac_addThing.class);
+                Intent intent = new Intent(getActivity(), AddNoteActivity.class);
                 startActivity(intent);
                 break;
             // 结束
@@ -117,7 +117,7 @@ public class ThingsFragment extends FragmentExt implements OnClickListener,
     public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                             long arg3) {
         note = list.get(position);
-        Intent intent_edit = new Intent(getActivity(), Ac_EditThing.class);
+        Intent intent_edit = new Intent(getActivity(), EditNoteActivity.class);
         intent_edit.putExtra("noteid", note.getId());
         startActivity(intent_edit);
     }
@@ -130,8 +130,7 @@ public class ThingsFragment extends FragmentExt implements OnClickListener,
         btn_complete.setOnClickListener(this);
         pop_button = new PopupWindow(mPopBtnView, LayoutParams.WRAP_CONTENT,
                 LayoutParams.WRAP_CONTENT);
-        pop_button.showAtLocation(getActivity().findViewById(R.id.vp_content),
-                Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 0);
+        pop_button.showAtLocation(getActivity().findViewById(R.id.vp_content), Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 0);
         pop_button.update();
     }
 

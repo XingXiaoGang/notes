@@ -20,7 +20,7 @@ import com.fenghuo.bean.Note;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Ac_EditThing extends Activity implements View.OnClickListener {
+public class EditNoteActivity extends Activity implements View.OnClickListener {
 
     private Button btn_back;
     private Button btn_save;
@@ -42,8 +42,8 @@ public class Ac_EditThing extends Activity implements View.OnClickListener {
 
         findviews();
 
-        noteHelper = new DBNoteHelper(Ac_EditThing.this);
-        toast = new CustomToast(Ac_EditThing.this);
+        noteHelper = new DBNoteHelper(EditNoteActivity.this);
+        toast = new CustomToast(EditNoteActivity.this);
 
         int noteid = getIntent().getIntExtra("noteid", -1);
         if (noteid != -1) {
@@ -138,13 +138,13 @@ public class Ac_EditThing extends Activity implements View.OnClickListener {
         String content = et_content.getText().toString().trim();
         switch (view.getId()) {
             case R.id.btn_alarm_editthi:
-                Intent intent_alarm = new Intent(Ac_EditThing.this, Ac_Alarm.class);
+                Intent intent_alarm = new Intent(EditNoteActivity.this, AlarmActivity.class);
                 intent_alarm.putExtra("noteid", currentNote.getId());
                 startActivity(intent_alarm);
                 break;
 
             case R.id.btn_delete_editthi:
-                new AlertDialog.Builder(Ac_EditThing.this)
+                new AlertDialog.Builder(EditNoteActivity.this)
                         .setTitle("确认删除?")
                         .setPositiveButton("确认",
                                 new DialogInterface.OnClickListener() {

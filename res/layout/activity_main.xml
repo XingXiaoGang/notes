@@ -93,11 +93,13 @@
         android:layout_height="match_parent"
         android:layout_below="@id/rl_index">
 
+
         <android.support.v4.view.ViewPager
             android:id="@+id/vp_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/main_bg" />
+
 
         <com.mine.view.gesture.GestureHandleView
             android:id="@+id/gesture_handler_view"
@@ -134,7 +136,6 @@
                 android:background="@drawable/menu_item_bg_selector"
                 android:clickable="true"
                 android:gravity="center"
-
                 android:text="备份" />
 
             <TextView
@@ -146,7 +147,6 @@
                 android:background="@drawable/menu_item_bg_selector"
                 android:clickable="true"
                 android:gravity="center"
-
                 android:text="设置密码" />
 
             <TextView
@@ -170,7 +170,6 @@
                 android:background="@drawable/menu_item_bg_selector"
                 android:clickable="true"
                 android:gravity="center"
-
                 android:text="清理记账" />
 
             <TextView
@@ -182,7 +181,6 @@
                 android:background="@drawable/menu_item_bg_selector"
                 android:clickable="true"
                 android:gravity="center"
-
                 android:text="关于" />
 
             <TextView
@@ -194,7 +192,6 @@
                 android:background="@drawable/menu_item_bg_selector"
                 android:clickable="true"
                 android:gravity="center"
-
                 android:text="退出" />
 
         </com.mine.view.menu.slide_section_menu.SlideSectionMenu>

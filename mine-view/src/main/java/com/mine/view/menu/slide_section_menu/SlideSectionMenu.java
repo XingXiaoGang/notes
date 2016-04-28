@@ -50,72 +50,40 @@ public class SlideSectionMenu extends LinearLayout implements Animation.Animatio
     public void openMenu(boolean anim) {
         if (mMenuState == State.CLOSED) {
             mMenuState = State.OPENING;
+            setVisibility(VISIBLE);
             //open
             if (mAnimationAdapter != null && anim) {
                 final int childCount = getChildCount();
-                List<Animation> animations = mAnimationAdapter.getOpenAnimations(childCount);
-                for (int i = 0; i < childCount; i++) {
-                    final View child = getChildAt(i);
-                    final Animation animation = animations.get(i);
-                    if (child.getVisibility() == VISIBLE) {
-                        child.startAnimation(animation);
+                List<Animation> animations = mAnimationAdapter.getAnimations(childCount);
+                switch (mAnimationAdapter.getType()) {
+                    case MenuAnimationAdapter.TYPE_ITEM: {
+                        for (int i = 0; i < childCount; i++) {
+                            final View child = getChildAt(i);
+                            final Animation animation = animations.get(i);
+                            if (child.getVisibility() == VISIBLE) {
+                                child.startAnimation(animation);
+                            }
+                            if (i == childCount - 1) {
+                                animation.setAnimationListener(this);
+                            }
+                        }
+                        break;
                     }
-                    if (i == childCount - 1) {
+                    case MenuAnimationAdapter.TYPE_CONTENT: {
+                        final Animation animation = animations.get(0);
+                        startAnimation(animation);
                         animation.setAnimationListener(this);
+                        break;
                     }
                 }
-            } else {
-                final int childCount = getChildCount();
-                List<Animation> animations = mAnimationAdapter.getOpenAnimations(childCount);
-                for (int i = 0; i < childCount; i++) {
-                    final View child = getChildAt(i);
-                    final Animation animation = animations.get(i);
-                    animation.setDuration(0);
-                    if (child.getVisibility() == VISIBLE) {
-                        child.startAnimation(animation);
-                    }
-                    if (i == childCount - 1) {
-                        animation.setAnimationListener(this);
-                    }
-                }
-                mMenuState = State.OPENED;
             }
         }
     }
 
-    public void closeMenu(boolean anim) {
+    public void closeMenu() {
         if (mMenuState == State.OPENED) {
-            mMenuState = State.CLOSING;
-            //close
-            if (mAnimationAdapter != null && anim) {
-                final int childCount = getChildCount();
-                List<Animation> animations = mAnimationAdapter.getCoseAnimations(childCount);
-                for (int i = 0; i < childCount; i++) {
-                    final View child = getChildAt(i);
-                    final Animation animation = animations.get(i);
-                    if (child.getVisibility() == VISIBLE) {
-                        child.startAnimation(animation);
-                    }
-                    if (i == 0) {
-                        animation.setAnimationListener(this);
-                    }
-                }
-            } else {
-                final int childCount = getChildCount();
-                List<Animation> animations = mAnimationAdapter.getCoseAnimations(childCount);
-                for (int i = 0; i < childCount; i++) {
-                    final View child = getChildAt(i);
-                    final Animation animation = animations.get(i);
-                    animation.setDuration(0);
-                    if (child.getVisibility() == VISIBLE) {
-                        child.startAnimation(animation);
-                    }
-                    if (i == 0) {
-                        animation.setAnimationListener(this);
-                    }
-                }
-                mMenuState = State.CLOSED;
-            }
+            mMenuState = State.CLOSED;
+            setVisibility(INVISIBLE);
         }
     }
 
@@ -127,14 +95,14 @@ public class SlideSectionMenu extends LinearLayout implements Animation.Animatio
         return mMenuState;
     }
 
-    public void toggleMenu(boolean openaim, boolean closeanim) {
+    public void toggleMenu(boolean anim) {
         switch (mMenuState) {
             case OPENED: {
-                closeMenu(closeanim);
+                closeMenu();
                 break;
             }
             case CLOSED: {
-                openMenu(openaim);
+                openMenu(anim);
                 break;
             }
         }

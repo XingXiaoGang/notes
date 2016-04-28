@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface IMenuAnimation {
 
-    List<Animation> getOpenAnimations(int itemNum);
-
-    List<Animation> getCoseAnimations(int itemNum);
+    List<Animation> getAnimations(int itemNum);
+// 关闭的时候一般不用动画 用动画感觉反而体验不好
+//    List<Animation> getCoseAnimations(int itemNum);
 }

@@ -5,12 +5,12 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
+import android.widget.FrameLayout;
 
 /**
  * Created by gang on 16-4-28.
  */
-public class GestureHandleView extends View implements GestureDetector.OnGestureListener {
+public class GestureHandleView extends FrameLayout implements GestureDetector.OnGestureListener {
 
     private GestureCallBack mGestureCallBack;
     private GestureDetector mGestureDetector;
@@ -32,14 +32,19 @@ public class GestureHandleView extends View implements GestureDetector.OnGesture
 
     private void initView(Context context) {
         mGestureDetector = new GestureDetector(context, this);
-        setClickable(true);
-        setFocusableInTouchMode(true);
+    }
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.d("test_gest", "======onTouchEvent=====" + event.getAction());
+        return false;
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         Log.d("test_gest", "======dispatchTouchEvent=====" + event.getAction());
-        return mGestureDetector.onTouchEvent(event);
+        return false;
     }
 
     public void setGestureCallBack(GestureCallBack callBack) {

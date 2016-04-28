@@ -28,7 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Ac_Alarm extends Activity implements OnClickListener {
+public class AlarmActivity extends Activity implements OnClickListener {
 
 	private MyAlarm alarmmanage;// 闹钟管理类
 	private DBAlarmHelper alarmHelper;// 闹钟数据库类
@@ -68,9 +68,9 @@ public class Ac_Alarm extends Activity implements OnClickListener {
 
 		findVeiws();
 
-		alarmmanage = new MyAlarm(Ac_Alarm.this);
-		noteHelper = new DBNoteHelper(Ac_Alarm.this);
-		alarmHelper = new DBAlarmHelper(Ac_Alarm.this);
+		alarmmanage = new MyAlarm(AlarmActivity.this);
+		noteHelper = new DBNoteHelper(AlarmActivity.this);
+		alarmHelper = new DBAlarmHelper(AlarmActivity.this);
 		// 接收
 		int noteid = getIntent().getIntExtra("noteid", -1);
 		selecteNote = noteHelper.GetSingle(noteid);
@@ -128,7 +128,7 @@ public class Ac_Alarm extends Activity implements OnClickListener {
 			tv_contents.setText(selecteNote.getContent());
 		}
 
-		toast = new CustomToast(Ac_Alarm.this);
+		toast = new CustomToast(AlarmActivity.this);
 
 		tv_ring.setOnClickListener(this);
 		rl_ring.setOnClickListener(this);
@@ -297,7 +297,7 @@ public class Ac_Alarm extends Activity implements OnClickListener {
 			View view = getLayoutInflater().inflate(R.layout.dialog_selectdate,
 					null);
 			datePicker = (DatePicker) view.findViewById(R.id.datepicker);
-			dialog_date = new AlertDialog.Builder(Ac_Alarm.this)
+			dialog_date = new AlertDialog.Builder(AlarmActivity.this)
 					.setView(view)
 					.setTitle("请选择日期")
 					.setPositiveButton("确认",
@@ -340,7 +340,7 @@ public class Ac_Alarm extends Activity implements OnClickListener {
 			View view = getLayoutInflater().inflate(R.layout.dialog_selecttime,
 					null);
 			timePicker = (TimePicker) view.findViewById(R.id.tiempicker);
-			dialog_time = new AlertDialog.Builder(Ac_Alarm.this)
+			dialog_time = new AlertDialog.Builder(AlarmActivity.this)
 					.setView(view)
 					.setTitle("请选择时间")
 					.setPositiveButton("确认",

@@ -15,7 +15,7 @@ import android.provider.MediaStore.Audio;
 import com.fenghuo.db.DBAlarmHelper;
 import com.fenghuo.db.DBNoteHelper;
 import com.fenghuo.bean.Alarm;
-import com.fenghuo.notes.Ac_EditThing;
+import com.fenghuo.notes.EditNoteActivity;
 import com.fenghuo.notes.R;
 
 public class AlarmReciver extends BroadcastReceiver {
@@ -81,7 +81,7 @@ public class AlarmReciver extends BroadcastReceiver {
 			}
 
 			// 点击跳转动作
-			Intent intent2 = new Intent(context, Ac_EditThing.class);
+			Intent intent2 = new Intent(context, EditNoteActivity.class);
 			intent2.putExtra("noteid", alarm.getId());
 			intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			PendingIntent pendingIntent = PendingIntent.getActivity(context, 3,intent2, PendingIntent.FLAG_UPDATE_CURRENT);

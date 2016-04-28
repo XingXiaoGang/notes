@@ -1,4 +1,4 @@
-package com.fenghuo;
+package com.mine.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

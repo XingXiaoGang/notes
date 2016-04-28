@@ -12,26 +12,23 @@ public abstract class MenuAnimationAdapter implements IMenuAnimation {
 
 
     private List<Animation> mOpenAnimationsCache = new ArrayList<>();
-    private List<Animation> mCloseAnimationsCache = new ArrayList<>();
-
     public static final int TYPE_ITEM = 0;
     public static final int TYPE_CONTENT = 1;
 
     @Override
-    public final List<Animation> getOpenAnimations(int itemNum) {
-
+    public final List<Animation> getAnimations(int itemNum) {
         int offset = getStartOffset();
         final List<Animation> list = mOpenAnimationsCache;
         if (list.isEmpty()) {
             switch (getType()) {
                 case TYPE_CONTENT: {
-                    Animation animation = getOpenAnimation();
+                    Animation animation = getAnimation();
                     list.add(animation);
                     break;
                 }
                 case TYPE_ITEM: {
                     Animation animation;
-                    while (itemNum > 0 && ((animation = getOpenAnimation()) != null)) {
+                    while (itemNum > 0 && ((animation = getAnimation()) != null)) {
                         animation.setStartOffset(offset);
                         offset += offset / 3;
                         list.add(animation);
@@ -44,41 +41,12 @@ public abstract class MenuAnimationAdapter implements IMenuAnimation {
         return list;
     }
 
-    @Override
-    public List<Animation> getCoseAnimations(int itemNum) {
-
-        int offset = getStartOffset();
-        final List<Animation> list = mCloseAnimationsCache;
-        if (list.isEmpty()) {
-            switch (getType()) {
-                case TYPE_CONTENT: {
-                    Animation animation = getOpenAnimation();
-                    list.add(animation);
-                    break;
-                }
-                case TYPE_ITEM: {
-                    Animation animation;
-                    while (itemNum > 0 && ((animation = getCloseAnimation()) != null)) {
-                        animation.setStartOffset(offset);
-                        offset += offset / 3;
-                        list.add(animation);
-                        itemNum--;
-                    }
-                    break;
-                }
-            }
-
-        }
-        return list;
-    }
 
     protected int getStartOffset() {
         return 50;
     }
 
-    abstract Animation getOpenAnimation();
-
-    abstract Animation getCloseAnimation();
+    abstract Animation getAnimation();
 
     abstract int getType();
 }

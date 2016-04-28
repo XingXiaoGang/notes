@@ -56,7 +56,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         findViewById(R.id.item_clean_accounts).setOnClickListener(this);
         findViewById(R.id.item_clean_notes).setOnClickListener(this);
         findViewById(R.id.item_setpwd).setOnClickListener(this);
-        mMenu.closeMenu(false);
+
+        mMenu.closeMenu();
         mAdapter = new ContentPageAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mAdapter);
         pagerTab.setViewPager(mViewPager);
@@ -67,14 +68,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         btn_setting.setOnClickListener(this);
         mAccountsTextView.setOnClickListener(this);
         mThingsTextView.setOnClickListener(this);
-
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_setting: {
-                mMenu.toggleMenu(true, true);
+                mMenu.toggleMenu(true);
                 break;
             }
             case R.id.tv_things: {
@@ -120,7 +120,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                                         Values.isRestore_database = false;
                                     }
                                 }).setNegativeButton("取消", null).show();
-                mMenu.closeMenu(false);
+                mMenu.closeMenu();
                 break;
             }
             case R.id.item_backup: {
@@ -149,12 +149,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         mToast.ShowMsg("备份成功！", CustomToast.Img_Ok);
                     }
                 }
-                mMenu.closeMenu(false);
+                mMenu.closeMenu();
                 break;
             }
             case R.id.item_setpwd: {
                 mToast.ShowMsg("该功能暂未开放，敬请期待下次更新", CustomToast.Img_Info);
-                mMenu.closeMenu(false);
+                mMenu.closeMenu();
                 break;
             }
             case R.id.item_clean_notes: {
@@ -179,7 +179,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                                         startActivity(intent);
                                     }
                                 }).setNegativeButton("取消", null).show();
-                mMenu.closeMenu(false);
+                mMenu.closeMenu();
                 break;
             }
             case R.id.item_clean_accounts: {
@@ -204,13 +204,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                                         startActivity(intent);
                                     }
                                 }).setNegativeButton("取消", null).show();
-                mMenu.closeMenu(false);
+                mMenu.closeMenu();
                 break;
             }
             case R.id.item_about: {
-                Intent intent = new Intent(MainActivity.this, Ac_About.class);
+                Intent intent = new Intent(MainActivity.this, AboutActivity.class);
                 startActivity(intent);
-                mMenu.closeMenu(false);
+                mMenu.closeMenu();
                 break;
             }
             case R.id.item_exit: {
@@ -227,7 +227,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         boolean res = false;
         switch (keyCode) {
             case KeyEvent.KEYCODE_MENU: {
-                mMenu.toggleMenu(true, true);
+                mMenu.toggleMenu(true);
                 res = true;
                 break;
             }
@@ -291,7 +291,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     public boolean onGestureClick() {
         if (mMenu.getMenuState() == SlideSectionMenu.State.OPENED) {
-            mMenu.closeMenu(false);
+            mMenu.closeMenu();
         }
         return true;
     }
@@ -307,7 +307,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     public boolean onSlideUp() {
         if (mMenu.getMenuState() == SlideSectionMenu.State.OPENED) {
-            mMenu.closeMenu(false);
+            mMenu.closeMenu();
         }
         return true;
     }

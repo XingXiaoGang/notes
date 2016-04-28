@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <item name="tag_group" type="id"></item>
+    <item name="tag_group" type="id" />
+    <item name="check_alarm" type="id" />
+    <item name="skip_splash" type="id" />
 
 </resources>

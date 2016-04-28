@@ -28,7 +28,7 @@ import com.fenghuo.bean.Kind;
 
 import java.util.List;
 
-public class Ac_AccountAdd extends Activity implements OnClickListener {
+public class AddAccountActivity extends Activity implements OnClickListener {
 
 	private Button btn_back;
 	private Button btn_save;
@@ -58,8 +58,8 @@ public class Ac_AccountAdd extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_add_acc);
 
 		findviews();
-		kindHelper = new DbKindHelper(Ac_AccountAdd.this);
-		toast = new CustomToast(Ac_AccountAdd.this);
+		kindHelper = new DbKindHelper(AddAccountActivity.this);
+		toast = new CustomToast(AddAccountActivity.this);
 
 		tv_date.setText(kindHelper.GetDateTime().substring(0, 10));
 		tv_time.setText(kindHelper.GetDateTime().substring(10));
@@ -97,7 +97,7 @@ public class Ac_AccountAdd extends Activity implements OnClickListener {
 				String time = tv_date.getText().toString() + " "
 						+ tv_time.getText().toString();
 				if (money != 0 && !kinds.equals("点击选择 >")) {
-					accountHelper = new DBAccountHelper(Ac_AccountAdd.this);
+					accountHelper = new DBAccountHelper(AddAccountActivity.this);
 					Account account = new Account(-1, kind, kinds, money, time);
 					accountHelper.insert(account);
 					accountHelper.Destroy();
@@ -130,7 +130,7 @@ public class Ac_AccountAdd extends Activity implements OnClickListener {
 			View view = getLayoutInflater().inflate(R.layout.dialog_selectdate,
 					null);
 			datePicker = (DatePicker) view.findViewById(R.id.datepicker);
-			dialog_date = new AlertDialog.Builder(Ac_AccountAdd.this)
+			dialog_date = new AlertDialog.Builder(AddAccountActivity.this)
 					.setView(view)
 					.setTitle("请选择日期")
 					.setPositiveButton("确认",
@@ -166,7 +166,7 @@ public class Ac_AccountAdd extends Activity implements OnClickListener {
 			View view = getLayoutInflater().inflate(R.layout.dialog_selecttime,
 					null);
 			timePicker = (TimePicker) view.findViewById(R.id.tiempicker);
-			dialog_time = new AlertDialog.Builder(Ac_AccountAdd.this)
+			dialog_time = new AlertDialog.Builder(AddAccountActivity.this)
 					.setView(view)
 					.setTitle("请选择时间")
 					.setPositiveButton("确认",
@@ -200,7 +200,7 @@ public class Ac_AccountAdd extends Activity implements OnClickListener {
 		View view = getLayoutInflater().inflate(R.layout.kind_list, null);
 		listView = (ListView) view.findViewById(R.id.lv_kinds);
 		kinds=kindHelper.Getlist();
-		adapter = new KindAdapter(Ac_AccountAdd.this, kinds);
+		adapter = new KindAdapter(AddAccountActivity.this, kinds);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -210,7 +210,7 @@ public class Ac_AccountAdd extends Activity implements OnClickListener {
 				handler.sendEmptyMessage(1);
 			}
 		});
-		dialog_kinds = new AlertDialog.Builder(Ac_AccountAdd.this)
+		dialog_kinds = new AlertDialog.Builder(AddAccountActivity.this)
 				.setTitle("请选择类型").setView(view)
 				.setPositiveButton("添加", new DialogInterface.OnClickListener() {
 
@@ -232,7 +232,7 @@ public class Ac_AccountAdd extends Activity implements OnClickListener {
 
 			final EditText editText = (EditText) view
 					.findViewById(R.id.et_addkinds);
-			dialog_addkinds = new AlertDialog.Builder(Ac_AccountAdd.this)
+			dialog_addkinds = new AlertDialog.Builder(AddAccountActivity.this)
 					.setTitle("请输入名称")
 					.setView(view)
 					.setPositiveButton("确定",

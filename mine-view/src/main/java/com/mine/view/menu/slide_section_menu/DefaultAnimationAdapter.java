@@ -29,7 +29,7 @@ public class DefaultAnimationAdapter extends MenuAnimationAdapter {
     }
 
     @Override
-    Animation getOpenAnimation() {
+    Animation getAnimation() {
         int from = 1;
         int to = 0;
         switch (mDrection) {
@@ -41,29 +41,6 @@ public class DefaultAnimationAdapter extends MenuAnimationAdapter {
             case DIRECTION_TO_BOTTOM: {
                 from = -1;
                 to = 0;
-                break;
-            }
-        }
-        TranslateAnimation animation = new TranslateAnimation(0, 0, 0, 0, TranslateAnimation.RELATIVE_TO_PARENT, from, Animation.RELATIVE_TO_PARENT, to);
-        animation.setDuration(DURATION);
-        animation.setFillAfter(true);
-        animation.setInterpolator(new OvershootInterpolator());
-        return animation;
-    }
-
-    @Override
-    Animation getCloseAnimation() {
-        int from = 1;
-        int to = 0;
-        switch (mDrection) {
-            case DIRECTION_TO_TOP: {
-                from = -1;
-                to = 0;
-                break;
-            }
-            case DIRECTION_TO_BOTTOM: {
-                from = 0;
-                to = -1;
                 break;
             }
         }

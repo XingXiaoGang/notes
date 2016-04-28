@@ -7,7 +7,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-public class Ac_About extends Activity implements OnClickListener {
+public class AboutActivity extends Activity implements OnClickListener {
 
     private Button btn_back;
     private RelativeLayout rl_app;
@@ -25,7 +25,7 @@ public class Ac_About extends Activity implements OnClickListener {
 
         findviews();
 
-        toast = new CustomToast(Ac_About.this);
+        toast = new CustomToast(AboutActivity.this);
 
         btn_back.setOnClickListener(this);
         rl_app.setOnClickListener(this);

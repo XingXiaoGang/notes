@@ -84,7 +84,7 @@
             android:background="@drawable/selector_edit" />
     </RelativeLayout>
 
-    <com.fenghuo.NoteScrollView
+    <com.mine.view.NoteScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -100,6 +100,6 @@
             android:paddingTop="5sp"
             android:singleLine="false"
             android:textColor="@color/shadow_medium" />
-    </com.fenghuo.NoteScrollView>
+    </com.mine.view.NoteScrollView>
 
 </LinearLayout>

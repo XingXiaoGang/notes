@@ -9,9 +9,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
 import com.fenghuo.LineEditText;
+import com.fenghuo.notes.bean.Note;
 import com.fenghuo.notes.db.DBNoteHelper;
 import com.fenghuo.notes.db.PreferenceHelper;
-import com.fenghuo.notes.bean.Note;
 
 import java.util.Random;
 import java.util.Timer;
@@ -89,8 +89,7 @@ public class AddNoteActivity extends Activity implements View.OnClickListener {
                 finish();
                 break;
             case R.id.btn_save_addthi:
-                int img = Values.pages[random.nextInt(5)];
-                currentNote = new Note(-1, img, content, noteHelper.GetDate(), 0);
+                currentNote = new Note(-1, random.nextInt(5), content, noteHelper.GetDate(), 0);
                 noteHelper.Add(currentNote);
                 helper.savelase("");// 如果是插入一条新记事 则需要清空last
                 noteHelper.Desdroy();

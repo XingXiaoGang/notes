@@ -14,8 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.fenghuo.LineEditText;
-import com.fenghuo.notes.db.DBNoteHelper;
 import com.fenghuo.notes.bean.Note;
+import com.fenghuo.notes.db.DBNoteHelper;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -108,26 +108,11 @@ public class EditNoteActivity extends Activity implements View.OnClickListener {
      * 设置背景
      */
     private void setbackgroud() {
-
-        switch (currentNote.getImg()) {
-            case R.drawable.page_blue:
-                et_content.setBackgroundResource(R.drawable.page_bg_blue);
-                break;
-            case R.drawable.page_green:
-                et_content.setBackgroundResource(R.drawable.page_bg_green);
-                break;
-            case R.drawable.page_pink:
-                et_content.setBackgroundResource(R.drawable.page_bg_pink);
-                break;
-            case R.drawable.page_white:
-                et_content.setBackgroundResource(R.color.white);
-                break;
-            case R.drawable.page_yellow:
-                et_content.setBackgroundResource(R.drawable.page_bg_yellow);
-                break;
-            default:
-                et_content.setBackgroundResource(R.drawable.page_bg_blue);
-                break;
+        int imgIndex = currentNote.getImg();
+        if (imgIndex >= 0 && imgIndex < Values.item_bg_big.length) {
+            et_content.setBackgroundResource(Values.item_bg_big[imgIndex]);
+        } else {
+            et_content.setBackgroundResource(R.drawable.page_bg_blue);
         }
     }
 

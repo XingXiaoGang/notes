@@ -1,50 +1,24 @@
 package com.mine.view.gesture;
 
 import android.content.Context;
-import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.widget.FrameLayout;
 
 /**
  * Created by gang on 16-4-28.
  */
-public class GestureHandleView extends FrameLayout implements GestureDetector.OnGestureListener {
+public class GestureHandler implements GestureDetector.OnGestureListener {
 
     private GestureCallBack mGestureCallBack;
     private GestureDetector mGestureDetector;
 
-    public GestureHandleView(Context context) {
-        super(context);
-        initView(context);
-    }
-
-    public GestureHandleView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initView(context);
-    }
-
-    public GestureHandleView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        initView(context);
-    }
-
-    private void initView(Context context) {
+    public GestureHandler(Context context, GestureCallBack callBack) {
         mGestureDetector = new GestureDetector(context, this);
+        this.mGestureCallBack = callBack;
     }
 
-
-    @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.d("test_gest", "======onTouchEvent=====" + event.getAction());
-        return false;
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        Log.d("test_gest", "======dispatchTouchEvent=====" + event.getAction());
-        return false;
+        return mGestureDetector.onTouchEvent(event);
     }
 
     public void setGestureCallBack(GestureCallBack callBack) {
@@ -78,7 +52,9 @@ public class GestureHandleView extends FrameLayout implements GestureDetector.On
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        if (velocityY > velocityX) {
+        int dx = (int) Math.abs(e2.getX() - e1.getX());
+        int dy = (int) Math.abs(e2.getY() - e1.getY());
+        if (dy > dx && velocityY > velocityX) {
             if (mGestureCallBack != null) {
                 if (velocityY > 0) {
                     mGestureCallBack.onSlideDown();
@@ -86,7 +62,7 @@ public class GestureHandleView extends FrameLayout implements GestureDetector.On
                     mGestureCallBack.onSlideUp();
                 }
             }
-
+            return true;
         }
         return false;
     }

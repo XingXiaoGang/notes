@@ -88,25 +88,17 @@
         </com.fenghuo.notes.ViewPagerTab>
     </RelativeLayout>
 
-    <FrameLayout
+    <com.mine.view.gesture.GestureFrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/rl_index">
-
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vp_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/main_bg" />
-
-
-        <com.mine.view.gesture.GestureHandleView
-            android:id="@+id/gesture_handler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:focusableInTouchMode="true" />
 
         <com.mine.view.menu.slide_section_menu.SlideSectionMenu
             android:id="@+id/menu"
@@ -196,6 +188,6 @@
 
         </com.mine.view.menu.slide_section_menu.SlideSectionMenu>
 
-    </FrameLayout>
+    </com.mine.view.gesture.GestureFrameLayout>
 
 </RelativeLayout>

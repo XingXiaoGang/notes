@@ -16,11 +16,11 @@ import com.fenghuo.adapter.ContentPageAdapter;
 import com.fenghuo.db.BackupRestoreUtils;
 import com.fenghuo.db.DBAccountHelper;
 import com.fenghuo.db.DBNoteHelper;
-import com.mine.view.gesture.GestureHandleView;
+import com.mine.view.gesture.GestureFrameLayout;
+import com.mine.view.gesture.GestureHandler;
 import com.mine.view.menu.slide_section_menu.SlideSectionMenu;
 
-public class MainActivity extends FragmentActivity implements View.OnClickListener, GestureHandleView.GestureCallBack, ViewPager.OnPageChangeListener,
-        ViewPagerTab.OnPageChangeListener_vp {
+public class MainActivity extends FragmentActivity implements View.OnClickListener, GestureHandler.GestureCallBack, ViewPager.OnPageChangeListener, ViewPagerTab.OnPageChangeListener_vp {
 
     private ViewPager mViewPager;
     private ContentPageAdapter mAdapter;
@@ -30,6 +30,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private TextView mAccountsTextView;
     private CustomToast mToast;
     private BackupRestoreUtils mBackupRestore;
+    private GestureFrameLayout mGestureFrameLayout;
 
     private long mLastBackDownTime = System.currentTimeMillis();// 时间
     private static final int CLICK_DURATION = 800;
@@ -41,13 +42,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         setContentView(R.layout.activity_main);
 
         Button btn_setting = (Button) findViewById(R.id.btn_setting);
-        mViewPager = (ViewPager) findViewById(R.id.vp_content);
         ViewPagerTab pagerTab = (ViewPagerTab) findViewById(R.id.vp_tab);
+        mViewPager = (ViewPager) findViewById(R.id.vp_content);
         mThingsTextView = (TextView) findViewById(R.id.tv_things);
         mAccountsTextView = (TextView) findViewById(R.id.tv_accounts);
         mMenu = (SlideSectionMenu) findViewById(R.id.menu);
-        GestureHandleView gestureHandleView = (GestureHandleView) findViewById(R.id.gesture_handler_view);
-        gestureHandleView.setGestureCallBack(this);
+        mGestureFrameLayout = (GestureFrameLayout) findViewById(R.id.container);
+        //回调手势
+        mGestureFrameLayout.setGestureCallBack(this);
 
         findViewById(R.id.item_about).setOnClickListener(this);
         findViewById(R.id.item_backup).setOnClickListener(this);
@@ -57,7 +59,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         findViewById(R.id.item_clean_notes).setOnClickListener(this);
         findViewById(R.id.item_setpwd).setOnClickListener(this);
 
-        mMenu.closeMenu();
         mAdapter = new ContentPageAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mAdapter);
         pagerTab.setViewPager(mViewPager);
@@ -68,6 +69,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         btn_setting.setOnClickListener(this);
         mAccountsTextView.setOnClickListener(this);
         mThingsTextView.setOnClickListener(this);
+        mMenu.closeMenu();
     }
 
     @Override

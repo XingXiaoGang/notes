@@ -99,57 +99,105 @@
             android:layout_height="match_parent"
             android:background="@drawable/main_bg" />
 
+        <com.mine.view.gesture.GestureHandleView
+            android:id="@+id/gesture_handler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusableInTouchMode="true" />
+
         <com.mine.view.menu.slide_section_menu.SlideSectionMenu
             android:id="@+id/menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="60dp"
-            android:background="@color/shadow"
-            android:visibility="gone">
+            android:layout_gravity="top|right"
+            android:background="@color/transparency">
 
 
             <TextView
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/shape_toast"
+                android:id="@+id/item_recovery"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/menu_item_bg_selector"
+                android:clickable="true"
                 android:gravity="center"
-                android:text="1aaa" />
+                android:text="恢复" />
 
             <TextView
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/shape_toast"
+                android:id="@+id/item_backup"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/menu_item_bg_selector"
+                android:clickable="true"
                 android:gravity="center"
-                android:text="2aaa" />
+
+                android:text="备份" />
 
             <TextView
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/shape_toast"
+                android:id="@+id/item_setpwd"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/menu_item_bg_selector"
+                android:clickable="true"
                 android:gravity="center"
-                android:text="3aaa" />
+
+                android:text="设置密码" />
 
             <TextView
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/shape_toast"
+                android:id="@+id/item_clean_notes"
+
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/menu_item_bg_selector"
+                android:clickable="true"
                 android:gravity="center"
-                android:text="4aaa" />
+                android:text="清理记事" />
 
             <TextView
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/shape_toast"
+                android:id="@+id/item_clean_accounts"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/menu_item_bg_selector"
+                android:clickable="true"
                 android:gravity="center"
-                android:text="5aaa" />
+
+                android:text="清理记账" />
+
+            <TextView
+                android:id="@+id/item_about"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/menu_item_bg_selector"
+                android:clickable="true"
+                android:gravity="center"
+
+                android:text="关于" />
+
+            <TextView
+                android:id="@+id/item_exit"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="50dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/menu_item_bg_selector"
+                android:clickable="true"
+                android:gravity="center"
+
+                android:text="退出" />
 
         </com.mine.view.menu.slide_section_menu.SlideSectionMenu>
-
 
     </FrameLayout>
 

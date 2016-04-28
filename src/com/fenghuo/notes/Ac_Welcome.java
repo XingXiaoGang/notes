@@ -83,7 +83,7 @@ public class Ac_Welcome extends Activity {
 				this.getApplicationContext(), R.drawable.ic_launcher);
 		shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, iconRes);
 
-		Intent intent = new Intent(getApplicationContext(), Ac_Main.class);
+		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 		intent.addFlags(Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY);
 		intent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -95,7 +95,7 @@ public class Ac_Welcome extends Activity {
 	}
 
 	private void skip() {
-		Intent intent = new Intent(Ac_Welcome.this, Ac_Main.class);
+		Intent intent = new Intent(Ac_Welcome.this, MainActivity.class);
 		startActivity(intent);
 		finish();
 	}

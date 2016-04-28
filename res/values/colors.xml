@@ -9,9 +9,10 @@
     <color name="transparency">#00000000</color>
     <color name="shadow">#1e000000</color>
     <color name="shadow_medium">#6e000000</color>
-    <color name="shadow_blue">#2e2669af</color>
+    <color name="shadow_blue">#442669af</color>
     <color name="shadow_deep">#bb000000</color>
     <color name="grey">#ff5b5a5a</color>
+    <color name="trans_gray">#aa5b5a5a</color>
     <color name="light_gray">#ffebebeb</color>
     <color name="light_grey">#DCDCDC</color><!-- 浅灰色 -->
     <color name="deep_gray">#ff3b3b3b</color>

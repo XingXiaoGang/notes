@@ -17,11 +17,11 @@ public class SlideSectionMenu extends LinearLayout implements Animation.Animatio
 
     private static final String TAG = "test_slide";
     //当前的状态
-    private State mMenuState = State.CLOSED;
+    private State mMenuState = State.OPENED;
     private MenuAnimationAdapter mAnimationAdapter;
 
 
-    private enum State {
+    public enum State {
         OPENED, OPENING, CLOSING, CLOSED
     }
 
@@ -44,13 +44,14 @@ public class SlideSectionMenu extends LinearLayout implements Animation.Animatio
     private void initView(Context context, AttributeSet attrs) {
         setWillNotDraw(true);
         setOrientation(VERTICAL);
+        mAnimationAdapter = new DefaultAnimationAdapter(context, DefaultAnimationAdapter.DIRECTION_TO_BOTTOM);
     }
 
-    public void openMenu() {
+    public void openMenu(boolean anim) {
         if (mMenuState == State.CLOSED) {
             mMenuState = State.OPENING;
             //open
-            if (mAnimationAdapter != null) {
+            if (mAnimationAdapter != null && anim) {
                 final int childCount = getChildCount();
                 List<Animation> animations = mAnimationAdapter.getOpenAnimations(childCount);
                 for (int i = 0; i < childCount; i++) {
@@ -63,15 +64,30 @@ public class SlideSectionMenu extends LinearLayout implements Animation.Animatio
                         animation.setAnimationListener(this);
                     }
                 }
+            } else {
+                final int childCount = getChildCount();
+                List<Animation> animations = mAnimationAdapter.getOpenAnimations(childCount);
+                for (int i = 0; i < childCount; i++) {
+                    final View child = getChildAt(i);
+                    final Animation animation = animations.get(i);
+                    animation.setDuration(0);
+                    if (child.getVisibility() == VISIBLE) {
+                        child.startAnimation(animation);
+                    }
+                    if (i == childCount - 1) {
+                        animation.setAnimationListener(this);
+                    }
+                }
+                mMenuState = State.OPENED;
             }
         }
     }
 
-    public void closeMenu() {
+    public void closeMenu(boolean anim) {
         if (mMenuState == State.OPENED) {
             mMenuState = State.CLOSING;
             //close
-            if (mAnimationAdapter != null) {
+            if (mAnimationAdapter != null && anim) {
                 final int childCount = getChildCount();
                 List<Animation> animations = mAnimationAdapter.getCoseAnimations(childCount);
                 for (int i = 0; i < childCount; i++) {
@@ -84,6 +100,21 @@ public class SlideSectionMenu extends LinearLayout implements Animation.Animatio
                         animation.setAnimationListener(this);
                     }
                 }
+            } else {
+                final int childCount = getChildCount();
+                List<Animation> animations = mAnimationAdapter.getCoseAnimations(childCount);
+                for (int i = 0; i < childCount; i++) {
+                    final View child = getChildAt(i);
+                    final Animation animation = animations.get(i);
+                    animation.setDuration(0);
+                    if (child.getVisibility() == VISIBLE) {
+                        child.startAnimation(animation);
+                    }
+                    if (i == 0) {
+                        animation.setAnimationListener(this);
+                    }
+                }
+                mMenuState = State.CLOSED;
             }
         }
     }
@@ -92,14 +123,18 @@ public class SlideSectionMenu extends LinearLayout implements Animation.Animatio
         this.mAnimationAdapter = adapter;
     }
 
-    public void toggleMenu() {
+    public State getMenuState() {
+        return mMenuState;
+    }
+
+    public void toggleMenu(boolean openaim, boolean closeanim) {
         switch (mMenuState) {
             case OPENED: {
-                closeMenu();
+                closeMenu(closeanim);
                 break;
             }
             case CLOSED: {
-                openMenu();
+                openMenu(openaim);
                 break;
             }
         }

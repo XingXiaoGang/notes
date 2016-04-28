@@ -20,7 +20,7 @@ public abstract class MenuAnimationAdapter implements IMenuAnimation {
     @Override
     public final List<Animation> getOpenAnimations(int itemNum) {
 
-        final int offset = getStartOffset();
+        int offset = getStartOffset();
         final List<Animation> list = mOpenAnimationsCache;
         if (list.isEmpty()) {
             switch (getType()) {
@@ -33,6 +33,7 @@ public abstract class MenuAnimationAdapter implements IMenuAnimation {
                     Animation animation;
                     while (itemNum > 0 && ((animation = getOpenAnimation()) != null)) {
                         animation.setStartOffset(offset);
+                        offset += offset / 3;
                         list.add(animation);
                         itemNum--;
                     }
@@ -46,7 +47,7 @@ public abstract class MenuAnimationAdapter implements IMenuAnimation {
     @Override
     public List<Animation> getCoseAnimations(int itemNum) {
 
-        final int offset = getStartOffset();
+        int offset = getStartOffset();
         final List<Animation> list = mCloseAnimationsCache;
         if (list.isEmpty()) {
             switch (getType()) {
@@ -59,6 +60,7 @@ public abstract class MenuAnimationAdapter implements IMenuAnimation {
                     Animation animation;
                     while (itemNum > 0 && ((animation = getCloseAnimation()) != null)) {
                         animation.setStartOffset(offset);
+                        offset += offset / 3;
                         list.add(animation);
                         itemNum--;
                     }

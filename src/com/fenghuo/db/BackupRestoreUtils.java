@@ -16,7 +16,7 @@ import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
 
-public class BackupRestore {
+public class BackupRestoreUtils {
 
 	private Context context;
 	private DBAlarmHelper alarmHelper;
@@ -37,7 +37,7 @@ public class BackupRestore {
 			.getPath() + "/Android/backups/com.fenghuo.notes";
 	private String DB_name = "data.db";
 
-	public BackupRestore(Context context) {
+	public BackupRestoreUtils(Context context) {
 		this.context = context;
 	}
 

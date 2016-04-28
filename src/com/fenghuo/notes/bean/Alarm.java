@@ -1,4 +1,4 @@
-package com.fenghuo.bean;
+package com.fenghuo.notes.bean;
 
 public class Alarm {
 	private int id;

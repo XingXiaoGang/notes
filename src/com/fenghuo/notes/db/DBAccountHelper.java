@@ -1,4 +1,4 @@
-package com.fenghuo.db;
+package com.fenghuo.notes.db;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -9,8 +9,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.fenghuo.bean.Account;
-import com.fenghuo.bean.MonthAccount;
+import com.fenghuo.notes.bean.Account;
+import com.fenghuo.notes.bean.MonthAccount;
 import com.fenghuo.notes.Values;
 
 public class DBAccountHelper {

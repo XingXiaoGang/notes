@@ -1,6 +1,6 @@
-package com.fenghuo.db;
+package com.fenghuo.notes.db;
 
-import com.fenghuo.bean.Note;
+import com.fenghuo.notes.bean.Note;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

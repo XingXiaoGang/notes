@@ -14,8 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.fenghuo.LineEditText;
-import com.fenghuo.db.DBNoteHelper;
-import com.fenghuo.bean.Note;
+import com.fenghuo.notes.db.DBNoteHelper;
+import com.fenghuo.notes.bean.Note;
 
 import java.util.Timer;
 import java.util.TimerTask;

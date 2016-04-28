@@ -17,11 +17,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.fenghuo.alarm.MyAlarm;
-import com.fenghuo.db.DBAlarmHelper;
-import com.fenghuo.db.DBNoteHelper;
-import com.fenghuo.bean.Alarm;
-import com.fenghuo.bean.Note;
+import com.fenghuo.notes.alarm.MyAlarm;
+import com.fenghuo.notes.db.DBAlarmHelper;
+import com.fenghuo.notes.db.DBNoteHelper;
+import com.fenghuo.notes.bean.Alarm;
+import com.fenghuo.notes.bean.Note;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

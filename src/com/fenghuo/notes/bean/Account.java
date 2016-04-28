@@ -1,4 +1,4 @@
-package com.fenghuo.bean;
+package com.fenghuo.notes.bean;
 
 /**数据库账单 model
  * @author Administrator

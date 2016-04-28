@@ -1,4 +1,4 @@
-package com.fenghuo.adapter;
+package com.fenghuo.notes.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.fenghuo.LineTextView;
-import com.fenghuo.db.DBNoteHelper;
-import com.fenghuo.bean.Note;
+import com.fenghuo.notes.db.DBNoteHelper;
+import com.fenghuo.notes.bean.Note;
 import com.fenghuo.notes.R;
 
 import java.util.List;

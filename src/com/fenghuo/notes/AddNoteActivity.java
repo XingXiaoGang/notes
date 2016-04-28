@@ -9,9 +9,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
 import com.fenghuo.LineEditText;
-import com.fenghuo.db.DBNoteHelper;
-import com.fenghuo.db.PreferenceHelper;
-import com.fenghuo.bean.Note;
+import com.fenghuo.notes.db.DBNoteHelper;
+import com.fenghuo.notes.db.PreferenceHelper;
+import com.fenghuo.notes.bean.Note;
 
 import java.util.Random;
 import java.util.Timer;

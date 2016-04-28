@@ -1,4 +1,4 @@
-package com.fenghuo.alarm;
+package com.fenghuo.notes.alarm;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -12,9 +12,9 @@ import android.os.PowerManager.WakeLock;
 import android.os.Vibrator;
 import android.provider.MediaStore.Audio;
 
-import com.fenghuo.db.DBAlarmHelper;
-import com.fenghuo.db.DBNoteHelper;
-import com.fenghuo.bean.Alarm;
+import com.fenghuo.notes.db.DBAlarmHelper;
+import com.fenghuo.notes.db.DBNoteHelper;
+import com.fenghuo.notes.bean.Alarm;
 import com.fenghuo.notes.EditNoteActivity;
 import com.fenghuo.notes.R;
 

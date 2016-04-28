@@ -1,12 +1,12 @@
-package com.fenghuo.db;
+package com.fenghuo.notes.db;
 
 import android.content.Context;
 import android.os.Environment;
 
-import com.fenghuo.bean.Alarm;
-import com.fenghuo.bean.Kind;
-import com.fenghuo.bean.MonthAccount;
-import com.fenghuo.bean.Note;
+import com.fenghuo.notes.bean.Alarm;
+import com.fenghuo.notes.bean.Kind;
+import com.fenghuo.notes.bean.MonthAccount;
+import com.fenghuo.notes.bean.Note;
 
 import org.json.JSONObject;
 

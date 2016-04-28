@@ -1,4 +1,4 @@
-package com.fenghuo.adapter;
+package com.fenghuo.notes.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,9 +8,9 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.fenghuo.bean.Account;
-import com.fenghuo.bean.GroupAccount;
-import com.fenghuo.bean.MonthAccount;
+import com.fenghuo.notes.bean.Account;
+import com.fenghuo.notes.bean.GroupAccount;
+import com.fenghuo.notes.bean.MonthAccount;
 import com.fenghuo.notes.R;
 
 import java.util.List;

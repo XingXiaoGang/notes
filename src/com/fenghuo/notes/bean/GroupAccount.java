@@ -1,4 +1,4 @@
-package com.fenghuo.bean;
+package com.fenghuo.notes.bean;
 
 /**分组数据model
  * @author Administrator

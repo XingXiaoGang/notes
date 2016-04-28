@@ -20,11 +20,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.fenghuo.LineEditText;
-import com.fenghuo.adapter.KindAdapter;
-import com.fenghuo.db.DBAccountHelper;
-import com.fenghuo.db.DbKindHelper;
-import com.fenghuo.bean.Account;
-import com.fenghuo.bean.Kind;
+import com.fenghuo.notes.adapter.KindAdapter;
+import com.fenghuo.notes.db.DBAccountHelper;
+import com.fenghuo.notes.db.DbKindHelper;
+import com.fenghuo.notes.bean.Account;
+import com.fenghuo.notes.bean.Kind;
 
 import java.util.List;
 

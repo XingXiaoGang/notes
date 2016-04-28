@@ -1,4 +1,4 @@
-package com.fenghuo.adapter;
+package com.fenghuo.notes.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

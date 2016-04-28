@@ -12,10 +12,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fenghuo.adapter.ContentPageAdapter;
-import com.fenghuo.db.BackupRestoreUtils;
-import com.fenghuo.db.DBAccountHelper;
-import com.fenghuo.db.DBNoteHelper;
+import com.fenghuo.notes.adapter.ContentPageAdapter;
+import com.fenghuo.notes.db.BackupRestoreUtils;
+import com.fenghuo.notes.db.DBAccountHelper;
+import com.fenghuo.notes.db.DBNoteHelper;
 import com.mine.view.ViewPagerTab;
 import com.mine.view.gesture.GestureFrameLayout;
 import com.mine.view.gesture.GestureHandler;

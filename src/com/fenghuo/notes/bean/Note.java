@@ -1,4 +1,4 @@
-package com.fenghuo.bean;
+package com.fenghuo.notes.bean;
 
 public class Note {
 	private int id;

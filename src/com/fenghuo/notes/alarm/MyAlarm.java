@@ -1,4 +1,4 @@
-package com.fenghuo.alarm;
+package com.fenghuo.notes.alarm;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,9 +11,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
-import com.fenghuo.db.DBAlarmHelper;
-import com.fenghuo.db.DBNoteHelper;
-import com.fenghuo.bean.Alarm;
+import com.fenghuo.notes.db.DBAlarmHelper;
+import com.fenghuo.notes.db.DBNoteHelper;
+import com.fenghuo.notes.bean.Alarm;
 
 public class MyAlarm {
 

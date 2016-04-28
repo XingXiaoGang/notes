@@ -16,9 +16,9 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.PopupWindow;
 
-import com.fenghuo.adapter.NoteAdapter;
-import com.fenghuo.bean.Note;
-import com.fenghuo.db.DBNoteHelper;
+import com.fenghuo.notes.adapter.NoteAdapter;
+import com.fenghuo.notes.bean.Note;
+import com.fenghuo.notes.db.DBNoteHelper;
 
 import java.util.List;
 

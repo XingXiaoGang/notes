@@ -13,8 +13,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 
-import com.fenghuo.alarm.AlarmService;
-import com.fenghuo.db.DBAlarmHelper;
+import com.fenghuo.notes.alarm.AlarmService;
+import com.fenghuo.notes.db.DBAlarmHelper;
 
 public class SplashActivity extends Activity implements Handler.Callback {
 

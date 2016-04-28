@@ -1,4 +1,4 @@
-package com.fenghuo.db;
+package com.fenghuo.notes.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -1,4 +1,4 @@
-package com.fenghuo.alarm;
+package com.fenghuo.notes.alarm;
 
 import android.app.Service;
 import android.content.Intent;

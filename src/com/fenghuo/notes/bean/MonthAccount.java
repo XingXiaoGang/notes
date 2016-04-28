@@ -1,4 +1,4 @@
-package com.fenghuo.bean;
+package com.fenghuo.notes.bean;
 
 /** 账单的月统计
  * @author Administrator

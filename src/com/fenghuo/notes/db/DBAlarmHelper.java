@@ -1,10 +1,10 @@
-package com.fenghuo.db;
+package com.fenghuo.notes.db;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.fenghuo.bean.Alarm;
+import com.fenghuo.notes.bean.Alarm;
 import com.fenghuo.notes.Values;
 
 import java.util.ArrayList;

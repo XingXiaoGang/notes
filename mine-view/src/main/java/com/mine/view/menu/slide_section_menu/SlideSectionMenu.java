@@ -17,7 +17,7 @@ public class SlideSectionMenu extends LinearLayout implements Animation.Animatio
 
     private static final String TAG = "test_slide";
     //当前的状态
-    private State mMenuState = State.OPENED;
+    private static State mMenuState = State.OPENED;
     private MenuAnimationAdapter mAnimationAdapter;
 
 
@@ -60,11 +60,15 @@ public class SlideSectionMenu extends LinearLayout implements Animation.Animatio
                         for (int i = 0; i < childCount; i++) {
                             final View child = getChildAt(i);
                             final Animation animation = animations.get(i);
-                            if (child.getVisibility() == VISIBLE) {
-                                child.startAnimation(animation);
-                            }
-                            if (i == childCount - 1) {
-                                animation.setAnimationListener(this);
+                            if (animation != null) {
+                                if (child.getVisibility() == VISIBLE) {
+                                    child.startAnimation(animation);
+                                }
+                                if (i == childCount - 1) {
+                                    animation.setAnimationListener(this);
+                                } else {
+                                    animation.setAnimationListener(null);
+                                }
                             }
                         }
                         break;
@@ -115,6 +119,9 @@ public class SlideSectionMenu extends LinearLayout implements Animation.Animatio
 
     @Override
     public void onAnimationEnd(Animation animation) {
+        if (mMenuState == null) {
+            return;
+        }
         switch (mMenuState) {
             case OPENING: {
                 mMenuState = State.OPENED;

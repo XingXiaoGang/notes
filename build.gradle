@@ -19,6 +19,7 @@ allprojects {
 }
 
 
+
 android {
     compileSdkVersion 19
     buildToolsVersion '23.0.1'
@@ -41,7 +42,7 @@ android {
         release.setRoot('build-types/release')
     }
     signingConfigs {
-        mconfig {
+        signConfig {
             storeFile file("gang.keystore")
             storePassword "xiaogang"
             keyAlias "android.keystore"
@@ -52,11 +53,11 @@ android {
 
     buildTypes {
         debug {
-
+            signingConfig signingConfigs.signConfig
         }
         release {
             minifyEnabled true
-            signingConfig signingConfigs.mconfig
+            signingConfig signingConfigs.signConfig
             proguardFile 'proguard-project.txt'
         }
     }
@@ -75,9 +76,4 @@ dependencies {
 
 def getLayoutLibPath() {
     return "${android.getSdkDirectory().getAbsolutePath()}" + "/platforms/" + android.compileSdkVersion + "/data/layoutlib.jar"
-}
-
-task doLast << {
-    println "=============android.doLast===================="
-    println "=============android.doLast===================="
 }

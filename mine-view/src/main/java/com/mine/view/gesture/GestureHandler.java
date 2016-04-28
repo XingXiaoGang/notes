@@ -59,8 +59,9 @@ public class GestureHandler implements GestureDetector.OnGestureListener {
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         int dx = (int) Math.abs(e2.getX() - e1.getX());
         int dy = (int) Math.abs(e2.getY() - e1.getY());
-        int area = (int) (mScreenSize.width / 4);
-        if (e1.getRawX() < area && e2.getRawX() < area) {
+        int left = (int) (mScreenSize.width / 4 * 3);
+        int bottom = (int) (mScreenSize.height / 4 * 3);
+        if (e1.getRawX() > left && e2.getRawX() > left && e1.getRawY() < bottom && e2.getRawY() < bottom) {
             if (dy > dx) {
                 if (mGestureCallBack != null) {
                     if (velocityY > velocityX) {

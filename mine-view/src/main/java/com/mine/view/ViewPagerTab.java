@@ -1,4 +1,4 @@
-package com.fenghuo.notes;
+package com.mine.view;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

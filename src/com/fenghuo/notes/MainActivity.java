@@ -16,6 +16,7 @@ import com.fenghuo.adapter.ContentPageAdapter;
 import com.fenghuo.db.BackupRestoreUtils;
 import com.fenghuo.db.DBAccountHelper;
 import com.fenghuo.db.DBNoteHelper;
+import com.mine.view.ViewPagerTab;
 import com.mine.view.gesture.GestureFrameLayout;
 import com.mine.view.gesture.GestureHandler;
 import com.mine.view.menu.slide_section_menu.SlideSectionMenu;

@@ -74,7 +74,7 @@
                 android:textColor="@color/grey" />
         </LinearLayout>
 
-        <com.fenghuo.notes.ViewPagerTab
+        <com.mine.view.ViewPagerTab
             android:id="@+id/vp_tab"
             android:layout_width="match_parent"
             android:layout_height="4sp"
@@ -85,7 +85,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/blue_text" />
 
-        </com.fenghuo.notes.ViewPagerTab>
+        </com.mine.view.ViewPagerTab>
     </RelativeLayout>
 
     <com.mine.view.gesture.GestureFrameLayout

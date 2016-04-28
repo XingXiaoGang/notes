@@ -4,6 +4,9 @@ import android.content.Context;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
+import com.fenghuo.utils.Size;
+import com.fenghuo.utils.Utils;
+
 /**
  * Created by gang on 16-4-28.
  */
@@ -11,10 +14,12 @@ public class GestureHandler implements GestureDetector.OnGestureListener {
 
     private GestureCallBack mGestureCallBack;
     private GestureDetector mGestureDetector;
+    private Size mScreenSize;
 
     public GestureHandler(Context context, GestureCallBack callBack) {
         mGestureDetector = new GestureDetector(context, this);
         this.mGestureCallBack = callBack;
+        mScreenSize = Utils.getScreenSize(context);
     }
 
     public boolean onTouchEvent(MotionEvent event) {
@@ -54,15 +59,18 @@ public class GestureHandler implements GestureDetector.OnGestureListener {
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         int dx = (int) Math.abs(e2.getX() - e1.getX());
         int dy = (int) Math.abs(e2.getY() - e1.getY());
-        if (dy > dx) {
-            if (mGestureCallBack != null) {
-                if (velocityY > velocityX) {
-                    mGestureCallBack.onSlideDown();
-                } else {
-                    mGestureCallBack.onSlideUp();
+        int area = (int) (mScreenSize.width / 4);
+        if (e1.getRawX() < area && e2.getRawX() < area) {
+            if (dy > dx) {
+                if (mGestureCallBack != null) {
+                    if (velocityY > velocityX) {
+                        mGestureCallBack.onSlideDown();
+                    } else {
+                        mGestureCallBack.onSlideUp();
+                    }
                 }
+                return true;
             }
-            return true;
         }
         return false;
     }

@@ -235,7 +235,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
             }
             case KeyEvent.KEYCODE_BACK: {
-                res = mAdapter.dispatchOnKeyDown(keyCode, event);
+                if (mMenu.getMenuState() == SlideSectionMenu.State.OPENED) {
+                    mMenu.closeMenu();
+                    res = true;
+                }
+                if (!res) {
+                    res = mAdapter.dispatchOnKeyDown(keyCode, event);
+                }
                 if (!res) {
                     if (mBackDownTimes == 1 && System.currentTimeMillis() - mLastBackDownTime < CLICK_DURATION || mBackDownTimes == 0) {
                         mBackDownTimes++;

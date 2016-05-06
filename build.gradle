@@ -37,6 +37,7 @@ android {
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
             jniLibs.srcDirs = ['libs']
+            jni.srcDirs=["jni"]
         }
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')

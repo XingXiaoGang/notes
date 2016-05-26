@@ -1,1 +1,1 @@
-include ':mine-view', ':mine-utils'
+include ':module-utils', ':module-view'

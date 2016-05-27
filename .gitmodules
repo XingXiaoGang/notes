@@ -1,0 +1,7 @@
+[submodule "module-utils"]
+ path = module-utils
+ url =  git@github.com:XingXiaoGang/module-utils.git
+ 
+ [submodule "module-view"]
+ path = module-view
+ url =  git@github.com:XingXiaoGang/module-view.git

@@ -20,7 +20,7 @@
 #}
 -optimizationpasses 5
 -verbose
-
+-dontwarn
 -dontwarn android.support.v4.**
 #-keep class android.support.v4.** { *; }
 #-keep interface android.support.v4.app.** { *; }
@@ -94,3 +94,11 @@
 #
 #    # 保持自己定义的类不被混淆
 #    -keep class MyClass;
+-dontwarn  android.support.v7.widget.**
+-keepattributes *Annotation*
+-keepattributes Signature
+-keepattributes InnerClasses
+
+-keepclassmembers class ** {
+    public void onEvent*(**);
+}

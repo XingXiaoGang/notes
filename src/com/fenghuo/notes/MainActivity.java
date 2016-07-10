@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Keep;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fenghuo.notes.adapter.ContentPageAdapter;
+import com.fenghuo.notes.context.NoteEvent;
 import com.fenghuo.notes.db.BackupRestoreUtils;
 import com.fenghuo.notes.db.DBAccountHelper;
 import com.fenghuo.notes.db.DBNoteHelper;
@@ -20,6 +22,8 @@ import com.mine.view.ViewPagerTab;
 import com.mine.view.gesture.GestureFrameLayout;
 import com.mine.view.gesture.GestureHandler;
 import com.mine.view.menu.slide_section_menu.SlideSectionMenu;
+
+import de.greenrobot.event.EventBus;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener, GestureHandler.GestureCallBack, ViewPager.OnPageChangeListener, ViewPagerTab.OnPageChangeListener_vp {
 
@@ -42,7 +46,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btn_setting = (Button) findViewById(R.id.btn_setting);
+
+        EventBus.getDefault().register(this);
+        Button btnSetting = (Button) findViewById(R.id.btn_setting);
         ViewPagerTab pagerTab = (ViewPagerTab) findViewById(R.id.vp_tab);
         mViewPager = (ViewPager) findViewById(R.id.vp_content);
         mThingsTextView = (TextView) findViewById(R.id.tv_things);
@@ -67,10 +73,15 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mViewPager.setCurrentItem(0, true);
 
         mToast = new CustomToast(MainActivity.this);
-        btn_setting.setOnClickListener(this);
+        btnSetting.setOnClickListener(this);
         mAccountsTextView.setOnClickListener(this);
         mThingsTextView.setOnClickListener(this);
-        mMenu.closeMenu();
+        mMenu.post(new Runnable() {
+            @Override
+            public void run() {
+                mMenu.closeMenu();
+            }
+        });
     }
 
     @Override
@@ -268,6 +279,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
     public void onPageScrollStateChanged(int arg0) {
 
     }
@@ -319,5 +336,27 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             mMenu.closeMenu();
         }
         return true;
+    }
+
+    /**
+     * 与发布者在同一个线程
+     *
+     * @param msg 事件1
+     */
+    @Keep
+    public void onEvent(NoteEvent msg) {
+        if (msg != null) {
+            switch (msg.what) {
+                case NoteEvent.TPYE_MENU_CLICK: {
+                    boolean isOpen = msg.argBoolean;
+                    if (isOpen) {
+                        mMenu.openMenu(true);
+                    } else {
+                        mMenu.closeMenu();
+                    }
+                    break;
+                }
+            }
+        }
     }
 }

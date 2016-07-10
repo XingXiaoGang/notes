@@ -82,7 +82,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         fw.write("\nproduct=" + SystemProperties.get("ro.product.name", "unknown"));
         fw.write("\nradio=" + SystemProperties.get("gsm.version.baseband", "unknown"));
         fw.write("\ntags=" + SystemProperties.get("ro.build.tags", "unknown"));
-        fw.write("\ntype=" + SystemProperties.get("ro.build.type", "unknown"));
+        fw.write("\nwhat=" + SystemProperties.get("ro.build.what", "unknown"));
         fw.write("\nuser=" + SystemProperties.get("ro.build.user", "unknown"));
         fw.write("\ncodename=" + SystemProperties.get("ro.build.version.codename", "unknown"));
         fw.write("\nincremental=" + SystemProperties.get("ro.build.version.incremental", "unknown"));

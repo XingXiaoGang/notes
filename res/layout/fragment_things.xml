@@ -1,32 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    
-    <Button
-        android:id="@+id/btn_add_things"
-        android:layout_width="200sp"
-        android:layout_height="35sp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15sp"
-        android:layout_marginTop="5sp"
-        android:text="+写记事"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:background="@drawable/selector_btn_blue" />
+    android:layout_height="match_parent">
+
 
     <GridView
         android:id="@+id/gv_list"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@+id/btn_add_things"
         android:layout_below="@id/rl_index"
         android:horizontalSpacing="10sp"
         android:numColumns="3"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="10sp" >
-    </GridView>
+        android:verticalSpacing="10sp" />
+
+
+    <LinearLayout
+        android:id="@+id/btn_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/blue_text"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="6dp"
+            app:cardUseCompatPadding="false"
+            app:contentPadding="0dp">
+
+            <com.mine.view.menu.icon.MaterialMenuView
+                android:id="@+id/material_menu_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:mm_color="@color/white"
+                app:mm_scale="1.2"
+                app:mm_strokeWidth="2"
+                app:mm_transformDuration="500"
+                app:mm_visible="true" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/blue_text"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="6dp"
+            app:cardUseCompatPadding="false"
+            app:contentPadding="0dp">
+
+            <TextView
+                android:id="@+id/material_add_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="+"
+                android:textColor="@color/white"
+                android:textSize="30dp" />
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
 
 </RelativeLayout>

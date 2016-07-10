@@ -73,6 +73,7 @@ dependencies {
     compile project(':module-utils')
     compile fileTree(include: ['*.jar'], dir: 'libs')
     provided files(getLayoutLibPath())
+    compile group: 'de.greenrobot', name: 'eventbus', version: '2.2.1'
 }
 
 def getLayoutLibPath() {

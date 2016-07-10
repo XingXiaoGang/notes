@@ -100,6 +100,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/main_bg" />
 
+
         <com.mine.view.menu.slide_section_menu.SlideSectionMenu
             android:id="@+id/menu"
             android:layout_width="wrap_content"
@@ -189,5 +190,6 @@
         </com.mine.view.menu.slide_section_menu.SlideSectionMenu>
 
     </com.mine.view.gesture.GestureFrameLayout>
+
 
 </RelativeLayout>

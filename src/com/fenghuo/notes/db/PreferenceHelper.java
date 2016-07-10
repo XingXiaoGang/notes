@@ -16,7 +16,7 @@ public class PreferenceHelper {
 	/**读取上一次的草稿
 	 * @return
 	 */
-	public String getlast() {
+	public String getLast() {
 		String str = "";
 		str = preferences.getString("last", "");
 		return str;
@@ -25,7 +25,7 @@ public class PreferenceHelper {
 	/**保存草稿
 	 * @param str
 	 */
-	public void savelase(String str) {
+	public void saveLast(String str) {
 		SharedPreferences.Editor editor = preferences.edit();
 		editor.putString("last", str);
 		editor.commit();

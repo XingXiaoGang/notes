@@ -14,8 +14,6 @@ import com.fenghuo.notes.db.DBNoteHelper;
 import com.fenghuo.notes.db.PreferenceHelper;
 
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class AddNoteActivity extends Activity implements View.OnClickListener {
 
@@ -35,7 +33,10 @@ public class AddNoteActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_thing);
 
-        findviews();
+        btn_back = (Button) findViewById(R.id.btn_back_addthi);
+        btn_save = (Button) findViewById(R.id.btn_save_addthi);
+        mScrollView = (ViewGroup) findViewById(R.id.scroll_view);
+        et_content = (LineEditText) findViewById(R.id.et_text_addthi);
 
         random = new Random();
         helper = new PreferenceHelper(AddNoteActivity.this);
@@ -44,35 +45,33 @@ public class AddNoteActivity extends Activity implements View.OnClickListener {
         btn_back.setOnClickListener(this);
         btn_save.setOnClickListener(this);
         // 上次没有保存的草稿
-        et_content.setText(helper.getlast());
+        et_content.setText(helper.getLast());
         et_content.setLineDown(et_content.getPaddingTop() - 2);
         // 自动弹出键盘
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
+        et_content.postDelayed(new Runnable() {
             @Override
             public void run() {
-
                 InputMethodManager manager = (InputMethodManager) et_content
                         .getContext().getSystemService(
                                 Context.INPUT_METHOD_SERVICE);
                 manager.showSoftInput(et_content, 0);
             }
         }, 500);
-
     }
 
-    private void findviews() {
-        btn_back = (Button) findViewById(R.id.btn_back_addthi);
-        btn_save = (Button) findViewById(R.id.btn_save_addthi);
-        mScrollView = (ViewGroup) findViewById(R.id.scroll_view);
-        et_content = (LineEditText) findViewById(R.id.et_text_addthi);
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (!isSaved) {
+            helper.saveLast(et_content.getText() + "");
+        }
     }
 
     @Override
     protected void onDestroy() {
 
         if (!isSaved)
-            helper.savelase(et_content.getText() + "");
+            helper.saveLast(et_content.getText() + "");
         super.onDestroy();
     }
 
@@ -85,13 +84,13 @@ public class AddNoteActivity extends Activity implements View.OnClickListener {
         switch (arg0.getId()) {
             case R.id.btn_back_addthi:
                 if (content.length() > 0)
-                    helper.savelase(content);
+                    helper.saveLast(content);
                 finish();
                 break;
             case R.id.btn_save_addthi:
                 currentNote = new Note(-1, random.nextInt(5), content, noteHelper.GetDate(), 0);
                 noteHelper.Add(currentNote);
-                helper.savelase("");// 如果是插入一条新记事 则需要清空last
+                helper.saveLast("");// 如果是插入一条新记事 则需要清空last
                 noteHelper.Desdroy();
                 isSaved = true;
                 finish();

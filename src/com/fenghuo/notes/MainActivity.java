@@ -324,17 +324,17 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     @Override
     public boolean onSlideDown() {
-        if (mMenu.getMenuState() == SlideSectionMenu.State.CLOSED) {
-            mMenu.openMenu(true);
-        }
+//        if (mMenu.getMenuState() == SlideSectionMenu.State.CLOSED) {
+//            mMenu.openMenu(true);
+//        }
         return true;
     }
 
     @Override
     public boolean onSlideUp() {
-        if (mMenu.getMenuState() == SlideSectionMenu.State.OPENED) {
-            mMenu.closeMenu();
-        }
+//        if (mMenu.getMenuState() == SlideSectionMenu.State.OPENED) {
+//            mMenu.closeMenu();
+//        }
         return true;
     }
 

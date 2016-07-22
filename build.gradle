@@ -37,7 +37,7 @@ android {
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
             jniLibs.srcDirs = ['libs']
-            jni.srcDirs=["jni"]
+            jni.srcDirs = ["jni"]
         }
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
@@ -78,4 +78,29 @@ dependencies {
 
 def getLayoutLibPath() {
     return "${android.getSdkDirectory().getAbsolutePath()}" + "/platforms/" + android.compileSdkVersion + "/data/layoutlib.jar"
+}
+
+//生成jar
+//gradle -q dependencies 查看依赖
+task copyAssets(type: Copy) {
+    from 'src/main/assets'
+    into 'build/intermediates/classes/release/assets'
+}
+
+//打jar
+//,dependsOn: tasks.findAll { task -> task.name.equals('_releaseCompile') }
+task genJar(type: Jar) {
+    from fileTree(dir: 'build/intermediates/classes/release/')
+    archiveName = 'gp_android_sdk_unproguard.jar'
+}
+
+//混淆jar
+task progJar(type: proguard.gradle.ProGuardTask) {
+    injars 'build/libs/gp_android_sdk_unproguard.jar'
+    outjars 'build/libs/gp_android_sdk.jar'
+    libraryjars System.getenv("ANDROID_HOME") + "/platforms/android-19/android.jar"
+    println("libraryjars path:"+System.getenv("ANDROID_HOME")+ "/platforms/android-19/android.jar")
+
+    // 具体需要keep住的类
+    configuration 'proguard-project.txt'
 }

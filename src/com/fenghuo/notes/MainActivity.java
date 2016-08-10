@@ -4,26 +4,24 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Keep;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fenghuo.notes.adapter.ContentPageAdapter;
-import com.fenghuo.notes.context.NoteEvent;
 import com.fenghuo.notes.db.BackupRestoreUtils;
 import com.fenghuo.notes.db.DBAccountHelper;
 import com.fenghuo.notes.db.DBNoteHelper;
 import com.mine.view.ViewPagerTab;
 import com.mine.view.gesture.GestureFrameLayout;
 import com.mine.view.gesture.GestureHandler;
+import com.mine.view.menu.icon.MaterialMenuDrawable;
+import com.mine.view.menu.icon.MaterialMenuView;
 import com.mine.view.menu.slide_section_menu.SlideSectionMenu;
 
-import de.greenrobot.event.EventBus;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener, GestureHandler.GestureCallBack, ViewPager.OnPageChangeListener, ViewPagerTab.OnPageChangeListener_vp {
 
@@ -36,9 +34,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private CustomToast mToast;
     private BackupRestoreUtils mBackupRestore;
     private GestureFrameLayout mGestureFrameLayout;
+    private MaterialMenuView mMenuView;
 
     private long mLastBackDownTime = System.currentTimeMillis();// 时间
-    private static final int CLICK_DURATION = 800;
+    private static final int CLICK_DURATION = 400;
     private int mBackDownTimes = 0;// 在短时间内按下的次数
 
     @Override
@@ -46,9 +45,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        EventBus.getDefault().register(this);
-        Button btnSetting = (Button) findViewById(R.id.btn_setting);
+        mMenuView = (MaterialMenuView) findViewById(R.id.material_menu_button);
         ViewPagerTab pagerTab = (ViewPagerTab) findViewById(R.id.vp_tab);
         mViewPager = (ViewPager) findViewById(R.id.vp_content);
         mThingsTextView = (TextView) findViewById(R.id.tv_things);
@@ -73,7 +70,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mViewPager.setCurrentItem(0, true);
 
         mToast = new CustomToast(MainActivity.this);
-        btnSetting.setOnClickListener(this);
+        mMenuView.setOnClickListener(this);
         mAccountsTextView.setOnClickListener(this);
         mThingsTextView.setOnClickListener(this);
         mMenu.post(new Runnable() {
@@ -87,8 +84,15 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_setting: {
+            case R.id.material_menu_button: {
                 mMenu.toggleMenu(true);
+                boolean isToOpen = mMenuView.getState() == MaterialMenuDrawable.IconState.BURGER;
+                updateMenuState(isToOpen);
+                if (isToOpen) {
+                    mMenu.openMenu(true);
+                } else {
+                    mMenu.closeMenu();
+                }
                 break;
             }
             case R.id.tv_things: {
@@ -281,7 +285,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -318,45 +321,35 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     public boolean onGestureClick() {
         if (mMenu.getMenuState() == SlideSectionMenu.State.OPENED) {
             mMenu.closeMenu();
+            updateMenuState(false);
         }
         return true;
     }
 
     @Override
     public boolean onSlideDown() {
-//        if (mMenu.getMenuState() == SlideSectionMenu.State.CLOSED) {
-//            mMenu.openMenu(true);
-//        }
+        if (mMenu.getMenuState() == SlideSectionMenu.State.CLOSED) {
+            mMenu.openMenu(true);
+            updateMenuState(true);
+        }
         return true;
     }
 
     @Override
     public boolean onSlideUp() {
-//        if (mMenu.getMenuState() == SlideSectionMenu.State.OPENED) {
-//            mMenu.closeMenu();
-//        }
+        if (mMenu.getMenuState() == SlideSectionMenu.State.OPENED) {
+            mMenu.closeMenu();
+            updateMenuState(false);
+        }
         return true;
     }
 
-    /**
-     * 与发布者在同一个线程
-     *
-     * @param msg 事件1
-     */
-    @Keep
-    public void onEvent(NoteEvent msg) {
-        if (msg != null) {
-            switch (msg.what) {
-                case NoteEvent.TPYE_MENU_CLICK: {
-                    boolean isOpen = msg.argBoolean;
-                    if (isOpen) {
-                        mMenu.openMenu(true);
-                    } else {
-                        mMenu.closeMenu();
-                    }
-                    break;
-                }
-            }
+    private void updateMenuState(boolean toOpen) {
+        if (toOpen) {
+            mMenuView.animateState(MaterialMenuDrawable.IconState.X);
+        } else {
+            mMenuView.animateState(MaterialMenuDrawable.IconState.BURGER);
         }
     }
+
 }

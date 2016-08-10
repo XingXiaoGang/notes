@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,17 +25,21 @@
             android:layout_height="25sp"
             android:layout_centerVertical="true"
             android:layout_marginRight="8sp"
-            android:layout_toLeftOf="@+id/btn_setting"
+            android:layout_toLeftOf="@+id/material_menu_button"
             android:background="@drawable/divide_blue" />
 
-        <Button
-            android:id="@+id/btn_setting"
-            android:layout_width="20sp"
-            android:layout_height="fill_parent"
+
+        <com.mine.view.menu.icon.MaterialMenuView
+            android:id="@+id/material_menu_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10sp"
-            android:background="@drawable/title_menu" />
+            android:layout_gravity="center"
+            app:mm_color="@color/white"
+            app:mm_scale="1"
+            app:mm_strokeWidth="2"
+            app:mm_transformDuration="500"
+            app:mm_visible="true" />
     </RelativeLayout>
 
     <RelativeLayout

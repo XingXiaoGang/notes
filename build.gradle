@@ -73,7 +73,12 @@ dependencies {
     compile project(':module-utils')
     compile fileTree(include: ['*.jar'], dir: 'libs')
     provided files(getLayoutLibPath())
-    compile group: 'de.greenrobot', name: 'eventbus', version: '2.2.1'
+    compile 'com.android.support:support-v4:23.0.1'
+    compile group: 'com.nineoldandroids', name: 'library', version: '2.4.0'
+    compile 'com.google.code.gson:gson:2.1'
+//    compile 'com.android.support:cardview-v7:23.0.1'
+//    compile 'com.android.support:recyclerview-v7:23.+'
+//    compile group: 'de.greenrobot', name: 'eventbus', version: '2.2.1'
 }
 
 def getLayoutLibPath() {
@@ -99,7 +104,7 @@ task progJar(type: proguard.gradle.ProGuardTask) {
     injars 'build/libs/gp_android_sdk_unproguard.jar'
     outjars 'build/libs/gp_android_sdk.jar'
     libraryjars System.getenv("ANDROID_HOME") + "/platforms/android-19/android.jar"
-    println("libraryjars path:"+System.getenv("ANDROID_HOME")+ "/platforms/android-19/android.jar")
+    println("libraryjars path:" + System.getenv("ANDROID_HOME") + "/platforms/android-19/android.jar")
 
     // 具体需要keep住的类
     configuration 'proguard-project.txt'

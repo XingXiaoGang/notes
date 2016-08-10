@@ -22,5 +22,7 @@
     <color name="button_yellow">#F3B63E</color>
     <color name="bluedeep_text">#588bf2</color>
     <color name="blue_text">#79b7f6</color>
+    <color name="blue_title">#3FB8F2</color>
+    <color name="blue_title_pre">#18abf2</color>
     <color name="gray_text">#9d9d9d</color>
 </resources>

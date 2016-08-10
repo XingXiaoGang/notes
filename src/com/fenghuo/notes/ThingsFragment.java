@@ -2,7 +2,6 @@ package com.fenghuo.notes;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Keep;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -19,14 +18,10 @@ import android.widget.PopupWindow;
 
 import com.fenghuo.notes.adapter.NoteAdapter;
 import com.fenghuo.notes.bean.Note;
-import com.fenghuo.notes.context.NoteEvent;
 import com.fenghuo.notes.db.DBNoteHelper;
-import com.mine.view.menu.icon.MaterialMenuDrawable;
-import com.mine.view.menu.icon.MaterialMenuView;
 
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
 
 public class ThingsFragment extends FragmentExt implements OnClickListener,
         OnItemClickListener, OnItemLongClickListener {
@@ -39,19 +34,15 @@ public class ThingsFragment extends FragmentExt implements OnClickListener,
     private PopupWindow pop_button;
     private View mPopBtnView;// 弹出
     // 按钮
-    private Note note;// 当前的note
-    private View view;
-    private MaterialMenuView mMaterialMenuView;
+    private Note mCurrentNote;// 当前的note
+    private View mRootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        EventBus.getDefault().register(this);
-        view = inflater.inflate(R.layout.fragment_things, null, false);
-        gv_list = (GridView) view.findViewById(R.id.gv_list);
-        view.findViewById(R.id.material_add_button).setOnClickListener(this);
-        mMaterialMenuView = (MaterialMenuView) view.findViewById(R.id.material_menu_button);
-        mMaterialMenuView.setOnClickListener(this);
+        mRootView = inflater.inflate(R.layout.fragment_things, null, false);
+        gv_list = (GridView) mRootView.findViewById(R.id.gv_list);
+        mRootView.findViewById(R.id.add_new_note).setOnClickListener(this);
         noteHelper = new DBNoteHelper(getActivity());
         list = noteHelper.Getlist();
         adapter = new NoteAdapter(getActivity(), list);
@@ -60,7 +51,7 @@ public class ThingsFragment extends FragmentExt implements OnClickListener,
         gv_list.setOnItemClickListener(this);
         gv_list.setOnItemLongClickListener(this);
 
-        return view;
+        return mRootView;
     }
 
     @Override
@@ -90,7 +81,7 @@ public class ThingsFragment extends FragmentExt implements OnClickListener,
     public void onClick(View arg0) {
         switch (arg0.getId()) {
             // 跳转界面
-            case R.id.material_add_button:
+            case R.id.add_new_note:
                 Intent intent = new Intent(getActivity(), AddNoteActivity.class);
                 startActivity(intent);
                 break;
@@ -100,15 +91,6 @@ public class ThingsFragment extends FragmentExt implements OnClickListener,
                 adapter.quitEdit();
                 pop_button.dismiss();
                 break;
-            case R.id.material_menu_button: {
-                boolean isToOpen = mMaterialMenuView.getState() == MaterialMenuDrawable.IconState.BURGER;
-                updateMenuState(isToOpen);
-                NoteEvent noteEvent = new NoteEvent(NoteEvent.TPYE_MENU_CLICK);
-                noteEvent.argBoolean = isToOpen;
-                EventBus.getDefault().post(noteEvent);
-
-                break;
-            }
             default:
                 break;
         }
@@ -126,36 +108,10 @@ public class ThingsFragment extends FragmentExt implements OnClickListener,
     @Override
     public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                             long arg3) {
-        note = list.get(position);
+        mCurrentNote = list.get(position);
         Intent intent_edit = new Intent(getActivity(), EditNoteActivity.class);
-        intent_edit.putExtra("noteid", note.getId());
+        intent_edit.putExtra("noteid", mCurrentNote.getId());
         startActivity(intent_edit);
-    }
-
-    /**
-     * 与发布者在同一个线程
-     *
-     * @param msg 事件1
-     */
-    @Keep
-    public void onEvent(NoteEvent msg) {
-        if (msg != null) {
-            switch (msg.what) {
-                case NoteEvent.TPYE_UPDATE_MENU_STATE: {
-                    boolean isOpen = msg.argBoolean;
-                    updateMenuState(isOpen);
-                    break;
-                }
-            }
-        }
-    }
-
-    private void updateMenuState(boolean toOpen) {
-        if (toOpen) {
-            mMaterialMenuView.animateState(MaterialMenuDrawable.IconState.X);
-        } else {
-            mMaterialMenuView.animateState(MaterialMenuDrawable.IconState.BURGER);
-        }
     }
 
     private void showPopButton() {

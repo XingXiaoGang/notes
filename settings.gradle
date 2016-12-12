@@ -1,1 +1,1 @@
-include ':module-utils', ':module-view'
+include ':module-utils', ':module-view',':module-locker'

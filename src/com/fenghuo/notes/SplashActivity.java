@@ -15,6 +15,8 @@ import android.view.animation.AlphaAnimation;
 
 import com.fenghuo.notes.alarm.AlarmService;
 import com.fenghuo.notes.db.DBAlarmHelper;
+import com.fenghuo.notes.db.PreferenceHelper;
+import com.haibison.android.lockpattern.LockPatternActivity;
 
 public class SplashActivity extends Activity implements Handler.Callback {
 
@@ -67,7 +69,13 @@ public class SplashActivity extends Activity implements Handler.Callback {
                 break;
             }
             case R.id.skip_splash: {
-                skip();
+                PreferenceHelper preferenceHelper = new PreferenceHelper(this);
+                String pattenPwd = null;
+                if ((pattenPwd = preferenceHelper.getPatternPwd()) != null) {
+                    LockPatternActivity.startToComparePattern(this, this, Values.CODE_UN_LOCK, pattenPwd.toCharArray());
+                } else {
+                    skip();
+                }
                 break;
             }
             default: {
@@ -80,6 +88,21 @@ public class SplashActivity extends Activity implements Handler.Callback {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case Values.CODE_UN_LOCK: {
+                if (resultCode == LockPatternActivity.RESULT_OK) {
+                    skip();
+                } else {
+                    finish();
+                }
+                break;
+            }
+        }
     }
 
     /**

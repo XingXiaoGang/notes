@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -15,6 +17,8 @@ import com.fenghuo.notes.adapter.ContentPageAdapter;
 import com.fenghuo.notes.db.BackupRestoreUtils;
 import com.fenghuo.notes.db.DBAccountHelper;
 import com.fenghuo.notes.db.DBNoteHelper;
+import com.fenghuo.notes.db.PreferenceHelper;
+import com.haibison.android.lockpattern.LockPatternActivity;
 import com.mine.view.ViewPagerTab;
 import com.mine.view.gesture.GestureFrameLayout;
 import com.mine.view.gesture.GestureHandler;
@@ -79,6 +83,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 mMenu.closeMenu();
             }
         });
+        PreferenceHelper preferenceHelper = new PreferenceHelper(this);
+        if (preferenceHelper.getPatternPwd() != null) {
+            ((TextView) findViewById(R.id.item_setpwd)).setText(R.string.del_pwd);
+        }
     }
 
     @Override
@@ -171,8 +179,15 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
             }
             case R.id.item_setpwd: {
-                mToast.ShowMsg("该功能暂未开放，敬请期待下次更新", CustomToast.Img_Info);
-                mMenu.closeMenu();
+                String text = ((TextView) view).getText().toString();
+                if (TextUtils.equals(text, getString(R.string.del_pwd))) {
+                    new PreferenceHelper(this).delPatternpwd();
+                    ((TextView) view).setText(R.string.create_pwd);
+                    Toast.makeText(this, R.string.pwd_deleted, Toast.LENGTH_SHORT).show();
+                } else {
+                    LockPatternActivity.startToCreatePattern(this, this, Values.CODE_SET_LOCK);
+                    mMenu.closeMenu();
+                }
                 break;
             }
             case R.id.item_clean_notes: {
@@ -352,4 +367,24 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(Values.TAG, "onActivityResult: " + requestCode + " , " + resultCode + " , " + data);
+
+        switch (requestCode) {
+            case Values.CODE_SET_LOCK: {
+                if (data != null) {
+                    char[] pwd = data.getCharArrayExtra(LockPatternActivity.EXTRA_PATTERN);
+                    if (pwd != null && pwd.length > 0) {
+                        String savedPwd = new String(pwd);
+                        new PreferenceHelper(this).setPatternpwd(savedPwd);
+                        ((TextView) findViewById(R.id.item_setpwd)).setText(R.string.del_pwd);
+                        Toast.makeText(getApplicationContext(), R.string.pwd_created, Toast.LENGTH_LONG).show();
+                    }
+                }
+                break;
+            }
+        }
+    }
 }

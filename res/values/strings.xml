@@ -2,5 +2,8 @@
 <resources>
 
     <string name="app_name">随心记</string>
-
+    <string name="del_pwd">删除密码</string>
+    <string name="create_pwd">创建密码</string>
+    <string name="pwd_deleted">密码已删除</string>
+    <string name="pwd_created">密码已创建</string>
 </resources>

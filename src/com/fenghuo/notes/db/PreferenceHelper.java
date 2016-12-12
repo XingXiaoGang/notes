@@ -6,28 +6,45 @@ import android.content.SharedPreferences;
 
 public class PreferenceHelper {
 
-	SharedPreferences preferences;
+    private static final String KEY_PWD = "k_pwd";
 
-	public PreferenceHelper(Context context) {
-		preferences = context.getSharedPreferences("temp",
-				Activity.MODE_PRIVATE);
-	}
+    private SharedPreferences mPreferences;
 
-	/**读取上一次的草稿
-	 * @return
-	 */
-	public String getLast() {
-		String str = "";
-		str = preferences.getString("last", "");
-		return str;
-	}
+    public PreferenceHelper(Context context) {
+        mPreferences = context.getSharedPreferences("temp", Activity.MODE_PRIVATE);
+    }
 
-	/**保存草稿
-	 * @param str
-	 */
-	public void saveLast(String str) {
-		SharedPreferences.Editor editor = preferences.edit();
-		editor.putString("last", str);
-		editor.commit();
-	}
+    /**
+     * 读取上一次的草稿
+     *
+     * @return
+     */
+    public String getLast() {
+        String str = "";
+        str = mPreferences.getString("last", "");
+        return str;
+    }
+
+    /**
+     * 保存草稿
+     *
+     * @param str
+     */
+    public void saveLast(String str) {
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putString("last", str);
+        editor.apply();
+    }
+
+    public String getPatternPwd() {
+        return mPreferences.getString(KEY_PWD, null);
+    }
+
+    public void setPatternpwd(String pwd) {
+        mPreferences.edit().putString(KEY_PWD, pwd).apply();
+    }
+
+    public void delPatternpwd() {
+        mPreferences.edit().remove(KEY_PWD).apply();
+    }
 }

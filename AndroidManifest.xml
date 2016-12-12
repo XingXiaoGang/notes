@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fenghuo.notes"
-    android:versionCode="1"
-    android:versionName="1.0">
+    android:versionCode="2"
+    android:versionName="1.1">
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="15"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -59,6 +59,10 @@
 
         <activity android:name=".EditNoteActivity"></activity>
         <activity android:name=".AboutActivity"></activity>
+
+        <activity android:name="com.haibison.android.lockpattern.LockPatternActivity"
+            android:theme="@style/Alp.42447968.Theme.Dialog.Light"/>
+
     </application>
 
 </manifest>

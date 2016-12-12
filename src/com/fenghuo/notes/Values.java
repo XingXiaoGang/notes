@@ -2,6 +2,8 @@ package com.fenghuo.notes;
 
 public class Values {
 
+    public static final String TAG = "test.main";
+
 
     public static final String DBName = "data.db";
     public static final String TableNote = "notes";
@@ -20,4 +22,6 @@ public class Values {
 
     public static int[] item_bg_big = new int[]{R.drawable.page_bg_yellow, R.drawable.page_bg_white, R.drawable.page_bg_pink, R.drawable.page_bg_green, R.drawable.page_bg_blue};
 
+    public static final int CODE_SET_LOCK = 123;
+    public static final int CODE_UN_LOCK = 234;
 }

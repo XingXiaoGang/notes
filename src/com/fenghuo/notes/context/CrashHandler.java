@@ -3,7 +3,8 @@ package com.fenghuo.notes.context;
 import android.content.Context;
 import android.os.SystemClock;
 import android.os.SystemProperties;
-import android.support.v4.BuildConfig;
+
+import com.fenghuo.notes.BuildConfig;
 
 import java.io.File;
 import java.io.FileWriter;

@@ -19,6 +19,7 @@ import android.widget.PopupWindow;
 import com.fenghuo.notes.adapter.NoteAdapter;
 import com.fenghuo.notes.bean.Note;
 import com.fenghuo.notes.db.DBNoteHelper;
+import com.fenghuo.notes.upload.CloudUtils;
 
 import java.util.List;
 
@@ -82,6 +83,7 @@ public class ThingsFragment extends FragmentExt implements OnClickListener,
         switch (arg0.getId()) {
             // 跳转界面
             case R.id.add_new_note:
+                CloudUtils.doUpload();
                 Intent intent = new Intent(getActivity(), AddNoteActivity.class);
                 startActivity(intent);
                 break;

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ivory"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/ln_top"
+        android:layout_width="fill_parent"
+        android:layout_height="45sp"
+        android:background="@drawable/title_bg"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_back_about"
+            android:layout_width="45sp"
+            android:layout_height="40sp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/select_back"
+            android:paddingLeft="6sp" />
+
+        <TextView
+            android:id="@+id/text_edit_acc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="登录云账号"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+    </RelativeLayout>
+
+    <!-- 主体 -->
+
+
+
+</LinearLayout>

@@ -30,6 +30,10 @@ public class AccountManager {
         return mInstance;
     }
 
+    public AccountManager() {
+
+    }
+
     public void regist(String name, String pwd, Handler handler) {
 
     }

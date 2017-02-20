@@ -83,7 +83,6 @@ public class ThingsFragment extends FragmentExt implements OnClickListener,
         switch (arg0.getId()) {
             // 跳转界面
             case R.id.add_new_note:
-                CloudUtils.doUpload();
                 Intent intent = new Intent(getActivity(), AddNoteActivity.class);
                 startActivity(intent);
                 break;

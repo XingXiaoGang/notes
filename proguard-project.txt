@@ -21,6 +21,7 @@
 -optimizationpasses 5
 -verbose
 -dontwarn
+-ignorewarnings
 -dontwarn android.support.v4.**
 #-keep class android.support.v4.** { *; }
 #-keep interface android.support.v4.app.** { *; }

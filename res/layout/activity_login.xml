@@ -33,6 +33,33 @@
 
     <!-- 主体 -->
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:gravity="center_horizontal|top"
+            android:inputType="textMultiLine"
+            android:lineSpacingExtra="5dp"
+            android:text="只是采用qq登录，请放心使用\n登录后，可使用云备份和云恢复功能"
+            android:textColor="@color/text_444444"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btn_login_qq"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/blue_corner_bg_selector"
+            android:text="QQ授权登录"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
 
 
 </LinearLayout>

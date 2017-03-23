@@ -39,6 +39,13 @@
 #解锁
 
 -keep class com.haibison.android.lockpattern.widget.LockPatternView$*{ *; }
+-keep class android.support.v4.hardware.fingerprint.**{ *; }
+-keep class com.awei.android.lib.fingerprintidentify** { *; }
+# MeiZuFingerprint
+-keep class com.fingerprints.**
+# SmsungFingerprint
+-keep class com.samsung.**
+
 
 #    # 指定代码的压缩级别
 #    -optimizationpasses 5

@@ -81,12 +81,9 @@ dependencies {
 
     provided files(getLayoutLibPath())
 
-//    compile 'com.android.support:support-v4:23.0.1'
+    compile 'com.android.support:support-v4:23.0.1'
     compile group: 'com.nineoldandroids', name: 'library', version: '2.4.0'
-//    compile 'com.google.code.gson:gson:2.1'
-//    compile 'com.android.support:cardview-v7:23.0.1'
-//    compile 'com.android.support:recyclerview-v7:23.+'
-//    compile group: 'de.greenrobot', name: 'eventbus', version: '2.2.1'
+
 }
 
 def getLayoutLibPath() {

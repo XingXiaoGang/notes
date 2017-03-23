@@ -72,7 +72,7 @@ public class SplashActivity extends Activity implements Handler.Callback {
                 PreferenceHelper preferenceHelper = new PreferenceHelper(this);
                 String pattenPwd = null;
                 if ((pattenPwd = preferenceHelper.getPatternPwd()) != null) {
-                    LockPatternActivity.startToComparePattern(this, this, Values.CODE_UN_LOCK, pattenPwd.toCharArray());
+                    LockPatternActivity.startToComparePattern(this, this, Values.CODE_UN_LOCK, true, pattenPwd.toCharArray());
                 } else {
                     skip();
                 }

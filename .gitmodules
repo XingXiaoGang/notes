@@ -8,3 +8,6 @@
 [submodule "module-locker"]
 	path = module-locker
 	url = git@github.com:XingXiaoGang/module-locker.git
+[submodule "module-fingerprint"]
+	path = module-fingerprint
+	url = git@github.com:XingXiaoGang/module-fingerprint.git

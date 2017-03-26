@@ -16,7 +16,7 @@ import com.fenghuo.notes.db.BackupRestoreUtils;
 import com.fenghuo.notes.db.DBAccountHelper;
 import com.fenghuo.notes.db.DBNoteHelper;
 import com.fenghuo.notes.db.PreferenceHelper;
-import com.fenghuo.notes.upload.AccountManager;
+import com.fenghuo.notes.upload.AccountProfileManager;
 import com.haibison.android.lockpattern.LockPatternActivity;
 import com.mine.view.ViewPagerTab;
 import com.mine.view.dialog.ConformDialog;
@@ -27,7 +27,7 @@ import com.mine.view.menu.icon.MaterialMenuView;
 import com.mine.view.menu.slide_section_menu.SlideSectionMenu;
 
 
-public class MainActivity extends FragmentActivity implements View.OnClickListener, GestureHandler.GestureCallBack, ViewPager.OnPageChangeListener, ViewPagerTab.OnPageChangeListener_vp {
+public class MainActivity extends FragmentActivity implements View.OnClickListener, GestureHandler.GestureCallBack, ViewPager.OnPageChangeListener, ViewPagerTab.OnPageChangeListener_vp, AccountProfileManager.ILoginListener {
 
     private ViewPager mViewPager;
     private ContentPageAdapter mAdapter;
@@ -353,9 +353,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     private void doRestoreCloud() {
-        if (AccountManager.getInstance().getUserState() != AccountManager.LOGIN_STATE_LOGIN) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+        if (AccountProfileManager.getInstance(this).getUserState() != AccountProfileManager.LOGIN_STATE_LOGIN) {
+            AccountProfileManager.getInstance(this).requestLogin(this, this, AccountProfileManager.REQUEST_RESTORE);
         } else {
             //todo 下载
         }
@@ -387,9 +386,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     private void doBackUpCloud() {
-        if (AccountManager.getInstance().getUserState() != AccountManager.LOGIN_STATE_LOGIN) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+        if (AccountProfileManager.getInstance(this).getUserState() != AccountProfileManager.LOGIN_STATE_LOGIN) {
+            AccountProfileManager.getInstance(this).requestLogin(this, this, AccountProfileManager.REQUEST_BACKUP);
         } else {
             //todo 上传
         }
@@ -411,6 +409,20 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         Toast.makeText(getApplicationContext(), R.string.pwd_created, Toast.LENGTH_LONG).show();
                     }
                 }
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void onLogin(int requestCode) {
+        switch (requestCode) {
+            case AccountProfileManager.REQUEST_RESTORE: {
+                doRestoreCloud();
+                break;
+            }
+            case AccountProfileManager.REQUEST_BACKUP: {
+                doBackUpCloud();
                 break;
             }
         }

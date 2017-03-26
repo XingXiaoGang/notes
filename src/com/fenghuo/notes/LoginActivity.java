@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.tencent.connect.common.Constants;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
@@ -18,7 +19,7 @@ import com.tencent.tauth.UiError;
 public class LoginActivity extends Activity implements View.OnClickListener, IUiListener {
 
     private static final String TAG = "LoginActivity";
-    private static final String APP_ID = "xxxxxxxxx";
+    private static final String APP_ID = "1105989781";
     private Tencent mTencent;
 
     @Override
@@ -41,10 +42,10 @@ public class LoginActivity extends Activity implements View.OnClickListener, IUi
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (mTencent != null) {
-            mTencent.onActivityResult(requestCode, requestCode, data);
+        if (requestCode == Constants.REQUEST_LOGIN) {
+            Tencent.handleResultData(data, this);
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private synchronized void doLogin() {
@@ -57,7 +58,7 @@ public class LoginActivity extends Activity implements View.OnClickListener, IUi
     @Override
     public void onComplete(Object o) {
         Toast.makeText(this, "omComplete:" + o, Toast.LENGTH_LONG).show();
-        Log.d(TAG, "onError: " + "omComplete:" + o);
+        Log.d(TAG, "onComplete:" + o);
     }
 
     @Override

@@ -81,7 +81,7 @@ dependencies {
 
     provided files(getLayoutLibPath())
 
-    compile 'com.android.support:support-v4:23.0.1'
+    compile 'com.android.support:support-v4:' + SupportVersion
     compile group: 'com.nineoldandroids', name: 'library', version: '2.4.0'
 
 }

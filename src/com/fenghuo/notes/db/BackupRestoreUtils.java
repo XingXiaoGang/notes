@@ -18,6 +18,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class BackupRestoreUtils {
 
@@ -111,9 +112,9 @@ public class BackupRestoreUtils {
 
     // 第二种思路 直接将数据库导出来 -1 失败 0 未找到数据 1 成功
 
-    public int restore2(String fileName) {
+    public int restoreLocal() {
         String pathto = DB_phone_path + "/" + DB_name;
-        String pathfrom = fileName != null ? fileName : DB_sd_path + "/" + DB_name;
+        String pathfrom = DB_sd_path + "/" + DB_name;
 
         Log.d(CloudUtils.TAG, "恢复数据库: pathTo=" + pathto + "\npathFrom=" + pathfrom);
 
@@ -147,7 +148,7 @@ public class BackupRestoreUtils {
         return -1;
     }
 
-    public boolean backup2() {
+    public boolean backupLocal() {
         String pathto = DB_phone_path + "/" + DB_name;
         String pathfrom = DB_sd_path + "/" + DB_name;
         try {
@@ -171,8 +172,48 @@ public class BackupRestoreUtils {
         return false;
     }
 
-    public boolean copyDbTofile(String fileName) {
-        String pathto = fileName;
+    //解密并恢复
+    public int restoreEncyptFile(String fileName) {
+        String pathto = DB_phone_path + "/" + DB_name;
+
+        Log.d(CloudUtils.TAG, "恢复数据库: pathTo=" + pathto + "\npathFrom=" + fileName);
+
+        try {
+            File to = new File(pathto);
+            File from = new File(fileName);
+            // 先决断sd卡文件夹是否存在
+            File pderectroy = new File(DB_sd_path);
+            if (!pderectroy.exists()) {
+                pderectroy.mkdirs();
+                return 0;
+            }
+            // sd卡数据库是否存在
+            if (!from.exists()) {
+                return 0;
+            }
+            FileInputStream streami = new FileInputStream(from);
+            FileOutputStream streamo = new FileOutputStream(to);
+            byte[] head = new byte[128];
+            byte[] bs = new byte[512];
+            //跳过head
+            streami.read(head);
+            int count = 0;
+            while ((count = streami.read(bs)) > 0) {
+                streamo.write(bs, 0, count);
+            }
+            streami.close();
+            streamo.close();
+            System.out.println("恢复成功===========");
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    //防君子不防小人的加密
+    public boolean copyDbFileWithEncypt(String toFileName) {
+        String pathto = toFileName;
         String pathfrom = DB_phone_path + "/" + DB_name;
         try {
             File from = new File(pathfrom);
@@ -180,6 +221,12 @@ public class BackupRestoreUtils {
             FileUtils.delete(to);
             FileInputStream streami = new FileInputStream(from);
             FileOutputStream streamo = new FileOutputStream(to, false);
+            //add head
+            byte[] head = new byte[128];
+            Random random = new Random(System.currentTimeMillis());
+            random.nextBytes(head);
+            streamo.write(head);
+            //add content
             byte[] bs = new byte[512];
             int count = 0;
             while ((count = streami.read(bs)) > 0) {

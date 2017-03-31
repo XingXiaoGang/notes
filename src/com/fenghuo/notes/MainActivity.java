@@ -341,17 +341,22 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 if (view.getId() == R.id.confirm) {
                     mToast.ShowMsg("正在恢复！", CustomToast.Img_Info);
                     Values.isRestore_database = true;
-                    int i = mBackupRestore.restore2(fileName != null ? fileName : null);
-                    if (i == 1) {
+                    int res = -1;
+                    if (fileName != null) {
+                        res = mBackupRestore.restoreEncyptFile(fileName);
+                    } else {
+                        res = mBackupRestore.restoreLocal();
+                    }
+                    if (res == 1) {
                         mToast.ShowMsg("恢复成功！", CustomToast.Img_Ok);
                         Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     }
-                    if (i == 0) {
+                    if (res == 0) {
                         mToast.ShowMsg("未找到备份文件！", CustomToast.Img_Info);
                     }
-                    if (i == -1) {
+                    if (res == -1) {
                         mToast.ShowMsg("恢复失败！", CustomToast.Img_Ok);
                     }
                     Values.isRestore_database = false;
@@ -370,7 +375,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 public void onClick(View view) {
                     if (view.getId() == R.id.confirm) {
                         mToast.ShowMsg("正在备份！", CustomToast.Img_Info);
-                        if (mBackupRestore.backup2()) {
+                        if (mBackupRestore.backupLocal()) {
                             mToast.ShowMsg("备份成功！",
                                     CustomToast.Img_Ok);
                         }
@@ -380,7 +385,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             }.setButtonText("取消备份", "继续备份").show();
         } else {
             mToast.ShowMsg("正在备份！", CustomToast.Img_Info);
-            if (mBackupRestore.backup2()) {
+            if (mBackupRestore.backupLocal()) {
                 mToast.ShowMsg("备份成功！", CustomToast.Img_Ok);
             }
         }
@@ -394,6 +399,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             if (AccountProfileManager.getInstance(this).getUserState() == AccountProfileManager.LOGIN_STATE_LOGIN) {
                 String serverFileName = Config.dbDir + File.separator + AccountProfileManager.getInstance(this).getUserDbName();
                 CloudUtils.doDownload(Config.Buckte, serverFileName, new File(getTempDownloadDbName()), mHandler);
+                mToast.ShowMsg("正在下载...", CustomToast.Img_Info);
             } else {
                 new CustomToast(this).ShowMsg("未登录", CustomToast.Img_Info);
             }
@@ -408,7 +414,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 //先把最新的数据拿出来
                 if (mBackupRestore == null)
                     mBackupRestore = new BackupRestoreUtils(MainActivity.this);
-                if (mBackupRestore.copyDbTofile(getTempUploadDbName())) {
+                if (mBackupRestore.copyDbFileWithEncypt(getTempUploadDbName())) {
                     //再上传
                     String serverFileName = Config.dbDir + File.separator + AccountProfileManager.getInstance(this).getUserDbName();
                     CloudUtils.doUpload(Config.Buckte, serverFileName, new File(getTempUploadDbName()), mHandler);
@@ -468,6 +474,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         switch (message.what) {
             case R.id.file_download_ok: {
                 //todo 可以传回一些云端文件的信息
+                mToast.cancel();
                 doRestore(getTempDownloadDbName());
                 break;
             }

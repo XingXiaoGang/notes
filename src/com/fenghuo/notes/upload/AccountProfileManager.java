@@ -81,7 +81,7 @@ public class AccountProfileManager {
         if (getUserState() != LOGIN_STATE_LOGIN) {
             throw new RuntimeException("未登录，请做登录检查 ");
         }
-        return getUser().userName + "-db";
+        return getUser().openId + "-db";
     }
 
     public User getUser() {

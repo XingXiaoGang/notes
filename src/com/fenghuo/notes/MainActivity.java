@@ -2,6 +2,9 @@ package com.fenghuo.notes;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Handler.Callback;
+import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
@@ -17,6 +20,8 @@ import com.fenghuo.notes.db.DBAccountHelper;
 import com.fenghuo.notes.db.DBNoteHelper;
 import com.fenghuo.notes.db.PreferenceHelper;
 import com.fenghuo.notes.upload.AccountProfileManager;
+import com.fenghuo.notes.upload.CloudUtils;
+import com.fenghuo.notes.upload.Config;
 import com.haibison.android.lockpattern.LockPatternActivity;
 import com.mine.view.ViewPagerTab;
 import com.mine.view.dialog.ConformDialog;
@@ -26,8 +31,10 @@ import com.mine.view.menu.icon.MaterialMenuDrawable;
 import com.mine.view.menu.icon.MaterialMenuView;
 import com.mine.view.menu.slide_section_menu.SlideSectionMenu;
 
+import java.io.File;
 
-public class MainActivity extends FragmentActivity implements View.OnClickListener, GestureHandler.GestureCallBack, ViewPager.OnPageChangeListener, ViewPagerTab.OnPageChangeListener_vp, AccountProfileManager.ILoginListener {
+
+public class MainActivity extends FragmentActivity implements View.OnClickListener, GestureHandler.GestureCallBack, ViewPager.OnPageChangeListener, ViewPagerTab.OnPageChangeListener_vp, AccountProfileManager.ILoginListener, Callback {
 
     private ViewPager mViewPager;
     private ContentPageAdapter mAdapter;
@@ -43,6 +50,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private long mLastBackDownTime = System.currentTimeMillis();// 时间
     private static final int CLICK_DURATION = 800;
     private int mBackDownTimes = 0;// 在短时间内按下的次数
+    private Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +66,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mGestureFrameLayout = (GestureFrameLayout) findViewById(R.id.container);
         //回调手势
         mGestureFrameLayout.setGestureCallBack(this);
+        mHandler = new Handler(this);
 
         findViewById(R.id.item_about).setOnClickListener(this);
         findViewById(R.id.item_backup).setOnClickListener(this);
@@ -119,7 +128,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         if (view.getId() == R.id.confirm) {
                             doRestoreCloud();
                         } else if (view.getId() == R.id.cancel) {
-                            doRestoreLocal();
+                            doRestore(null);
                         }
                         dismiss();
                     }
@@ -136,7 +145,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         if (view.getId() == R.id.confirm) {
                             doBackUpCloud();
                         } else if (view.getId() == R.id.cancel) {
-                            doBackupLocal();
+                            doBackup();
                         }
                         dismiss();
                     }
@@ -323,16 +332,16 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }
     }
 
-    private void doRestoreLocal() {
+    private void doRestore(final String fileName) {
         if (mBackupRestore == null)
             mBackupRestore = new BackupRestoreUtils(MainActivity.this);
-        new ConformDialog(MainActivity.this, "确定恢复?所有记录将会还原到备份时的状态") {
+        new ConformDialog(MainActivity.this, (fileName != null ? "确定从云端恢复?" : "确定恢复?") + "所有记录将会还原到备份时的状态") {
             @Override
             public void onClick(View view) {
                 if (view.getId() == R.id.confirm) {
                     mToast.ShowMsg("正在恢复！", CustomToast.Img_Info);
                     Values.isRestore_database = true;
-                    int i = mBackupRestore.restore2();
+                    int i = mBackupRestore.restore2(fileName != null ? fileName : null);
                     if (i == 1) {
                         mToast.ShowMsg("恢复成功！", CustomToast.Img_Ok);
                         Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
@@ -352,15 +361,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }.setButtonText("取消", "恢复").show();
     }
 
-    private void doRestoreCloud() {
-        if (AccountProfileManager.getInstance(this).getUserState() != AccountProfileManager.LOGIN_STATE_LOGIN) {
-            AccountProfileManager.getInstance(this).requestLogin(this, this, AccountProfileManager.REQUEST_RESTORE);
-        } else {
-            //todo 下载
-        }
-    }
-
-    private void doBackupLocal() {
+    private void doBackup() {
         if (mBackupRestore == null)
             mBackupRestore = new BackupRestoreUtils(MainActivity.this);
         if (mBackupRestore.checkexist()) {
@@ -385,12 +386,46 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }
     }
 
+    private void doRestoreCloud() {
+        if (AccountProfileManager.getInstance(this).getUserState() != AccountProfileManager.LOGIN_STATE_LOGIN) {
+            AccountProfileManager.getInstance(this).requestLogin(this, this, AccountProfileManager.REQUEST_RESTORE);
+        } else {
+            //从云端下载
+            if (AccountProfileManager.getInstance(this).getUserState() == AccountProfileManager.LOGIN_STATE_LOGIN) {
+                String serverFileName = Config.dbDir + File.separator + AccountProfileManager.getInstance(this).getUserDbName();
+                CloudUtils.doDownload(Config.Buckte, serverFileName, new File(getTempDownloadDbName()), mHandler);
+            } else {
+                new CustomToast(this).ShowMsg("未登录", CustomToast.Img_Info);
+            }
+        }
+    }
+
     private void doBackUpCloud() {
         if (AccountProfileManager.getInstance(this).getUserState() != AccountProfileManager.LOGIN_STATE_LOGIN) {
             AccountProfileManager.getInstance(this).requestLogin(this, this, AccountProfileManager.REQUEST_BACKUP);
         } else {
-            //todo 上传
+            if (AccountProfileManager.getInstance(this).getUserState() == AccountProfileManager.LOGIN_STATE_LOGIN) {
+                //先把最新的数据拿出来
+                if (mBackupRestore == null)
+                    mBackupRestore = new BackupRestoreUtils(MainActivity.this);
+                if (mBackupRestore.copyDbTofile(getTempUploadDbName())) {
+                    //再上传
+                    String serverFileName = Config.dbDir + File.separator + AccountProfileManager.getInstance(this).getUserDbName();
+                    CloudUtils.doUpload(Config.Buckte, serverFileName, new File(getTempUploadDbName()), mHandler);
+                    mToast.ShowMsg("正在上传...", CustomToast.Img_Info);
+                }
+            } else {
+                new CustomToast(this).ShowMsg("未登录", CustomToast.Img_Info);
+            }
         }
+    }
+
+    private String getTempUploadDbName() {
+        return this.getFilesDir().getAbsolutePath() + File.separator + "temp_upload_db.temp";
+    }
+
+    private String getTempDownloadDbName() {
+        return this.getFilesDir().getAbsolutePath() + File.separator + "temp_download_db.temp";
     }
 
     @Override
@@ -426,5 +461,25 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
             }
         }
+    }
+
+    @Override
+    public boolean handleMessage(Message message) {
+        switch (message.what) {
+            case R.id.file_download_ok: {
+                //todo 可以传回一些云端文件的信息
+                doRestore(getTempDownloadDbName());
+                break;
+            }
+            case R.id.file_download_error: {
+                new CustomToast(getApplicationContext()).ShowMsg("文件下载失败!", CustomToast.Img_Erro);
+                break;
+            }
+            case R.id.file_upload_ok: {
+                mToast.ShowMsg("文件上传成功!", CustomToast.Img_Ok);
+                break;
+            }
+        }
+        return false;
     }
 }

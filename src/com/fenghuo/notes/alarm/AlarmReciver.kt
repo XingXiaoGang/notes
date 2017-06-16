@@ -84,7 +84,7 @@ class AlarmReciver : BroadcastReceiver() {
             intent2.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             val pendingIntent = PendingIntent.getActivity(context, 3, intent2, PendingIntent.FLAG_UPDATE_CURRENT)
 
-            notification.setLatestEventInfo(context, "随心记提醒", alarm!!.content, pendingIntent)
+            notification.setLatestEventInfo(context, context.getString(R.string.sxj_tips), alarm!!.content, pendingIntent)
             val maneger = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             maneger.notify(0x103, notification)
 

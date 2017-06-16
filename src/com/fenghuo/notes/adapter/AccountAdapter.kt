@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.ImageView
 import android.widget.TextView
-
+import com.fenghuo.notes.R
 import com.fenghuo.notes.bean.Account
 import com.fenghuo.notes.bean.GroupAccount
 import com.fenghuo.notes.bean.MonthAccount
-import com.fenghuo.notes.R
 
 class AccountAdapter
 // GroupItem 右边箭头动画
@@ -60,6 +59,7 @@ class AccountAdapter
     override fun getChildView(groupposition: Int, childposition: Int,
                               islastchild: Boolean, convertview: View, parent: ViewGroup): View {
         var convertview = convertview
+        var context: Context = convertview.context;
         val holder = ChildHolder()
         convertview = inflater.inflate(R.layout.item_elv_child, null)
         holder.tv_name = convertview
@@ -76,27 +76,27 @@ class AccountAdapter
             0// 本日
             -> {
                 val data = data_today[childposition]
-                holder.tv_kinds!!.text = "日期:" + data.date
-                var todaymoney = if (data.kind == 1) "支出:" else "收入:"
-                todaymoney = todaymoney + data.money + "元"
+                holder.tv_kinds!!.text = context.getString(R.string.date) + data.date
+                var todaymoney = if (data.kind == 1) context.getString(R.string.consume) else context.getString(R.string.income)
+                todaymoney = todaymoney + data.money + context.getString(R.string.yuan)
                 holder.tv_sumOut!!.text = todaymoney
-                holder.tv_name!!.text = "消费内容:" + data.kinds
+                holder.tv_name!!.text = context.getString(R.string.consume_project) + data.kinds
                 println(data.toString())
             }
             1 -> {
                 val data2 = data_moth[childposition]
-                holder.tv_name!!.text = "日期:" + data2.date!!.substring(5, 10)
-                holder.tv_kinds!!.text = "消费内容:" + data2.things
-                holder.tv_sumIn!!.text = "支出:" + data2.sumout + "元"
-                holder.tv_sumOut!!.text = "收入:" + data2.sumin + "元"
+                holder.tv_name!!.text = context.getString(R.string.date) + data2.date!!.substring(5, 10)
+                holder.tv_kinds!!.text = context.getString(R.string.consume_project) + data2.things
+                holder.tv_sumIn!!.text = context.getString(R.string.consume) + data2.sumout + context.getString(R.string.yuan)
+                holder.tv_sumOut!!.text = context.getString(R.string.income) + data2.sumin + context.getString(R.string.yuan)
             }
             2// 所有
             -> {
                 val data3 = data_all[childposition]
-                holder.tv_name!!.text = "日期:" + data3.date!!.substring(5, 10)
-                holder.tv_kinds!!.text = "消费内容:" + data3.things
-                holder.tv_sumIn!!.text = "支出:" + data3.sumout + "元"
-                holder.tv_sumOut!!.text = "收入:" + data3.sumin + "元"
+                holder.tv_name!!.text = context.getString(R.string.date) + data3.date!!.substring(5, 10)
+                holder.tv_kinds!!.text = context.getString(R.string.consume_project) + data3.things
+                holder.tv_sumIn!!.text = context.getString(R.string.consume) + data3.sumout + context.getString(R.string.yuan)
+                holder.tv_sumOut!!.text = context.getString(R.string.income) + data3.sumin + context.getString(R.string.yuan)
             }
             else -> {
             }

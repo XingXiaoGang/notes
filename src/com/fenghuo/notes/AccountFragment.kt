@@ -70,9 +70,9 @@ class AccountFragment : FragmentExt(), OnClickListener, AdapterView.OnItemLongCl
             else
                 todayOutsum += list_today!![i].money
         }
-        list_group!!.add(GroupAccount(1, "本日消费明细", "支出:" + todayOutsum, "收入:" + todayInsum))
-        tv_todayin!!.text = "今日消费:" + todayOutsum + "元"
-        tv_todayout!!.text = "今日收入:" + todayInsum + "元"
+        list_group!!.add(GroupAccount(1, getString(R.string.dayly_statistics), getString(R.string.consume) + todayOutsum, getString(R.string.income) + todayInsum))
+        tv_todayin!!.text = getString(R.string.dayly_consume) + todayOutsum + getString(R.string.yuan)
+        tv_todayout!!.text = getString(R.string.dayly_income) + todayInsum + getString(R.string.yuan)
         // 统计本月
         var mothInsum = 0f
         var monthOutsum = 0f
@@ -80,7 +80,7 @@ class AccountFragment : FragmentExt(), OnClickListener, AdapterView.OnItemLongCl
             mothInsum += java.lang.Float.valueOf(list_month!![i].sumin)!!
             monthOutsum += java.lang.Float.valueOf(list_month!![i].sumout)!!
         }
-        list_group!!.add(GroupAccount(2, "本月消费统计", "支出:" + monthOutsum, "收入:" + mothInsum))
+        list_group!!.add(GroupAccount(2, getString(R.string.month_statistics), getString(R.string.consume) + monthOutsum, getString(R.string.income) + mothInsum))
         // 统计所有
         var Insum = 0f
         var Outsum = 0f
@@ -88,7 +88,7 @@ class AccountFragment : FragmentExt(), OnClickListener, AdapterView.OnItemLongCl
             Insum += java.lang.Float.valueOf(list_all!![i].sumin)!!
             Outsum += java.lang.Float.valueOf(list_all!![i].sumout)!!
         }
-        list_group!!.add(GroupAccount(2, "全部消费", "支出:" + Outsum, "收入:" + Insum))
+        list_group!!.add(GroupAccount(2, getString(R.string.all_consume), getString(R.string.consume) + Outsum, getString(R.string.income) + Insum))
 
         adapter = AccountAdapter(activity, list_today!!, list_month!!,
                 list_all!!, list_group as ArrayList<GroupAccount>)
@@ -122,44 +122,42 @@ class AccountFragment : FragmentExt(), OnClickListener, AdapterView.OnItemLongCl
                 0 -> {
                     daccount = list_today!![p[1]]
                     AlertDialog.Builder(activity)
-                            .setTitle("删除")
-                            .setMessage("确认删除？将不可恢复\n内容：" + daccount!!.kinds)
-                            .setPositiveButton("确定"
+                            .setTitle(R.string.delete)
+                            .setMessage(getString(R.string.confirm_delete_content, daccount!!.kinds))
+                            .setPositiveButton(R.string.confirm
                             ) { arg0, arg1 ->
                                 accountHelper!!.DeleteByID(daccount!!
                                         .id)
-                                toast!!.ShowMsg("删除成功！",
+                                toast!!.ShowMsg(getString(R.string.delete_success),
                                         CustomToast.Img_Ok)
                                 inite()
-                            }.setNegativeButton("取消", null).show()
+                            }.setNegativeButton(R.string.cancel, null).show()
                 }
                 1 -> {
                     maccount = list_all!![p[1]]
                     AlertDialog.Builder(activity)
-                            .setTitle("删除")
-                            .setMessage(
-                                    "删除将不可恢复,确认删除" + maccount!!.date + "的所有记录？")
-                            .setPositiveButton("确定"
+                            .setTitle(R.string.delete)
+                            .setMessage(getString(R.string.confirm_delete_date, aaccount!!.date))
+                            .setPositiveButton(R.string.confirm
                             ) { dialog, which ->
                                 accountHelper!!.DeleteDay(maccount!!.date!!)
-                                toast!!.ShowMsg("删除成功！",
+                                toast!!.ShowMsg(getString(R.string.delete_success),
                                         CustomToast.Img_Ok)
                                 inite()
-                            }.setNegativeButton("取消", null).show()
+                            }.setNegativeButton(R.string.cancel, null).show()
                 }
                 2 -> {
                     aaccount = list_all!![p[1]]
                     AlertDialog.Builder(activity)
-                            .setTitle("删除")
-                            .setMessage(
-                                    "删除将不可恢复,确认删除" + aaccount!!.date + "的所有记录？")
-                            .setPositiveButton("确定"
+                            .setTitle(R.string.delete)
+                            .setMessage(getString(R.string.confirm_delete_date, aaccount!!.date))
+                            .setPositiveButton(R.string.confirm
                             ) { dialog, which ->
                                 accountHelper!!.DeleteDay(aaccount!!.date!!)
-                                toast!!.ShowMsg("删除成功！",
+                                toast!!.ShowMsg(getString(R.string.delete_success),
                                         CustomToast.Img_Ok)
                                 inite()
-                            }.setNegativeButton("取消", null).show()
+                            }.setNegativeButton(R.string.cancel, null).show()
                 }
                 else -> {
                 }

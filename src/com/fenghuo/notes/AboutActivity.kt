@@ -46,11 +46,11 @@ class AboutActivity : Activity(), OnClickListener {
     override fun onClick(arg0: View) {
         when (arg0.id) {
             R.id.btn_back_about -> finish()
-            R.id.rl_app -> toast!!.ShowMsg("关于", CustomToast.Img_Info)
-            R.id.rl_art -> toast!!.ShowMsg("关于", CustomToast.Img_Info)
-            R.id.rl_funvtion -> toast!!.ShowMsg("关于", CustomToast.Img_Info)
-            R.id.rl_tjfh -> toast!!.ShowMsg("关于", CustomToast.Img_Info)
-            R.id.rl_update -> toast!!.ShowMsg("关于", CustomToast.Img_Info)
+            R.id.rl_app -> toast!!.ShowMsg(getString(R.string.about), CustomToast.Img_Info)
+            R.id.rl_art -> toast!!.ShowMsg(getString(R.string.about), CustomToast.Img_Info)
+            R.id.rl_funvtion -> toast!!.ShowMsg(getString(R.string.about), CustomToast.Img_Info)
+            R.id.rl_tjfh -> toast!!.ShowMsg(getString(R.string.about), CustomToast.Img_Info)
+            R.id.rl_update -> toast!!.ShowMsg(getString(R.string.about), CustomToast.Img_Info)
             else -> {
             }
         }

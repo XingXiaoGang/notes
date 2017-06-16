@@ -3,7 +3,6 @@ package com.fenghuo.notes
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
@@ -12,13 +11,10 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.TextView
-
 import com.fenghuo.LineEditText
 import com.fenghuo.notes.bean.Note
 import com.fenghuo.notes.db.DBNoteHelper
-
-import java.util.Timer
-import java.util.TimerTask
+import java.util.*
 
 class EditNoteActivity : Activity(), View.OnClickListener {
 
@@ -124,13 +120,13 @@ class EditNoteActivity : Activity(), View.OnClickListener {
             }
 
             R.id.btn_delete_editthi -> AlertDialog.Builder(this@EditNoteActivity)
-                    .setTitle("确认删除?")
-                    .setPositiveButton("确认"
+                    .setTitle(getString(R.string.confirm_delete))
+                    .setPositiveButton(getString(R.string.confirm)
                     ) { arg0, arg1 ->
                         noteHelper!!.Delete(currentNote!!.id)
-                        toast!!.ShowMsg("删除成功!", CustomToast.Img_Ok)
+                        toast!!.ShowMsg(getString(R.string.delete_success), CustomToast.Img_Ok)
                         finish()
-                    }.setNegativeButton("取消", null).show()
+                    }.setNegativeButton(getString(R.string.cancel), null).show()
             R.id.btn_edit_editthi -> {
                 et_content!!.isEnabled = true
                 et_content!!.inputType = InputType.TYPE_TEXT_FLAG_MULTI_LINE

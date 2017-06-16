@@ -78,7 +78,7 @@ class LoginActivity : Activity(), View.OnClickListener, IUiListener {
             }
         } catch (e: JSONException) {
             e.printStackTrace()
-            Toast.makeText(this, "解析登录结果失败 :" + e.message, Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "解析登录结果失败 :${e.message}", Toast.LENGTH_LONG).show()
         }
 
     }

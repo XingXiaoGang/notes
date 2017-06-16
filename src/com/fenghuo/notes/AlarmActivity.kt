@@ -48,7 +48,7 @@ class AlarmActivity : Activity(), OnClickListener {
     private var dialog_time: AlertDialog? = null
     private var datePicker: DatePicker? = null
     private var timePicker: TimePicker? = null
-    internal var weekstr = arrayOf("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六")
+    internal var weekstr = arrayOf(getString(R.string.sunday), getString(R.string.monday), getString(R.string.tusday), getString(R.string.thirsday), getString(R.string.wensday), getString(R.string.friday), getString(R.string.saturday))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,17 +98,17 @@ class AlarmActivity : Activity(), OnClickListener {
             if (alarm.vibration == 1)
                 chb_vibration!!.isChecked = true
             if (alarm.ringUri != "") {
-                tv_ring!!.text = "提示铃声(静音)"
+                tv_ring!!.text = getString(R.string.tips_silence)
             } else {
                 try {
                     val indexOf = ringUri.lastIndexOf("/")
                     var index = ringUri.substring(indexOf)
                     index = index.substring(1)
                     Integer.parseInt(index)
-                    tv_ring!!.text = "提示铃声(自定义)"
+                    tv_ring!!.text = getString(R.string.custom_ring)
                 } catch (e: Exception) {
                     // 默认
-                    tv_ring!!.text = "提示铃声(默认)"
+                    tv_ring!!.text = getString(R.string.default_ring)
                     ringUri = "default"
                 }
 
@@ -184,145 +184,139 @@ class AlarmActivity : Activity(), OnClickListener {
         tv_week!!.text = weekstr[w]
     }
 
-    override fun onClick(v: View) {
-        when (v.id) {
-            R.id.ln_pickrings, R.id.tv_alarm_ring, R.id.btn_selectring -> {
-                val intent = Intent(RingtoneManager.ACTION_RINGTONE_PICKER)
+    override fun onClick(v: View) = when (v.id) {
+        R.id.ln_pickrings, R.id.tv_alarm_ring, R.id.btn_selectring -> {
+            val intent = Intent(RingtoneManager.ACTION_RINGTONE_PICKER).apply {
                 // 类型为来电TYPE_RINGTONE TYPE_NOTIFICATION TYPE_ALARM
-                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,
+                putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,
                         RingtoneManager.TYPE_NOTIFICATION)
-                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "设置提醒铃声")
-                startActivityForResult(intent, 3)
-                tv_ring!!.text = "提示铃声(静音)"
-                ringUri = ""
+                putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, getString(R.string.set_tip_rings))
             }
-            R.id.btn_savetop_alarm -> {
-                val date = tv_date!!.text.toString()
-                val time = tv_time!!.text.toString()
-
-                var isrepeat = 0
-                var repeatweeks = ""
-                if (checktext1!!.isChecked)
-                    repeatweeks += "1,"
-                if (checktext2!!.isChecked)
-                    repeatweeks += "2,"
-                if (checktext3!!.isChecked)
-                    repeatweeks += "3,"
-                if (checktext4!!.isChecked)
-                    repeatweeks += "4,"
-                if (checktext5!!.isChecked)
-                    repeatweeks += "5,"
-                if (checktext6!!.isChecked)
-                    repeatweeks += "6,"
-                if (checktext7!!.isChecked)
-                    repeatweeks += "7,"
-                if (repeatweeks.length > 1) {
-                    repeatweeks = repeatweeks
-                            .substring(0, repeatweeks.length - 1)
-                    isrepeat = 1
-                }
-                val vibration = if (chb_vibration!!.isChecked) 1 else 0
-                val content = tv_contents!!.text.toString()
-                val alarm = Alarm(selecteNote!!.id, date, time, isrepeat,
-                        repeatweeks, vibration, ringUri, content)
-                // 保存到数据库
-                alarmHelper!!.add(alarm)
-                // 更新note
-                noteHelper!!.Addalarm(selecteNote!!.id)
-                // 设置闹钟
-                alarmmanage!!.set(alarm)
-                alarmmanage!!.destroy()
-                toast!!.ShowMsg("设置成功！", CustomToast.Img_Ok)
-                finish()
-            }
-            R.id.btn_back_alarm -> {
-                finish()
-                showdatepick()
-            }
-            R.id.tv_alarm_date -> showdatepick()
-            R.id.tv_alarm_time -> showtimepick()
-            R.id.week1 -> checktext1!!.isChecked = !checktext1!!.isChecked
-            R.id.week2 -> checktext2!!.isChecked = !checktext2!!.isChecked
-            R.id.week3 -> checktext3!!.isChecked = !checktext3!!.isChecked
-            R.id.week4 -> checktext4!!.isChecked = !checktext4!!.isChecked
-            R.id.week5 -> checktext5!!.isChecked = !checktext5!!.isChecked
-            R.id.week6 -> checktext6!!.isChecked = !checktext6!!.isChecked
-            R.id.week7 -> checktext7!!.isChecked = !checktext7!!.isChecked
-            R.id.btn_cancelalarm -> {
-                noteHelper!!.deletealarm(selecteNote!!.id)
-                alarmHelper!!.delete(selecteNote!!.id)
-                toast!!.ShowMsg("已取消", CustomToast.Img_Ok)
-                btn_cancel!!.visibility = View.GONE
-            }
-            else -> {
-            }
+            startActivityForResult(intent, 3)
+            tv_ring!!.text = getString(R.string.tips_silence)
+            ringUri = ""
         }
+        R.id.btn_savetop_alarm -> {
+            val date = tv_date!!.text.toString()
+            val time = tv_time!!.text.toString()
 
+            var isrepeat = 0
+            var repeatweeks = ""
+            if (checktext1!!.isChecked)
+                repeatweeks += "1,"
+            if (checktext2!!.isChecked)
+                repeatweeks += "2,"
+            if (checktext3!!.isChecked)
+                repeatweeks += "3,"
+            if (checktext4!!.isChecked)
+                repeatweeks += "4,"
+            if (checktext5!!.isChecked)
+                repeatweeks += "5,"
+            if (checktext6!!.isChecked)
+                repeatweeks += "6,"
+            if (checktext7!!.isChecked)
+                repeatweeks += "7,"
+            if (repeatweeks.length > 1) {
+                repeatweeks = repeatweeks
+                        .substring(0, repeatweeks.length - 1)
+                isrepeat = 1
+            }
+            val vibration = if (chb_vibration!!.isChecked) 1 else 0
+            val content = tv_contents!!.text.toString()
+            val alarm = Alarm(selecteNote!!.id, date, time, isrepeat,
+                    repeatweeks, vibration, ringUri, content)
+            // 保存到数据库
+            alarmHelper!!.add(alarm)
+            // 更新note
+            noteHelper!!.Addalarm(selecteNote!!.id)
+            // 设置闹钟
+            alarmmanage!!.set(alarm)
+            alarmmanage!!.destroy()
+            toast!!.ShowMsg(getString(R.string.setted_success), CustomToast.Img_Ok)
+            finish()
+        }
+        R.id.btn_back_alarm -> {
+            finish()
+            showdatepick()
+        }
+        R.id.tv_alarm_date -> showdatepick()
+        R.id.tv_alarm_time -> showtimepick()
+        R.id.week1 -> checktext1!!.isChecked = !checktext1!!.isChecked
+        R.id.week2 -> checktext2!!.isChecked = !checktext2!!.isChecked
+        R.id.week3 -> checktext3!!.isChecked = !checktext3!!.isChecked
+        R.id.week4 -> checktext4!!.isChecked = !checktext4!!.isChecked
+        R.id.week5 -> checktext5!!.isChecked = !checktext5!!.isChecked
+        R.id.week6 -> checktext6!!.isChecked = !checktext6!!.isChecked
+        R.id.week7 -> checktext7!!.isChecked = !checktext7!!.isChecked
+        R.id.btn_cancelalarm -> {
+            noteHelper!!.deletealarm(selecteNote!!.id)
+            alarmHelper!!.delete(selecteNote!!.id)
+            toast!!.ShowMsg(getString(R.string.canceld), CustomToast.Img_Ok)
+            btn_cancel!!.visibility = View.GONE
+        }
+        else -> {
+        }
     }
 
     /**
      * 显示选择日期对话框
      */
-    private fun showdatepick() {
-        if (dialog_date == null) {
-            val view = layoutInflater.inflate(R.layout.dialog_selectdate, null)
-            datePicker = view.findViewById(R.id.datepicker) as DatePicker
-            dialog_date = AlertDialog.Builder(this@AlarmActivity)
-                    .setView(view)
-                    .setTitle("请选择日期")
-                    .setPositiveButton("确认"
-                    ) { arg0, arg1 ->
-                        val year = datePicker!!.year.toString() + ""
-                        val moth: Int = datePicker!!.month + 1
-                        val day = datePicker!!.dayOfMonth.toString() + ""
-                        val calendar = Calendar.getInstance()
-                        calendar.set(Calendar.YEAR,
-                                Integer.parseInt(year))
-                        calendar.set(Calendar.MONTH, moth - 1)
-                        calendar.set(Calendar.DATE,
-                                Integer.parseInt(day))
-                        initeWeek(calendar.time)
-                        tv_date!!.text = year + "-" + (if ("$moth".length == 1)
-                            "0" + moth
-                        else
-                            moth) + "-" + if (day.length == 1)
-                            "0" + day
-                        else
-                            day
-                    }.show()
-        } else {
-            dialog_date!!.show()
-        }
+    private fun showdatepick() = if (dialog_date == null) {
+        val view = layoutInflater.inflate(R.layout.dialog_selectdate, null)
+        datePicker = view.findViewById(R.id.datepicker) as DatePicker
+        dialog_date = AlertDialog.Builder(this@AlarmActivity)
+                .setView(view)
+                .setTitle(getString(R.string.choose_date))
+                .setPositiveButton(R.string.confirm
+                ) { arg0, arg1 ->
+                    val year = datePicker!!.year.toString() + ""
+                    val moth: Int = datePicker!!.month + 1
+                    val day = datePicker!!.dayOfMonth.toString() + ""
+                    val calendar = Calendar.getInstance()
+                    calendar.set(Calendar.YEAR,
+                            Integer.parseInt(year))
+                    calendar.set(Calendar.MONTH, moth - 1)
+                    calendar.set(Calendar.DATE,
+                            Integer.parseInt(day))
+                    initeWeek(calendar.time)
+                    tv_date!!.text = "$year-" + (if ("$moth".length == 1)
+                        "0" + moth
+                    else
+                        moth) + "-" + if (day.length == 1)
+                        "0" + day
+                    else
+                        day
+                }.show()
+    } else {
+        dialog_date!!.show()
     }
 
     /**
      * 显示选择时间对话框
      */
-    private fun showtimepick() {
-        if (dialog_time == null) {
-            val view = layoutInflater.inflate(R.layout.dialog_selecttime, null)
-            timePicker = view.findViewById(R.id.tiempicker) as TimePicker
-            dialog_time = AlertDialog.Builder(this@AlarmActivity)
-                    .setView(view)
-                    .setTitle("请选择时间")
-                    .setPositiveButton("确认"
-                    ) { arg0, arg1 ->
-                        var hour = timePicker!!.currentHour.toString() + ""
-                        var minite = timePicker!!
-                                .currentMinute.toString() + ""
-                        hour = if (hour.length == 1)
-                            "0" + hour
-                        else
-                            hour
-                        minite = if (minite.length == 1)
-                            "0" + minite
-                        else
-                            minite
-                        tv_time!!.text = hour + ":" + minite
-                    }.show()
-        } else {
-            dialog_time!!.show()
-        }
+    private fun showtimepick() = if (dialog_time == null) {
+        val view = layoutInflater.inflate(R.layout.dialog_selecttime, null)
+        timePicker = view.findViewById(R.id.tiempicker) as TimePicker
+        dialog_time = AlertDialog.Builder(this@AlarmActivity)
+                .setView(view)
+                .setTitle(getString(R.string.choose_time))
+                .setPositiveButton(R.string.confirm
+                ) { arg0, arg1 ->
+                    var hour = timePicker!!.currentHour.toString() + ""
+                    var minite = timePicker!!
+                            .currentMinute.toString() + ""
+                    hour = if (hour.length == 1)
+                        "0" + hour
+                    else
+                        hour
+                    minite = if (minite.length == 1)
+                        "0" + minite
+                    else
+                        minite
+                    tv_time!!.text = hour + ":" + minite
+                }.show()
+    } else {
+        dialog_time!!.show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
@@ -336,10 +330,10 @@ class AlarmActivity : Activity(), OnClickListener {
             if (uri != null) {
                 println(uri.toString() + "============")
                 if (uri.toString().contains("ringtone")) {
-                    tv_ring!!.text = "提示铃声(默认)"
+                    tv_ring!!.text = getString(R.string.default_ring)
                     ringUri = "default"
                 } else {
-                    tv_ring!!.text = "提示铃声(自定义)"
+                    tv_ring!!.text = getString(R.string.custom_ring)
                     ringUri = uri.toString()
                 }
             }

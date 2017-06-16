@@ -1,5 +1,6 @@
 package com.fenghuo.notes
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
@@ -69,34 +70,31 @@ class AddAccountActivity : Activity(), OnClickListener {
         group = findViewById(R.id.rg_kind) as RadioGroup
     }
 
-    override fun onClick(view: View) {
-
-        when (view.id) {
-            R.id.btn_back_accadd -> finish()
-            R.id.btn_save_addacc -> {
-                val money = java.lang.Float.valueOf(et_money!!.text.toString())!!
-                val kind = if (group!!.checkedRadioButtonId == R.id.rab_outcome)
-                    1
-                else
-                    2
-                val kinds = tv_kinds!!.text.toString()
-                val time = tv_date!!.text.toString() + " " + tv_time!!.text.toString()
-                if (money != 0f && kinds != "点击选择 >") {
-                    accountHelper = DBAccountHelper(this@AddAccountActivity)
-                    val account = Account(-1, kind, kinds, money, time)
-                    accountHelper!!.insert(account)
-                    accountHelper!!.Destroy()
-                    toast!!.ShowMsg("成功！", CustomToast.Img_Ok)
-                    finish()
-                } else {
-                    toast!!.ShowMsg("请将金额/分类填写正确！！", CustomToast.Img_Erro)
-                }
+    override fun onClick(view: View) = when (view.id) {
+        R.id.btn_back_accadd -> finish()
+        R.id.btn_save_addacc -> {
+            val money = java.lang.Float.valueOf(et_money!!.text.toString())!!
+            val kind = if (group!!.checkedRadioButtonId == R.id.rab_outcome)
+                1
+            else
+                2
+            val kinds = tv_kinds!!.text.toString()
+            val time = tv_date!!.text.toString() + " " + tv_time!!.text.toString()
+            if (money != 0f && kinds != getString(R.string.click_to_choose)) {
+                accountHelper = DBAccountHelper(this@AddAccountActivity)
+                val account = Account(-1, kind, kinds, money, time)
+                accountHelper!!.insert(account)
+                accountHelper!!.Destroy()
+                toast!!.ShowMsg(getString(R.string.success), CustomToast.Img_Ok)
+                finish()
+            } else {
+                toast!!.ShowMsg(getString(R.string.crrecot_mony_kind), CustomToast.Img_Erro)
             }
-            R.id.tv_kinds_addacc, R.id.ln_kinds_addacc -> showselectKinds()
-            R.id.tv_picktime_acc -> showselecttime()
-            R.id.tv_pickdate_acc -> showselectDate()
-            else -> {
-            }
+        }
+        R.id.tv_kinds_addacc, R.id.ln_kinds_addacc -> showselectKinds()
+        R.id.tv_picktime_acc -> showselecttime()
+        R.id.tv_pickdate_acc -> showselectDate()
+        else -> {
         }
     }
 
@@ -109,13 +107,13 @@ class AddAccountActivity : Activity(), OnClickListener {
             datePicker = view.findViewById(R.id.datepicker) as DatePicker
             dialog_date = AlertDialog.Builder(this@AddAccountActivity)
                     .setView(view)
-                    .setTitle("请选择日期")
-                    .setPositiveButton("确认"
+                    .setTitle(R.string.choose_date)
+                    .setPositiveButton(R.string.confirm
                     ) { arg0, arg1 ->
                         val year = datePicker!!.year.toString() + ""
                         val moth: Int = datePicker!!.month + 1
                         val day = datePicker!!.dayOfMonth.toString() + ""
-                        tv_date!!.text = year + "-" + (if (moth.toString().length == 1)
+                        tv_date!!.text = "$year-" + (if (moth.toString().length == 1)
                             "0" + moth
                         else
                             moth) + "-" + if (day.length == 1)
@@ -137,8 +135,8 @@ class AddAccountActivity : Activity(), OnClickListener {
             timePicker = view.findViewById(R.id.tiempicker) as TimePicker
             dialog_time = AlertDialog.Builder(this@AddAccountActivity)
                     .setView(view)
-                    .setTitle("请选择时间")
-                    .setPositiveButton("确认"
+                    .setTitle(R.string.choose_time)
+                    .setPositiveButton(R.string.confirm
                     ) { arg0, arg1 ->
                         var hour = timePicker!!.currentHour.toString() + ""
                         var minite = timePicker!!
@@ -174,8 +172,8 @@ class AddAccountActivity : Activity(), OnClickListener {
             handler.sendEmptyMessage(1)
         }
         dialog_kinds = AlertDialog.Builder(this@AddAccountActivity)
-                .setTitle("请选择类型").setView(view)
-                .setPositiveButton("添加") { arg0, arg1 -> showAddKinds() }.show()
+                .setTitle(getString(R.string.choose_kind)).setView(view)
+                .setPositiveButton(getString(R.string.add)) { arg0, arg1 -> showAddKinds() }.show()
 
     }
 
@@ -189,9 +187,9 @@ class AddAccountActivity : Activity(), OnClickListener {
             val editText = view
                     .findViewById(R.id.et_addkinds) as EditText
             dialog_addkinds = AlertDialog.Builder(this@AddAccountActivity)
-                    .setTitle("请输入名称")
+                    .setTitle(getString(R.string.input_name))
                     .setView(view)
-                    .setPositiveButton("确定"
+                    .setPositiveButton(R.string.confirm
                     ) { arg0, arg1 ->
                         val text = editText.text.toString() + ""
                         if (text.length > 0) {
@@ -199,7 +197,7 @@ class AddAccountActivity : Activity(), OnClickListener {
                             tv_kinds!!.text = text
                             dialog_kinds = null
                         } else {
-                            toast!!.ShowMsg("未添加",
+                            toast!!.ShowMsg(getString(R.string.not_add),
                                     CustomToast.Img_Erro)
                         }
                     }.show()
@@ -208,13 +206,13 @@ class AddAccountActivity : Activity(), OnClickListener {
         }
     }
 
-    internal var handler: Handler = object : Handler() {
+    internal var handler: Handler = @SuppressLint("HandlerLeak")
+    object : Handler() {
 
         override fun handleMessage(msg: Message) {
 
             when (msg.what) {
                 1 -> dialog_kinds!!.dismiss()
-
                 else -> {
                 }
             }

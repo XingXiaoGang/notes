@@ -76,7 +76,7 @@ class AddNoteActivity : Activity(), View.OnClickListener {
 
         when (arg0.id) {
             R.id.btn_back_addthi -> {
-                if (content.length > 0)
+                if (content.isNotEmpty())
                     helper!!.saveLast(content)
                 finish()
             }

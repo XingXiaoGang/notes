@@ -110,7 +110,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
                 mViewPager!!.currentItem = 1
             }
             R.id.item_recovery -> {
-                object : ConformDialog(this@MainActivity, "请选择恢复方式!") {
+                object : ConformDialog(this@MainActivity, getString(R.string.recovery_method)) {
 
                     override fun onClick(view: View) {
                         if (view.id == R.id.confirm) {
@@ -121,11 +121,11 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
                         dismiss()
                     }
                 }.setButtonTextColor(resources.getColor(R.color.text_444444), resources.getColor(R.color.text_444444))
-                        .setButtonText("本地恢复", "云恢复").show()
+                        .setButtonText(getString(R.string.local_recovery), getString(R.string.cloud_recovery)).show()
                 mMenu!!.closeMenu()
             }
             R.id.item_backup -> {
-                object : ConformDialog(this@MainActivity, "请选择备份方式!") {
+                object : ConformDialog(this@MainActivity, getString(R.string.choose_backup_method)) {
 
                     override fun onClick(view: View) {
                         if (view.id == R.id.confirm) {
@@ -136,7 +136,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
                         dismiss()
                     }
                 }.setButtonTextColor(resources.getColor(R.color.text_444444), resources.getColor(R.color.text_444444))
-                        .setButtonText("本地备份", "云备份").show()
+                        .setButtonText(getString(R.string.local_backup), getString(R.string.cloud_backup)).show()
                 mMenu!!.closeMenu()
             }
             R.id.item_setpwd -> {
@@ -152,37 +152,37 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
             }
             R.id.item_clean_notes -> {
 
-                object : ConformDialog(this@MainActivity, "确定删除所有记事?建议删除前先备份数据") {
+                object : ConformDialog(this@MainActivity, getString(R.string.delete_all_note_warning)) {
                     override fun onClick(view: View) {
                         if (view.id == R.id.confirm) {
                             val helper = DBNoteHelper(this@MainActivity)
                             helper.Deleteall()
                             helper.Desdroy()
-                            mToast!!.ShowMsg("删除成功！", CustomToast.Img_Ok)
+                            mToast!!.ShowMsg(getString(R.string.delete_success), CustomToast.Img_Ok)
                             val intent = packageManager.getLaunchIntentForPackage(packageName)
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                             startActivity(intent)
                         }
                         dismiss()
                     }
-                }.setButtonText("取消", "删除").show()
+                }.setButtonText(getString(R.string.cancel), getString(R.string.delete)).show()
                 mMenu!!.closeMenu()
             }
             R.id.item_clean_accounts -> {
-                object : ConformDialog(this@MainActivity, "确定删除所有记账?建议删除前先备份数据") {
+                object : ConformDialog(this@MainActivity, getString(R.string.delete_all_account_warning)) {
                     override fun onClick(view: View) {
                         if (view.id == R.id.confirm) {
                             val helper = DBAccountHelper(this@MainActivity)
                             helper.Deleteall()
                             helper.Destroy()
-                            mToast!!.ShowMsg("删除成功！", CustomToast.Img_Ok)
+                            mToast!!.ShowMsg(getString(R.string.delete_success), CustomToast.Img_Ok)
                             val intent = packageManager.getLaunchIntentForPackage(packageName)
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                             startActivity(intent)
                         }
                         dismiss()
                     }
-                }.setButtonText("取消", "删除").show()
+                }.setButtonText(getString(R.string.cancel), getString(R.string.delete)).show()
                 mMenu!!.closeMenu()
             }
             R.id.item_about -> {
@@ -192,8 +192,6 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
             }
             R.id.item_exit -> {
                 finish()
-            }
-            else -> {
             }
         }
     }
@@ -222,7 +220,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
                     }
 
                     if (mBackDownTimes == 1) {
-                        Toast.makeText(applicationContext, "再按一次退出", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, getString(R.string.click_again_to_quit), Toast.LENGTH_SHORT).show()
                         res = true
                     } else if (mBackDownTimes == 2) {
                         res = false
@@ -303,10 +301,10 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
     private fun doRestore(fileName: String?) {
         if (mBackupRestore == null)
             mBackupRestore = BackupRestoreUtils(this@MainActivity)
-        object : ConformDialog(this@MainActivity, (if (fileName != null) "确定从云端恢复?" else "确定恢复?") + "所有记录将会还原到备份时的状态") {
+        object : ConformDialog(this@MainActivity, (if (fileName != null) getString(R.string.restore_from_cloud_ask) else getString(R.string.sure_restor))) {
             override fun onClick(view: View) {
                 if (view.id == R.id.confirm) {
-                    mToast!!.ShowMsg("正在恢复！", CustomToast.Img_Info)
+                    mToast!!.ShowMsg(getString(R.string.restoreing), CustomToast.Img_Info)
                     Values.isRestore_database = true
                     var res = -1
                     if (fileName != null) {
@@ -315,44 +313,44 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
                         res = mBackupRestore!!.restoreLocal()
                     }
                     if (res == 1) {
-                        mToast!!.ShowMsg("恢复成功！", CustomToast.Img_Ok)
+                        mToast!!.ShowMsg(getString(R.string.restore_success), CustomToast.Img_Ok)
                         val intent = packageManager.getLaunchIntentForPackage(packageName)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         startActivity(intent)
                     }
                     if (res == 0) {
-                        mToast!!.ShowMsg("未找到备份文件！", CustomToast.Img_Info)
+                        mToast!!.ShowMsg(getString(R.string.no_backup_file), CustomToast.Img_Info)
                     }
                     if (res == -1) {
-                        mToast!!.ShowMsg("恢复失败！", CustomToast.Img_Ok)
+                        mToast!!.ShowMsg(getString(R.string.restore_fialed), CustomToast.Img_Ok)
                     }
                     Values.isRestore_database = false
                 }
                 dismiss()
             }
-        }.setButtonText("取消", "恢复").show()
+        }.setButtonText(getString(R.string.cancel), getString(R.string.restore)).show()
     }
 
     private fun doBackup() {
         if (mBackupRestore == null)
             mBackupRestore = BackupRestoreUtils(this@MainActivity)
         if (mBackupRestore!!.checkexist()) {
-            object : ConformDialog(this@MainActivity, "备份已存在，备份将会覆盖原来的数据，仍然备份？") {
+            object : ConformDialog(this@MainActivity, getString(R.string.backup_exist)) {
                 override fun onClick(view: View) {
                     if (view.id == R.id.confirm) {
-                        mToast!!.ShowMsg("正在备份！", CustomToast.Img_Info)
+                        mToast!!.ShowMsg(getString(R.string.backuping), CustomToast.Img_Info)
                         if (mBackupRestore!!.backupLocal()) {
-                            mToast!!.ShowMsg("备份成功！",
+                            mToast!!.ShowMsg(getString(R.string.backup_success),
                                     CustomToast.Img_Ok)
                         }
                     }
                     dismiss()
                 }
-            }.setButtonText("取消备份", "继续备份").show()
+            }.setButtonText(getString(R.string.cancel_backup), getString(R.string.continue_backup)).show()
         } else {
-            mToast!!.ShowMsg("正在备份！", CustomToast.Img_Info)
+            mToast!!.ShowMsg(getString(R.string.backuping), CustomToast.Img_Info)
             if (mBackupRestore!!.backupLocal()) {
-                mToast!!.ShowMsg("备份成功！", CustomToast.Img_Ok)
+                mToast!!.ShowMsg(getString(R.string.backup_success), CustomToast.Img_Ok)
             }
         }
     }
@@ -365,9 +363,9 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
             if (AccountProfileManager.getInstance(this).userState == AccountProfileManager.LOGIN_STATE_LOGIN) {
                 val serverFileName = Config.dbDir + File.separator + AccountProfileManager.getInstance(this).userDbName
                 CloudUtils.doDownload(Config.Buckte, serverFileName, File(tempDownloadDbName), mHandler)
-                mToast!!.ShowMsg("正在下载...", CustomToast.Img_Info)
+                mToast!!.ShowMsg(getString(R.string.downloading), CustomToast.Img_Info)
             } else {
-                CustomToast(this).ShowMsg("未登录", CustomToast.Img_Info)
+                CustomToast(this).ShowMsg(getString(R.string.have_not_login), CustomToast.Img_Info)
             }
         }
     }
@@ -384,10 +382,10 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
                     //再上传
                     val serverFileName = Config.dbDir + File.separator + AccountProfileManager.getInstance(this).userDbName
                     CloudUtils.doUpload(Config.Buckte, serverFileName, File(tempUploadDbName), mHandler)
-                    mToast!!.ShowMsg("正在上传...", CustomToast.Img_Info)
+                    mToast!!.ShowMsg(getString(R.string.uploading), CustomToast.Img_Info)
                 }
             } else {
-                CustomToast(this).ShowMsg("未登录", CustomToast.Img_Info)
+                CustomToast(this).ShowMsg(getString(R.string.have_not_login), CustomToast.Img_Info)
             }
         }
     }
@@ -406,7 +404,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
             Values.CODE_SET_LOCK -> {
                 if (data != null) {
                     val pwd = data.getCharArrayExtra(LockPatternActivity.EXTRA_PATTERN)
-                    if (pwd != null && pwd.size > 0) {
+                    if (pwd != null && pwd.isNotEmpty()) {
                         val savedPwd = String(pwd)
                         PreferenceHelper(this).setPatternpwd(savedPwd)
                         (findViewById(R.id.item_setpwd) as TextView).setText(R.string.del_pwd)
@@ -436,10 +434,10 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
                 doRestore(tempDownloadDbName)
             }
             R.id.file_download_error -> {
-                CustomToast(applicationContext).ShowMsg("文件下载失败!", CustomToast.Img_Erro)
+                CustomToast(applicationContext).ShowMsg(getString(R.string.file_download_failed), CustomToast.Img_Erro)
             }
             R.id.file_upload_ok -> {
-                mToast!!.ShowMsg("文件上传成功!", CustomToast.Img_Ok)
+                mToast!!.ShowMsg(getString(R.string.file_uplaod_success), CustomToast.Img_Ok)
             }
         }
         return false

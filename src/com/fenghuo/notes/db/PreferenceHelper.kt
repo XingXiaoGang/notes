@@ -35,7 +35,7 @@ class PreferenceHelper(context: Context) {
         editor.apply()
     }
 
-    val patternPwd: String
+    val patternPwd: String?
         get() = mPreferences.getString(KEY_PWD, null)
 
     fun setPatternpwd(pwd: String) {

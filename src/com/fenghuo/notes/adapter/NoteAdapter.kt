@@ -7,26 +7,36 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.ImageView
-
 import com.fenghuo.LineTextView
 import com.fenghuo.notes.R
 import com.fenghuo.notes.Values
 import com.fenghuo.notes.bean.Note
 import com.fenghuo.notes.db.DBNoteHelper
 
-class NoteAdapter(private val context: Context, private var data: MutableList<Note>?) : BaseAdapter() {
-    var isEdit: Boolean = false
-        private set// 是否在编辑
-    private val inflater: LayoutInflater
+class NoteAdapter() : BaseAdapter(), View.OnClickListener {
 
-    init {
-        inflater = LayoutInflater.from(context)
+
+    var isEdit: Boolean = false
+    private var inflater: LayoutInflater? = null
+    private var noteDbHelper: DBNoteHelper? = null
+    private val data: MutableList<Note> = arrayListOf()
+
+    constructor(context: Context) : this() {
+        this.inflater = LayoutInflater.from(context)
+        this.noteDbHelper = DBNoteHelper(context)
+        this.data.clear()
+        this.noteDbHelper.let { this.data.addAll(it!!.Getlist()) }
     }
 
+    /**
+     * 刷新数据
+     * **/
     fun Update(list: MutableList<Note>) {
-        data!!.clear()
-        data = list
-        notifyDataSetChanged()
+        data.clear()
+        list.let {
+            data.addAll(list)
+            notifyDataSetChanged()
+        }
     }
 
     /**
@@ -45,51 +55,57 @@ class NoteAdapter(private val context: Context, private var data: MutableList<No
         notifyDataSetChanged()
     }
 
-    override fun getCount(): Int {
-
-        return data!!.size
+    fun destory() {
+        noteDbHelper?.Desdroy()
+        noteDbHelper = null
     }
 
-    override fun getItem(arg0: Int): Any {
-
-        return data!![arg0]
-    }
-
+    override fun getCount(): Int = data.size
+    override fun getItem(arg0: Int): Any = data[arg0]
     override fun getItemId(arg0: Int): Long {
-
         return arg0.toLong()
+    }
+
+    override fun onClick(view: View) {
+        val item: Note = view.getTag(R.id.tag_1) as Note
+        // 从列表中移除
+        val dbNoteHelper = DBNoteHelper(view.context)
+        dbNoteHelper.Delete(item.id)
+        dbNoteHelper.Desdroy()
+        // 从集合中移除
+        data.remove(item)
+        notifyDataSetChanged()
     }
 
     override fun getView(position: Int, view: View?, arg2: ViewGroup): View {
         var view = view
-
         var h: ViewHolder? = null
+        val item: Note = data[position]
         if (view != null) {
             h = view.tag as ViewHolder
         } else {
             h = ViewHolder()
-            view = inflater.inflate(R.layout.item_note, null)
+            view = inflater?.inflate(R.layout.item_note, null)
             h.item_img = view!!.findViewById(R.id.item_img) as ImageView
-            h.item_tv_content = view
-                    .findViewById(R.id.item_tv_content) as LineTextView
+            h.item_tv_content = view.findViewById(R.id.item_tv_content) as LineTextView
             h.item_btn_delete = view.findViewById(R.id.item_btndelete) as Button
             h.item_alarm = view.findViewById(R.id.item_alarm) as ImageView
             view.tag = h
         }
 
-        val imgIndex = data!![position].img
+        val imgIndex = item.img
         if (imgIndex >= 0 && imgIndex < Values.item_bg_preview.size) {
             h.item_img!!.setBackgroundResource(Values.item_bg_preview[imgIndex])
         } else {
             h.item_img!!.setBackgroundResource(R.drawable.page_blue)
         }
 
-        h.item_tv_content!!.text = data!![position].content
-        h.item_btn_delete!!.setOnClickListener(onclicklistener())
-        h.item_btn_delete!!.tag = position
+        h.item_tv_content!!.text = item.content
+        h.item_btn_delete!!.setOnClickListener(this)
+        h.item_btn_delete!!.setTag(R.id.tag_1, item)
         // 此方法对横线的位置进行微调(原始:getPaddingtop+lineHeigt+x). 这里setLineDown(X)
         h.item_tv_content!!.setLineDown(-h.item_tv_content!!.paddingTop - 1)
-        if (data!![position].alarm == 1)
+        if (item.alarm == 1)
             h.item_alarm!!.visibility = View.VISIBLE
         else
             h.item_alarm!!.visibility = View.INVISIBLE
@@ -97,30 +113,15 @@ class NoteAdapter(private val context: Context, private var data: MutableList<No
             h.item_btn_delete!!.visibility = View.VISIBLE
         else
             h.item_btn_delete!!.visibility = View.GONE
+        view.setTag(R.id.tag_1, item)
         return view
-    }
-
-    internal inner class onclicklistener : View.OnClickListener {
-
-        override fun onClick(arg0: View) {
-
-            val position = Integer.valueOf(arg0.tag.toString())!!
-            // 从列表中移除
-            val dbNoteHelper = DBNoteHelper(context)
-            dbNoteHelper.Delete(data!![position].id)
-            dbNoteHelper.Desdroy()
-            // 从集合中移除
-            data!!.removeAt(position)
-            notifyDataSetChanged()
-        }
-
     }
 
     private inner class ViewHolder {
         var item_img: ImageView? = null
-        // public LineEditText item_tv_content;
         var item_tv_content: LineTextView? = null
         var item_btn_delete: Button? = null
         var item_alarm: ImageView? = null
     }
+
 }

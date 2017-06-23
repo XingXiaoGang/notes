@@ -3,16 +3,13 @@ package com.fenghuo.notes.context
 import android.content.Context
 import android.os.SystemClock
 import android.os.SystemProperties
-
 import com.fenghuo.notes.BuildConfig
-
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException
 import java.io.PrintWriter
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import java.util.*
 
 /**
  * Created by gang on 16-4-28.
@@ -40,6 +37,7 @@ class CrashHandler internal constructor(internal var context: Context) : Thread.
         } catch (e: IOException) {
             e.printStackTrace()
         } finally {
+            ex.printStackTrace()
             SystemClock.sleep(200)
             android.os.Process.killProcess(android.os.Process.myPid())
             System.exit(0)

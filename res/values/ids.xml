@@ -2,6 +2,7 @@
 <resources>
 
     <item name="tag_group" type="id" />
+    <item name="tag_1" type="id" />
     <item name="check_alarm" type="id" />
     <item name="skip_splash" type="id" />
     <item name="file_download_ok" type="id" />

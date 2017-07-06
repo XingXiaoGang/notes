@@ -25,18 +25,14 @@ class NoteAdapter() : BaseAdapter(), View.OnClickListener {
         this.inflater = LayoutInflater.from(context)
         this.noteDbHelper = DBNoteHelper(context)
         this.data.clear()
-        this.noteDbHelper.let { this.data.addAll(it!!.Getlist()) }
     }
 
     /**
      * 刷新数据
      * **/
-    fun Update(list: MutableList<Note>) {
+    fun Update() {
         data.clear()
-        list.let {
-            data.addAll(list)
-            notifyDataSetChanged()
-        }
+        data.let { this.data.addAll(noteDbHelper!!.Getlist()) }
     }
 
     /**

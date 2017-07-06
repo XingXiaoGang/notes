@@ -94,13 +94,11 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
     override fun onClick(view: View) {
         when (view.id) {
             R.id.material_menu_button -> {
-                mMenu!!.toggleMenu(true)
                 val isToOpen = mMenuView!!.state == MaterialMenuDrawable.IconState.BURGER
-                updateMenuState(isToOpen)
                 if (isToOpen) {
-                    mMenu!!.openMenu(true)
+                    openMenu()
                 } else {
-                    mMenu!!.closeMenu()
+                    closeMenu()
                 }
             }
             R.id.tv_things -> {
@@ -200,14 +198,11 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
         var res = false
         when (keyCode) {
             KeyEvent.KEYCODE_MENU -> {
-                mMenu!!.toggleMenu(true)
+                toggleMenu()
                 res = true
             }
             KeyEvent.KEYCODE_BACK -> {
-                if (mMenu!!.menuState == SlideSectionMenu.State.OPENED) {
-                    mMenu!!.closeMenu()
-                    res = true
-                }
+                res = closeMenu();
                 if (!res) {
                     res = mAdapter!!.dispatchOnKeyDown(keyCode, event)
                 }
@@ -267,27 +262,47 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
     }
 
     override fun onGestureClick(): Boolean {
-        if (mMenu!!.menuState == SlideSectionMenu.State.OPENED) {
-            mMenu!!.closeMenu()
-            updateMenuState(false)
-        }
+        closeMenu()
         return true
     }
 
     override fun onSlideDown(): Boolean {
-        if (mMenu!!.menuState == SlideSectionMenu.State.CLOSED) {
-            mMenu!!.openMenu(true)
-            updateMenuState(true)
-        }
+        openMenu()
         return true
     }
 
     override fun onSlideUp(): Boolean {
+        closeMenu()
+        return true
+    }
+
+    private fun openMenu(): Boolean {
+        mGestureFrameLayout?.setIntercept(true)
+        if (mMenu!!.menuState == SlideSectionMenu.State.CLOSED) {
+            mMenu!!.openMenu(true)
+            mGestureFrameLayout?.setIntercept(true)
+            updateMenuState(true)
+            return true;
+        }
+        return false;
+    }
+
+    private fun closeMenu(): Boolean {
+        mGestureFrameLayout?.setIntercept(false)
         if (mMenu!!.menuState == SlideSectionMenu.State.OPENED) {
             mMenu!!.closeMenu()
             updateMenuState(false)
+            return true
         }
-        return true
+        return false
+    }
+
+    private fun toggleMenu() {
+        if (mMenu!!.menuState != SlideSectionMenu.State.OPENED) {
+            openMenu()
+        } else {
+            closeMenu()
+        }
     }
 
     private fun updateMenuState(toOpen: Boolean) {

@@ -35,6 +35,11 @@ class ThingsFragment : FragmentExt(), OnClickListener, OnItemClickListener, OnIt
         return mRootView
     }
 
+    override fun onResume() {
+        super.onResume()
+        adapter?.Update();
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         adapter?.destory()

@@ -56,7 +56,9 @@ class EditNoteActivity : Activity(), View.OnClickListener {
     override fun onResume() {
         super.onResume()
         // 编辑、添加逻辑处理
-        currentNote = noteHelper!!.GetSingle(currentNote!!.id)
+        currentNote?.let {
+            currentNote = noteHelper!!.GetSingle(currentNote!!.id)
+        }
         et_content!!.setText(currentNote!!.content)
         et_content!!.inputType = InputType.TYPE_NULL
         et_content!!.setSingleLine(false)

@@ -33,7 +33,7 @@ class CrashHandler internal constructor(internal var context: Context) : Thread.
             writeCrash(ex, writer)
             writer.flush()
             writer.close()
-            ex.printStackTrace()
+            throw ex;
         } catch (e: IOException) {
             e.printStackTrace()
         } finally {

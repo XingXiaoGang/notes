@@ -57,18 +57,17 @@ class AccountAdapter
     }
 
     override fun getChildView(groupposition: Int, childposition: Int,
-                              islastchild: Boolean, convertview: View, parent: ViewGroup): View {
-        var convertview = convertview
-        var context: Context = convertview.context;
+                              islastchild: Boolean, convertview: View?, parent: ViewGroup): View {
+        var context: Context = parent.context;
         val holder = ChildHolder()
-        convertview = inflater.inflate(R.layout.item_elv_child, null)
-        holder.tv_name = convertview
+        var itemView = inflater.inflate(R.layout.item_elv_child, null)
+        holder.tv_name = itemView
                 .findViewById(R.id.item_child_name) as TextView
-        holder.tv_sumIn = convertview
+        holder.tv_sumIn = itemView
                 .findViewById(R.id.item_child_in) as TextView
-        holder.tv_sumOut = convertview
+        holder.tv_sumOut = itemView
                 .findViewById(R.id.item_child_out) as TextView
-        holder.tv_kinds = convertview
+        holder.tv_kinds = itemView
                 .findViewById(R.id.item_child_kinds) as TextView
 
         // 赋值
@@ -102,8 +101,8 @@ class AccountAdapter
             }
         }// 本月
         val tag = intArrayOf(groupposition, childposition)
-        convertview.tag = tag
-        return convertview
+        itemView.tag = tag
+        return itemView
     }
 
     override fun getChildrenCount(groupposition: Int): Int {

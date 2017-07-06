@@ -48,11 +48,14 @@ class AlarmActivity : Activity(), OnClickListener {
     private var dialog_time: AlertDialog? = null
     private var datePicker: DatePicker? = null
     private var timePicker: TimePicker? = null
-    internal var weekstr = arrayOf(getString(R.string.sunday), getString(R.string.monday), getString(R.string.tusday), getString(R.string.thirsday), getString(R.string.wensday), getString(R.string.friday), getString(R.string.saturday))
+    internal var weekstr: Array<String>? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alarm)
+
+        weekstr = arrayOf(getString(R.string.sunday), getString(R.string.monday), getString(R.string.tusday), getString(R.string.thirsday), getString(R.string.wensday), getString(R.string.friday), getString(R.string.saturday))
 
         findVeiws()
 
@@ -181,7 +184,7 @@ class AlarmActivity : Activity(), OnClickListener {
         var w = cal.get(Calendar.DAY_OF_WEEK) - 1
         if (w < 0)
             w = 0
-        tv_week!!.text = weekstr[w]
+        tv_week!!.text = weekstr!![w]
     }
 
     override fun onClick(v: View) = when (v.id) {

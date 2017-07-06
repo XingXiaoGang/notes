@@ -73,6 +73,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
         findViewById(R.id.item_clean_accounts).setOnClickListener(this)
         findViewById(R.id.item_clean_notes).setOnClickListener(this)
         findViewById(R.id.item_setpwd).setOnClickListener(this)
+        findViewById(R.id.item_cancel).setOnClickListener(this)
 
         mAdapter = ContentPageAdapter(supportFragmentManager)
         mViewPager!!.adapter = mAdapter
@@ -191,6 +192,9 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
             R.id.item_exit -> {
                 finish()
             }
+            R.id.item_cancel -> {
+                closeMenu()
+            }
         }
     }
 
@@ -277,10 +281,8 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
     }
 
     private fun openMenu(): Boolean {
-        mGestureFrameLayout?.setIntercept(true)
         if (mMenu!!.menuState == SlideSectionMenu.State.CLOSED) {
             mMenu!!.openMenu(true)
-            mGestureFrameLayout?.setIntercept(true)
             updateMenuState(true)
             return true;
         }
@@ -288,7 +290,6 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
     }
 
     private fun closeMenu(): Boolean {
-        mGestureFrameLayout?.setIntercept(false)
         if (mMenu!!.menuState == SlideSectionMenu.State.OPENED) {
             mMenu!!.closeMenu()
             updateMenuState(false)

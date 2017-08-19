@@ -65,7 +65,7 @@
                 android:text="记事"
                 android:textColor="@color/bluedeep_text" />
 
-            <ImageView
+            <View
                 android:layout_width="2sp"
                 android:layout_height="25sp"
                 android:layout_gravity="center_vertical"
@@ -76,6 +76,19 @@
                 style="@style/menuTitle"
                 android:background="@drawable/title_kindbar_bg"
                 android:text="记账"
+                android:textColor="@color/grey" />
+
+            <View
+                android:layout_width="2sp"
+                android:layout_height="25sp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/devide" />
+
+            <TextView
+                android:id="@+id/tv_records"
+                style="@style/menuTitle"
+                android:background="@drawable/title_kindbar_bg"
+                android:text="记时"
                 android:textColor="@color/grey" />
         </LinearLayout>
 

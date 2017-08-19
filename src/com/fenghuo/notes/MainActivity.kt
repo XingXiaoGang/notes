@@ -13,7 +13,6 @@ import android.view.KeyEvent
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-
 import com.fenghuo.notes.adapter.ContentPageAdapter
 import com.fenghuo.notes.db.BackupRestoreUtils
 import com.fenghuo.notes.db.DBAccountHelper
@@ -30,7 +29,6 @@ import com.mine.view.gesture.GestureHandler
 import com.mine.view.menu.icon.MaterialMenuDrawable
 import com.mine.view.menu.icon.MaterialMenuView
 import com.mine.view.menu.slide_section_menu.SlideSectionMenu
-
 import java.io.File
 
 
@@ -40,8 +38,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
     private var mAdapter: ContentPageAdapter? = null
     private var mMenu: SlideSectionMenu? = null
 
-    private var mThingsTextView: TextView? = null
-    private var mAccountsTextView: TextView? = null
+    private val mTabTexts: MutableList<TextView> = mutableListOf();
     private var mToast: CustomToast? = null
     private var mBackupRestore: BackupRestoreUtils? = null
     private var mGestureFrameLayout: GestureFrameLayout? = null
@@ -58,8 +55,10 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
         mMenuView = findViewById(R.id.material_menu_button) as MaterialMenuView
         val pagerTab = findViewById(R.id.vp_tab) as ViewPagerTab
         mViewPager = findViewById(R.id.vp_content) as ViewPager
-        mThingsTextView = findViewById(R.id.tv_things) as TextView
-        mAccountsTextView = findViewById(R.id.tv_accounts) as TextView
+        mTabTexts.add(findViewById(R.id.tv_things) as TextView)
+        mTabTexts.add(findViewById(R.id.tv_accounts) as TextView)
+        mTabTexts.add(findViewById(R.id.tv_records) as TextView)
+
         mMenu = findViewById(R.id.menu) as SlideSectionMenu
         mGestureFrameLayout = findViewById(R.id.container) as GestureFrameLayout
         //回调手势
@@ -83,8 +82,6 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
 
         mToast = CustomToast(this@MainActivity)
         mMenuView!!.setOnClickListener(this)
-        mAccountsTextView!!.setOnClickListener(this)
-        mThingsTextView!!.setOnClickListener(this)
         mMenu!!.post { mMenu!!.closeMenu() }
         val preferenceHelper = PreferenceHelper(this)
         if (preferenceHelper.patternPwd != null) {
@@ -247,20 +244,11 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
     }
 
     override fun onPageSelected(i: Int) {
-        when (i) {
-            0 -> {
-                mThingsTextView!!.setTextColor(resources.getColor(
-                        R.color.bluedeep_text))
-                mAccountsTextView!!
-                        .setTextColor(resources.getColor(R.color.gray_text))
-            }
-            1 -> {
-                mAccountsTextView!!.setTextColor(resources.getColor(
-                        R.color.bluedeep_text))
-                mThingsTextView!!.setTextColor(resources.getColor(R.color.gray_text))
-            }
-
-            else -> {
+        mTabTexts.forEach {
+            if (mTabTexts.indexOf(it) == i) {
+                it.setTextColor(resources.getColor(R.color.bluedeep_text))
+            } else {
+                it.setTextColor(resources.getColor(R.color.gray_text))
             }
         }
     }

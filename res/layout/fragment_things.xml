@@ -13,17 +13,18 @@
         android:stretchMode="columnWidth"
         android:verticalSpacing="10sp" />
 
-    <ImageView
+    <com.mine.view.button.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/add_new_note"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="16dp"
         android:layout_marginRight="16dp"
-        android:background="@drawable/add_new_bg_selector"
-        android:scaleType="centerInside"
         android:src="@drawable/add_new"
-        android:textColor="@color/white" />
+        app:fab_colorNormal="@color/blue_title"
+        app:fab_colorRipple="@color/white"
+        app:fab_label="add"
+        app:fab_size="normal" />
 
 </RelativeLayout>

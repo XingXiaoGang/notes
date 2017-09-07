@@ -7,13 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
-
 import com.fenghuo.LineEditText
 import com.fenghuo.notes.bean.Note
 import com.fenghuo.notes.db.DBNoteHelper
 import com.fenghuo.notes.db.PreferenceHelper
-
-import java.util.Random
+import java.util.*
 
 class AddNoteActivity : Activity(), View.OnClickListener {
 
@@ -55,18 +53,22 @@ class AddNoteActivity : Activity(), View.OnClickListener {
         }, 500)
     }
 
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putString("saved_txt", et_content?.text.toString())
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        savedInstanceState?.getString("saved_txt")?.let { et_content?.setText(it) }
+    }
+
     override fun onStop() {
         super.onStop()
         if (!isSaved) {
             helper!!.saveLast(et_content!!.text.toString() + "")
+            isSaved = true
         }
-    }
-
-    override fun onDestroy() {
-
-        if (!isSaved)
-            helper!!.saveLast(et_content!!.text.toString() + "")
-        super.onDestroy()
     }
 
     // 返回 /保存 按钮事件

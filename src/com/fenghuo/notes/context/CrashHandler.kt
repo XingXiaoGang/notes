@@ -21,6 +21,7 @@ class CrashHandler internal constructor(internal var context: Context) : Thread.
     }
 
     override fun uncaughtException(thread: Thread, ex: Throwable) {
+        ex.printStackTrace()
         val dir = context.getExternalFilesDir("logs")
         val file = File(dir, "crash.log")
         try {

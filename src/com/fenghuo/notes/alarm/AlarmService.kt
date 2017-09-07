@@ -23,7 +23,7 @@ class AlarmService : Service() {
         val reciver = AlarmReciver()
         registerReceiver(reciver, filter)
         //再次注册闹钟
-        val alarm = MyAlarm(applicationContext)
+        val alarm = AlarmHelper(applicationContext)
         alarm.reset()
         alarm.destroy()
         super.onStart(intent, startId)

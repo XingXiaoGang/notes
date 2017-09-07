@@ -45,6 +45,11 @@ class ThingsFragment : FragmentExt(), OnClickListener, OnItemClickListener, OnIt
         adapter?.destory()
     }
 
+    override fun onStop() {
+        super.onStop()
+
+    }
+
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (adapter!!.isEdit) {
             adapter!!.quitEdit()

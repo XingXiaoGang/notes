@@ -89,6 +89,7 @@
                 style="@style/menuTitle"
                 android:background="@drawable/title_kindbar_bg"
                 android:text="记时"
+                android:visibility="gone"
                 android:textColor="@color/grey" />
         </LinearLayout>
 

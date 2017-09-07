@@ -11,7 +11,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MyAlarm(private val context: Context) {
+class AlarmHelper(private val context: Context) {
 
     private val manager: AlarmManager
     private val alarmHelper: DBAlarmHelper

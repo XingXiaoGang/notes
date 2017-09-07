@@ -9,7 +9,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.*
-import com.fenghuo.notes.alarm.MyAlarm
+import com.fenghuo.notes.alarm.AlarmHelper
 import com.fenghuo.notes.bean.Alarm
 import com.fenghuo.notes.bean.Note
 import com.fenghuo.notes.db.DBAlarmHelper
@@ -20,7 +20,7 @@ import java.util.*
 
 class AlarmActivity : Activity(), OnClickListener {
 
-    private var alarmmanage: MyAlarm? = null// 闹钟管理类
+    private var alarmmanage: AlarmHelper? = null// 闹钟管理类
     private var alarmHelper: DBAlarmHelper? = null// 闹钟数据库类
     private var noteHelper: DBNoteHelper? = null// note 数据库类
     private var toast: CustomToast? = null
@@ -59,7 +59,7 @@ class AlarmActivity : Activity(), OnClickListener {
 
         findVeiws()
 
-        alarmmanage = MyAlarm(this@AlarmActivity)
+        alarmmanage = AlarmHelper(this@AlarmActivity)
         noteHelper = DBNoteHelper(this@AlarmActivity)
         alarmHelper = DBAlarmHelper(this@AlarmActivity)
         // 接收

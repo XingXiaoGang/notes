@@ -19,9 +19,7 @@ class PreferenceHelper(context: Context) {
      */
     val last: String
         get() {
-            var str = ""
-            str = mPreferences.getString("last", "")
-            return str
+            return mPreferences.getString("last", "")
         }
 
     /**
@@ -32,6 +30,28 @@ class PreferenceHelper(context: Context) {
     fun saveLast(str: String) {
         val editor = mPreferences.edit()
         editor.putString("last", str)
+        editor.apply()
+    }
+
+    fun removeLastDraft() {
+        val editor = mPreferences.edit()
+        editor.remove("last");
+        editor.apply()
+    }
+
+    fun saveLastWithID(id: Long, str: String) {
+        val editor = mPreferences.edit()
+        editor.putString("last_draft_with_id:$id", str);
+        editor.apply()
+    }
+
+    fun getLastDraftById(id: Long): String? {
+        return mPreferences.getString("last_draft_with_id:$id", null);
+    }
+
+    fun removeLastDraft(id: Long) {
+        val editor = mPreferences.edit()
+        editor.remove("last_draft_with_id:$id");
         editor.apply()
     }
 

@@ -27,7 +27,7 @@ class ContentPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     }
 
     override fun getCount(): Int {
-        return 3;
+        return 2;//显示两个fragment页
     }
 
     override fun getItem(position: Int): Fragment? {

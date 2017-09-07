@@ -12,8 +12,7 @@ class RecordFragment : FragmentExt() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var rootView = View.inflate(context, R.layout.fragment_record, null);
-        
+
         return rootView;
     }
-
 }

@@ -42,7 +42,7 @@
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/main_bg">
+        android:background="@drawable/note_bg_image">
 
         <com.fenghuo.LineEditText
             android:id="@+id/et_text_addthi"

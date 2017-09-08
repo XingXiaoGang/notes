@@ -117,7 +117,7 @@
             android:id="@+id/vp_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/main_bg" />
+            android:background="@drawable/note_bg_image" />
 
 
         <com.mine.view.menu.slide_section_menu.SlideSectionMenu

@@ -2,15 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/note_bg_image"
-    android:orientation="vertical" >
+    android:background="@color/blue_title"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/ln_top"
         android:layout_width="fill_parent"
-        android:layout_height="45sp"
-        android:background="@drawable/title_bg"
-        android:orientation="horizontal" >
+        android:layout_height="@dimen/action_bar_height"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_back_alarm"
@@ -42,290 +42,299 @@
     <!-- 第一行  时间 -->
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="80sp"
-        android:background="@drawable/alarm_bar_bg"
-        android:gravity="center_vertical" >
-
-        <LinearLayout
-            android:id="@+id/ln_alarm_date"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/tv_alarm_date"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="3"
-                android:gravity="center|bottom"
-                android:text="2014-08-26"
-                android:textColor="@color/gray_text"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_alarm_week"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="5"
-                android:gravity="center"
-                android:text="星期二"
-                android:textColor="@color/gray_text"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="5sp"
-            android:layout_height="70sp"
-            android:background="@drawable/alarm_divide" />
-
-        <TextView
-            android:id="@+id/tv_alarm_time"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text=" 19:54"
-            android:textColor="@color/gray_text"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <!-- 主体 -->
-
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="15sp"
-        android:layout_marginRight="15sp"
-        android:layout_marginTop="10sp"
-        android:orientation="vertical" >
-
-        <!-- 重复 -->
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/note_bg_image"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="36sp"
-            android:gravity="center_vertical" >
+            android:layout_height="80sp"
+            android:background="@drawable/alarm_bar_bg"
+            android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="55sp"
-                android:layout_height="36sp"
-                android:background="@drawable/chongfu_bg"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:gravity="center_vertical"
-                android:paddingLeft="10sp"
-                android:text="重复"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
-
-            <CheckedTextView
-                android:id="@+id/week1"
+            <LinearLayout
+                android:id="@+id/ln_alarm_date"
                 android:layout_width="fill_parent"
-                android:layout_height="36sp"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:background="@drawable/select_check_btn"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
                 android:gravity="center_vertical"
-                android:paddingLeft="10sp"
-                android:text="一"
-                android:textColor="@color/blue_text"
-                android:textSize="14sp" />
-
-            <CheckedTextView
-                android:id="@+id/week2"
-                android:layout_width="fill_parent"
-                android:layout_height="36sp"
-                android:layout_weight="1"
-                android:background="@drawable/select_check_btn"
-                android:gravity="center_vertical"
-                android:paddingLeft="10sp"
-                android:text="二"
-                android:textColor="@color/blue_text"
-                android:textSize="14sp" />
-
-            <CheckedTextView
-                android:id="@+id/week3"
-                android:layout_width="fill_parent"
-                android:layout_height="36sp"
-                android:layout_weight="1"
-                android:background="@drawable/select_check_btn"
-                android:gravity="center_vertical"
-                android:paddingLeft="10sp"
-                android:text="三"
-                android:textColor="@color/blue_text"
-                android:textSize="14sp" />
-
-            <CheckedTextView
-                android:id="@+id/week4"
-                android:layout_width="fill_parent"
-                android:layout_height="36sp"
-                android:layout_weight="1"
-                android:background="@drawable/select_check_btn"
-                android:gravity="center_vertical"
-                android:paddingLeft="10sp"
-                android:text="四"
-                android:textColor="@color/blue_text"
-                android:textSize="14sp" />
-
-            <CheckedTextView
-                android:id="@+id/week5"
-                android:layout_width="fill_parent"
-                android:layout_height="36sp"
-                android:layout_weight="1"
-                android:background="@drawable/select_check_btn"
-                android:gravity="center_vertical"
-                android:paddingLeft="10sp"
-                android:text="五"
-                android:textColor="@color/blue_text"
-                android:textSize="14sp" />
-
-            <CheckedTextView
-                android:id="@+id/week6"
-                android:layout_width="fill_parent"
-                android:layout_height="36sp"
-                android:layout_weight="1"
-                android:background="@drawable/select_check_btn"
-                android:paddingLeft="10sp"
-                android:text="六"
-                android:gravity="center_vertical"
-                android:textColor="@color/blue_text"
-                android:textSize="14sp" />
-
-            <CheckedTextView
-                android:id="@+id/week7"
-                android:layout_width="fill_parent"
-                android:layout_height="36sp"
-                android:layout_weight="1"
-                android:background="@drawable/select_check_btn"
-                android:gravity="center_vertical"
-                android:paddingLeft="10sp"
-                android:text="日"
-                android:textColor="@color/blue_text"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <!-- 星期 -->
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="36sp"
-            android:layout_marginTop="10sp"
-            android:background="@drawable/alarm_bar" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10sp"
-                android:text="振动"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
-
-            <CheckBox
-                android:id="@+id/chb_vibration"
-                android:layout_width="30sp"
-                android:layout_height="30sp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10sp"
-                android:button="@drawable/check_box_change"
-                android:textColor="@color/white" />
-        </RelativeLayout>
-
-        <!-- 铃声 -->
-
-        <RelativeLayout
-            android:id="@+id/ln_pickrings"
-            android:layout_width="fill_parent"
-            android:layout_height="36sp"
-            android:layout_marginTop="10sp"
-            android:background="@drawable/alarm_bar" >
-
-            <TextView
-                android:id="@+id/tv_alarm_ring"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10sp"
-                android:text="提示铃声(默认)"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
-
-            <Button
-                android:id="@+id/btn_selectring"
-                android:layout_width="25sp"
-                android:layout_height="25sp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="15sp"
-                android:background="@drawable/select_right" />
-        </RelativeLayout>
-        <!-- 振动 -->
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="36sp"
-            android:layout_marginTop="10sp"
-            android:background="@drawable/alarm_bar" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10sp"
-                android:text="提醒内容"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
-        </RelativeLayout>
-        <!-- 内容 -->
-
-        <RelativeLayout
-            android:id="@+id/lin_content"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5sp"
-            android:gravity="center_vertical" >
-
-            <ScrollView
-                android:id="@+id/scroll"
-                android:layout_width="fill_parent"
-                android:layout_height="100sp"
-                android:padding="2sp" >
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_alarm_contents"
+                    android:id="@+id/tv_alarm_date"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@+id/btn_cancelalarm"
-                    android:layout_alignParentTop="true"
-                    android:background="@color/white"
-                    android:padding="5sp"
-                    android:text=""
+                    android:layout_height="fill_parent"
+                    android:layout_weight="3"
+                    android:gravity="center|bottom"
+                    android:text="2014-08-26"
                     android:textColor="@color/gray_text"
-                    android:textSize="18sp" />
-            </ScrollView>
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btn_cancelalarm"
-                android:layout_width="200sp"
-                android:layout_height="35sp"
-                android:layout_below="@+id/scroll"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10sp"
-                android:background="@drawable/selector_btn_blue"
-                android:text="取消提醒"
-                android:textColor="@color/white"
-                android:textSize="18sp"
+                <TextView
+                    android:id="@+id/tv_alarm_week"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="5"
+                    android:gravity="center"
+                    android:text="星期二"
+                    android:textColor="@color/gray_text"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="5sp"
+                android:layout_height="70sp"
+                android:background="@drawable/alarm_divide" />
+
+            <TextView
+                android:id="@+id/tv_alarm_time"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text=" 19:54"
+                android:textColor="@color/gray_text"
+                android:textSize="28sp"
                 android:textStyle="bold" />
-        </RelativeLayout>
+        </LinearLayout>
+
+        <!-- 主体 -->
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="15sp"
+            android:layout_marginRight="15sp"
+            android:layout_marginTop="10sp"
+            android:orientation="vertical">
+
+            <!-- 重复 -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="36sp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="55sp"
+                    android:layout_height="36sp"
+                    android:background="@drawable/chongfu_bg"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10sp"
+                    android:text="重复"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <CheckedTextView
+                    android:id="@+id/week1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="36sp"
+                    android:layout_weight="1"
+                    android:background="@drawable/select_check_btn"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10sp"
+                    android:text="一"
+                    android:textColor="@color/blue_text"
+                    android:textSize="14sp" />
+
+                <CheckedTextView
+                    android:id="@+id/week2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="36sp"
+                    android:layout_weight="1"
+                    android:background="@drawable/select_check_btn"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10sp"
+                    android:text="二"
+                    android:textColor="@color/blue_text"
+                    android:textSize="14sp" />
+
+                <CheckedTextView
+                    android:id="@+id/week3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="36sp"
+                    android:layout_weight="1"
+                    android:background="@drawable/select_check_btn"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10sp"
+                    android:text="三"
+                    android:textColor="@color/blue_text"
+                    android:textSize="14sp" />
+
+                <CheckedTextView
+                    android:id="@+id/week4"
+                    android:layout_width="fill_parent"
+                    android:layout_height="36sp"
+                    android:layout_weight="1"
+                    android:background="@drawable/select_check_btn"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10sp"
+                    android:text="四"
+                    android:textColor="@color/blue_text"
+                    android:textSize="14sp" />
+
+                <CheckedTextView
+                    android:id="@+id/week5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="36sp"
+                    android:layout_weight="1"
+                    android:background="@drawable/select_check_btn"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10sp"
+                    android:text="五"
+                    android:textColor="@color/blue_text"
+                    android:textSize="14sp" />
+
+                <CheckedTextView
+                    android:id="@+id/week6"
+                    android:layout_width="fill_parent"
+                    android:layout_height="36sp"
+                    android:layout_weight="1"
+                    android:background="@drawable/select_check_btn"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10sp"
+                    android:text="六"
+                    android:textColor="@color/blue_text"
+                    android:textSize="14sp" />
+
+                <CheckedTextView
+                    android:id="@+id/week7"
+                    android:layout_width="fill_parent"
+                    android:layout_height="36sp"
+                    android:layout_weight="1"
+                    android:background="@drawable/select_check_btn"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10sp"
+                    android:text="日"
+                    android:textColor="@color/blue_text"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- 星期 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="36sp"
+                android:layout_marginTop="10sp"
+                android:background="@drawable/alarm_bar">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10sp"
+                    android:text="振动"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <CheckBox
+                    android:id="@+id/chb_vibration"
+                    android:layout_width="30sp"
+                    android:layout_height="30sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10sp"
+                    android:button="@drawable/check_box_change"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+
+            <!-- 铃声 -->
+
+            <RelativeLayout
+                android:id="@+id/ln_pickrings"
+                android:layout_width="fill_parent"
+                android:layout_height="36sp"
+                android:layout_marginTop="10sp"
+                android:background="@drawable/alarm_bar">
+
+                <TextView
+                    android:id="@+id/tv_alarm_ring"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10sp"
+                    android:text="提示铃声(默认)"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btn_selectring"
+                    android:layout_width="25sp"
+                    android:layout_height="25sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15sp"
+                    android:background="@drawable/select_right" />
+            </RelativeLayout>
+            <!-- 振动 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="36sp"
+                android:layout_marginTop="10sp"
+                android:background="@drawable/alarm_bar">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10sp"
+                    android:text="提醒内容"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+            <!-- 内容 -->
+
+            <RelativeLayout
+                android:id="@+id/lin_content"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5sp"
+                android:gravity="center_vertical">
+
+                <ScrollView
+                    android:id="@+id/scroll"
+                    android:layout_width="fill_parent"
+                    android:layout_height="100sp"
+                    android:padding="2sp">
+
+                    <TextView
+                        android:id="@+id/tv_alarm_contents"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/btn_cancelalarm"
+                        android:layout_alignParentTop="true"
+                        android:background="@color/white"
+                        android:padding="5sp"
+                        android:text=""
+                        android:textColor="@color/gray_text"
+                        android:textSize="18sp" />
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/btn_cancelalarm"
+                    android:layout_width="200sp"
+                    android:layout_height="35sp"
+                    android:layout_below="@+id/scroll"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10sp"
+                    android:background="@drawable/selector_btn_blue"
+                    android:gravity="center"
+                    android:text="取消提醒"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

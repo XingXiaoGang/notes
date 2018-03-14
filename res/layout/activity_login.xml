@@ -2,14 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ivory"
+    android:background="@color/blue_title"
     android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/ln_top"
         android:layout_width="fill_parent"
-        android:layout_height="45sp"
-        android:background="@drawable/title_bg"
+        android:layout_height="@dimen/action_bar_height"
         android:orientation="horizontal">
 
         <Button
@@ -36,6 +35,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:padding="16dp">
@@ -56,6 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@drawable/blue_corner_bg_selector"
+            android:gravity="center"
             android:text="QQ授权登录"
             android:textColor="@color/white"
             android:textSize="18sp" />

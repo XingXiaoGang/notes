@@ -2,19 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ivory"
-    android:orientation="vertical" >
+    android:background="@color/blue_title"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/ln_top"
         android:layout_width="fill_parent"
-        android:layout_height="45sp"
-        android:background="@drawable/title_bg"
-        android:orientation="horizontal" >
+        android:layout_height="@dimen/action_bar_height"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_back_about"
-        android:layout_width="45sp"
+            android:layout_width="45sp"
             android:layout_height="40sp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
@@ -37,7 +37,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@color/white"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <!-- 第一行 金额 -->
 
@@ -45,25 +45,23 @@
             android:layout_width="fill_parent"
             android:layout_height="160sp"
             android:layout_marginLeft="10sp"
-            android:layout_marginRight="10sp" >
+            android:layout_marginRight="10sp">
 
             <ImageView
                 android:id="@+id/image_about"
                 android:layout_width="100sp"
                 android:layout_height="100sp"
                 android:layout_centerInParent="true"
-                android:background="@drawable/ic_about" >
-            </ImageView>
+                android:background="@drawable/ic_about" />
 
             <ImageView
                 android:id="@+id/image_about_text"
                 android:layout_width="60sp"
-                android:layout_height="11sp"
+                android:layout_height="11dp"
                 android:layout_below="@+id/image_about"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="3sp"
-                android:background="@drawable/about_text" >
-            </ImageView>
+                android:background="@drawable/about_text" />
         </RelativeLayout>
 
         <!-- 消费内容 -->
@@ -71,9 +69,9 @@
         <RelativeLayout
             android:id="@+id/rl_funvtion"
             android:layout_width="fill_parent"
-            android:layout_height="30sp"
+            android:layout_height="36sp"
             android:layout_marginLeft="25sp"
-            android:layout_marginRight="25sp" >
+            android:layout_marginRight="25sp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -85,11 +83,12 @@
                 android:textSize="16sp" />
 
             <ImageView
-                android:layout_width="40sp"
+                android:layout_width="20sp"
                 android:layout_height="25sp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/ic_right_about" />
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_right_about" />
         </RelativeLayout>
 
         <ImageView
@@ -102,9 +101,9 @@
         <RelativeLayout
             android:id="@+id/rl_app"
             android:layout_width="fill_parent"
-            android:layout_height="30sp"
+            android:layout_height="36sp"
             android:layout_marginLeft="25sp"
-            android:layout_marginRight="25sp" >
+            android:layout_marginRight="25sp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -116,11 +115,12 @@
                 android:textSize="16sp" />
 
             <ImageView
-                android:layout_width="40sp"
+                android:layout_width="20sp"
                 android:layout_height="25sp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/ic_right_about" />
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_right_about" />
         </RelativeLayout>
 
         <ImageView
@@ -134,9 +134,9 @@
         <RelativeLayout
             android:id="@+id/rl_art"
             android:layout_width="fill_parent"
-            android:layout_height="30sp"
+            android:layout_height="36sp"
             android:layout_marginLeft="25sp"
-            android:layout_marginRight="25sp" >
+            android:layout_marginRight="25sp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -148,11 +148,12 @@
                 android:textSize="16sp" />
 
             <ImageView
-                android:layout_width="40sp"
+                android:layout_width="20sp"
                 android:layout_height="25sp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/ic_right_about" />
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_right_about" />
         </RelativeLayout>
 
         <ImageView
@@ -166,9 +167,9 @@
         <RelativeLayout
             android:id="@+id/rl_tjfh"
             android:layout_width="fill_parent"
-            android:layout_height="30sp"
+            android:layout_height="36sp"
             android:layout_marginLeft="25sp"
-            android:layout_marginRight="25sp" >
+            android:layout_marginRight="25sp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -180,11 +181,12 @@
                 android:textSize="16sp" />
 
             <ImageView
-                android:layout_width="40sp"
+                android:layout_width="20sp"
                 android:layout_height="25sp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/ic_right_about" />
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_right_about" />
         </RelativeLayout>
 
         <ImageView
@@ -197,9 +199,9 @@
         <RelativeLayout
             android:id="@+id/rl_update"
             android:layout_width="fill_parent"
-            android:layout_height="30sp"
+            android:layout_height="36sp"
             android:layout_marginLeft="25sp"
-            android:layout_marginRight="25sp" >
+            android:layout_marginRight="25sp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -211,11 +213,12 @@
                 android:textSize="16sp" />
 
             <ImageView
-                android:layout_width="40sp"
+                android:layout_width="20sp"
                 android:layout_height="25sp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/ic_right_about" />
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_right_about" />
         </RelativeLayout>
 
         <ImageView

@@ -101,14 +101,14 @@ class EditNoteActivity : Activity(), View.OnClickListener {
     }
 
     private fun initViews() {
-        btn_back = findViewById(R.id.btn_back_editthi) as Button
-        btn_save = findViewById(R.id.btn_save_editthi) as Button
-        et_content = findViewById(R.id.et_text_editthi) as LineEditText
-        btn_alarm = findViewById(R.id.btn_alarm_editthi) as Button
-        btn_delete = findViewById(R.id.btn_delete_editthi) as Button
-        btn_edit = findViewById(R.id.btn_edit_editthi) as Button
-        tv_date = findViewById(R.id.tv_date_editthi) as TextView
-        mScrollView = findViewById(R.id.scroll_view) as ViewGroup
+        btn_back = findViewById(R.id.btn_back_editthi)
+        btn_save = findViewById(R.id.btn_save_editthi)
+        et_content = findViewById(R.id.et_text_editthi)
+        btn_alarm = findViewById(R.id.btn_alarm_editthi)
+        btn_delete = findViewById(R.id.btn_delete_editthi)
+        btn_edit = findViewById(R.id.btn_edit_editthi)
+        tv_date = findViewById(R.id.tv_date_editthi)
+        mScrollView = findViewById(R.id.scroll_view)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -166,7 +166,6 @@ class EditNoteActivity : Activity(), View.OnClickListener {
         timer.schedule(object : TimerTask() {
 
             override fun run() {
-                // TODO Auto-generated method stub
                 val manager = et_content!!.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 manager.showSoftInput(et_content, 0)
             }

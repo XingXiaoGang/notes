@@ -23,8 +23,8 @@ class CustomToast(private val context: Context) {
         if (toast == null) {
             toast = Toast(context)
             view = inflater.inflate(R.layout.toast, null)
-            toast_img = view!!.findViewById(R.id.toast_img) as ImageView
-            toast_msg = view!!.findViewById(R.id.toast_tv) as TextView
+            toast_img = view!!.findViewById(R.id.toast_img) 
+            toast_msg = view!!.findViewById(R.id.toast_tv) 
             toast!!.view = view
         }
 

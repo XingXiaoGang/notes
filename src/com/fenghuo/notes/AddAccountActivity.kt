@@ -60,14 +60,14 @@ class AddAccountActivity : Activity(), OnClickListener {
     }
 
     private fun findviews() {
-        btn_back = findViewById(R.id.btn_back_accadd) as Button
-        btn_save = findViewById(R.id.btn_save_addacc) as Button
-        et_money = findViewById(R.id.et_money) as LineEditText
-        tv_kinds = findViewById(R.id.tv_kinds_addacc) as TextView
-        ln_kinds = findViewById(R.id.ln_kinds_addacc) as RelativeLayout
-        tv_time = findViewById(R.id.tv_picktime_acc) as TextView
-        tv_date = findViewById(R.id.tv_pickdate_acc) as TextView
-        group = findViewById(R.id.rg_kind) as RadioGroup
+        btn_back = findViewById(R.id.btn_back_accadd)
+        btn_save = findViewById(R.id.btn_save_addacc)
+        et_money = findViewById(R.id.et_money)
+        tv_kinds = findViewById(R.id.tv_kinds_addacc)
+        ln_kinds = findViewById(R.id.ln_kinds_addacc)
+        tv_time = findViewById(R.id.tv_picktime_acc)
+        tv_date = findViewById(R.id.tv_pickdate_acc)
+        group = findViewById(R.id.rg_kind)
     }
 
     override fun onClick(view: View) = when (view.id) {
@@ -104,7 +104,7 @@ class AddAccountActivity : Activity(), OnClickListener {
     private fun showselectDate() {
         if (dialog_date == null) {
             val view = layoutInflater.inflate(R.layout.dialog_selectdate, null)
-            datePicker = view.findViewById(R.id.datepicker) as DatePicker
+            datePicker = view.findViewById<DatePicker>(R.id.datepicker) as DatePicker
             dialog_date = AlertDialog.Builder(this@AddAccountActivity)
                     .setView(view)
                     .setTitle(R.string.choose_date)
@@ -132,7 +132,7 @@ class AddAccountActivity : Activity(), OnClickListener {
     private fun showselecttime() {
         if (dialog_time == null) {
             val view = layoutInflater.inflate(R.layout.dialog_selecttime, null)
-            timePicker = view.findViewById(R.id.tiempicker) as TimePicker
+            timePicker = view.findViewById<TimePicker>(R.id.tiempicker) as TimePicker
             dialog_time = AlertDialog.Builder(this@AddAccountActivity)
                     .setView(view)
                     .setTitle(R.string.choose_time)
@@ -163,7 +163,7 @@ class AddAccountActivity : Activity(), OnClickListener {
         dialog_kinds = null
         listView = null
         val view = layoutInflater.inflate(R.layout.kind_list, null)
-        listView = view.findViewById(R.id.lv_kinds) as ListView
+        listView = view.findViewById<ListView>(R.id.lv_kinds) as ListView
         kinds = kindHelper!!.Getlist()
         adapter = KindAdapter(this@AddAccountActivity, kinds!!)
         listView!!.adapter = adapter
@@ -185,7 +185,7 @@ class AddAccountActivity : Activity(), OnClickListener {
             val view = layoutInflater.inflate(R.layout.dialog_addkinds, null)
 
             val editText = view
-                    .findViewById(R.id.et_addkinds) as EditText
+                    .findViewById<EditText>(R.id.et_addkinds) as EditText
             dialog_addkinds = AlertDialog.Builder(this@AddAccountActivity)
                     .setTitle(getString(R.string.input_name))
                     .setView(view)

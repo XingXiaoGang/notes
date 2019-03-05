@@ -141,24 +141,24 @@ class AlarmActivity : Activity(), OnClickListener {
     }
 
     private fun findVeiws() {
-        btn_back = findViewById(R.id.btn_back_alarm) as Button
-        btn_save = findViewById(R.id.btn_savetop_alarm) as Button
-        btn_cancel = findViewById(R.id.btn_cancelalarm) as Button
-        btn_ring = findViewById(R.id.btn_selectring) as Button
-        tv_date = findViewById(R.id.tv_alarm_date) as TextView
-        tv_time = findViewById(R.id.tv_alarm_time) as TextView
-        tv_week = findViewById(R.id.tv_alarm_week) as TextView
-        checktext1 = findViewById(R.id.week1) as CheckedTextView
-        checktext2 = findViewById(R.id.week2) as CheckedTextView
-        checktext3 = findViewById(R.id.week3) as CheckedTextView
-        checktext4 = findViewById(R.id.week4) as CheckedTextView
-        checktext5 = findViewById(R.id.week5) as CheckedTextView
-        checktext6 = findViewById(R.id.week6) as CheckedTextView
-        checktext7 = findViewById(R.id.week7) as CheckedTextView
-        tv_ring = findViewById(R.id.tv_alarm_ring) as TextView
-        rl_ring = findViewById(R.id.ln_pickrings) as RelativeLayout
-        tv_contents = findViewById(R.id.tv_alarm_contents) as TextView
-        chb_vibration = findViewById(R.id.chb_vibration) as CheckBox
+        btn_back = findViewById(R.id.btn_back_alarm) 
+        btn_save = findViewById(R.id.btn_savetop_alarm) 
+        btn_cancel = findViewById(R.id.btn_cancelalarm) 
+        btn_ring = findViewById(R.id.btn_selectring) 
+        tv_date = findViewById(R.id.tv_alarm_date) 
+        tv_time = findViewById(R.id.tv_alarm_time) 
+        tv_week = findViewById(R.id.tv_alarm_week) 
+        checktext1 = findViewById(R.id.week1) 
+        checktext2 = findViewById(R.id.week2) 
+        checktext3 = findViewById(R.id.week3) 
+        checktext4 = findViewById(R.id.week4) 
+        checktext5 = findViewById(R.id.week5) 
+        checktext6 = findViewById(R.id.week6) 
+        checktext7 = findViewById(R.id.week7) 
+        tv_ring = findViewById(R.id.tv_alarm_ring) 
+        rl_ring = findViewById(R.id.ln_pickrings) 
+        tv_contents = findViewById(R.id.tv_alarm_contents) 
+        chb_vibration = findViewById(R.id.chb_vibration) 
     }
 
     /**
@@ -266,7 +266,7 @@ class AlarmActivity : Activity(), OnClickListener {
      */
     private fun showdatepick() = if (dialog_date == null) {
         val view = layoutInflater.inflate(R.layout.dialog_selectdate, null)
-        datePicker = view.findViewById(R.id.datepicker) as DatePicker
+        datePicker = view.findViewById(R.id.datepicker) 
         dialog_date = AlertDialog.Builder(this@AlarmActivity)
                 .setView(view)
                 .setTitle(getString(R.string.choose_date))
@@ -299,7 +299,7 @@ class AlarmActivity : Activity(), OnClickListener {
      */
     private fun showtimepick() = if (dialog_time == null) {
         val view = layoutInflater.inflate(R.layout.dialog_selecttime, null)
-        timePicker = view.findViewById(R.id.tiempicker) as TimePicker
+        timePicker = view.findViewById(R.id.tiempicker) 
         dialog_time = AlertDialog.Builder(this@AlarmActivity)
                 .setView(view)
                 .setTitle(getString(R.string.choose_time))

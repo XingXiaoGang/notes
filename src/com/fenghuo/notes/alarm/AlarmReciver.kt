@@ -82,9 +82,10 @@ class AlarmReciver : BroadcastReceiver() {
             val intent2 = Intent(context, EditNoteActivity::class.java)
             intent2.putExtra("noteid", alarm!!.id)
             intent2.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            val pendingIntent = PendingIntent.getActivity(context, 3, intent2, PendingIntent.FLAG_UPDATE_CURRENT)
+            val pendingIntent = PendingIntent.getActivity(context, 3, intent2, PendingIntent.FLAG_UPDATE_CURRENT) as PendingIntent
 
-            notification.setLatestEventInfo(context, context.getString(R.string.sxj_tips), alarm!!.content, pendingIntent)
+            notification.contentIntent = pendingIntent;
+//            notification.setLatestEventInfo(context, context.getString(R.string.sxj_tips), alarm!!.content, pendingIntent)
             val maneger = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             maneger.notify(0x103, notification)
 

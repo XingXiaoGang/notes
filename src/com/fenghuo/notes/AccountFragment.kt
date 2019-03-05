@@ -100,10 +100,10 @@ class AccountFragment : FragmentExt(), OnClickListener, AdapterView.OnItemLongCl
     }
 
     private fun findviews() {
-        btn_add = rootView!!.findViewById(R.id.btn_add_account) as Button
-        elv_list = rootView!!.findViewById(R.id.elv_list) as ExpandableListView
-        tv_todayin = rootView!!.findViewById(R.id.tv_todayIn) as TextView
-        tv_todayout = rootView!!.findViewById(R.id.tv_todayOut) as TextView
+        btn_add = rootView!!.findViewById(R.id.btn_add_account)
+        elv_list = rootView!!.findViewById(R.id.elv_list)
+        tv_todayin = rootView!!.findViewById(R.id.tv_todayIn)
+        tv_todayout = rootView!!.findViewById(R.id.tv_todayOut)
     }
 
     override fun onClick(arg0: View) {

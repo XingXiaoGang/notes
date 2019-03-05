@@ -35,12 +35,12 @@ class AboutActivity : Activity(), OnClickListener {
     }
 
     private fun findviews() {
-        btn_back = findViewById(R.id.btn_back_about) as Button
-        rl_app = findViewById(R.id.rl_app) as RelativeLayout
-        rl_art = findViewById(R.id.rl_art) as RelativeLayout
-        rl_fuction = findViewById(R.id.rl_funvtion) as RelativeLayout
-        rl_tjfh = findViewById(R.id.rl_tjfh) as RelativeLayout
-        rl_update = findViewById(R.id.rl_update) as RelativeLayout
+        btn_back = findViewById(R.id.btn_back_about)
+        rl_app = findViewById(R.id.rl_app)
+        rl_art = findViewById(R.id.rl_art)
+        rl_fuction = findViewById(R.id.rl_funvtion)
+        rl_tjfh = findViewById(R.id.rl_tjfh)
+        rl_update = findViewById(R.id.rl_update) 
     }
 
     override fun onClick(arg0: View) {

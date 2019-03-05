@@ -30,10 +30,10 @@ class AddNoteActivity : Activity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_thing)
 
-        btn_back = findViewById(R.id.btn_back_addthi) as Button
-        btn_save = findViewById(R.id.btn_save_addthi) as Button
-        mScrollView = findViewById(R.id.scroll_view) as ViewGroup
-        et_content = findViewById(R.id.et_text_addthi) as LineEditText
+        btn_back = findViewById(R.id.btn_back_addthi)
+        btn_save = findViewById(R.id.btn_save_addthi)
+        mScrollView = findViewById(R.id.scroll_view)
+        et_content = findViewById(R.id.et_text_addthi)
 
         random = Random()
         helper = PreferenceHelper(this@AddNoteActivity)

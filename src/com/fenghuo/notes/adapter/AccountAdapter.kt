@@ -62,13 +62,13 @@ class AccountAdapter
         val holder = ChildHolder()
         var itemView = inflater.inflate(R.layout.item_elv_child, null)
         holder.tv_name = itemView
-                .findViewById(R.id.item_child_name) as TextView
+                .findViewById(R.id.item_child_name)
         holder.tv_sumIn = itemView
-                .findViewById(R.id.item_child_in) as TextView
+                .findViewById(R.id.item_child_in)
         holder.tv_sumOut = itemView
-                .findViewById(R.id.item_child_out) as TextView
+                .findViewById(R.id.item_child_out)
         holder.tv_kinds = itemView
-                .findViewById(R.id.item_child_kinds) as TextView
+                .findViewById(R.id.item_child_kinds)
 
         // 赋值
         when (groupposition) {
@@ -141,13 +141,13 @@ class AccountAdapter
             convertview = inflater.inflate(R.layout.item_elv_group, null)
             holder = GroupHolder()
             holder.tv_name = convertview!!
-                    .findViewById(R.id.item_group_name) as TextView
+                    .findViewById(R.id.item_group_name)
             holder.tv_sumIn = convertview
-                    .findViewById(R.id.item_group_in) as TextView
+                    .findViewById(R.id.item_group_in)
             holder.tv_sumOut = convertview
-                    .findViewById(R.id.item_group_out) as TextView
+                    .findViewById(R.id.item_group_out)
             holder.img = convertview
-                    .findViewById(R.id.item_group_img) as ImageView
+                    .findViewById(R.id.item_group_img)
         }
 
         if (isexpand) {

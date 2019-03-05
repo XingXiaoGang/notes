@@ -45,8 +45,8 @@ class KindAdapter(private val context: Context, private val data: MutableList<Ki
         } else {
             h = ViewHolder()
             view = inflater.inflate(R.layout.item_kind, null)
-            h.item_text = view!!.findViewById(R.id.kind_item_tv) as TextView
-            h.item_btn_delete = view.findViewById(R.id.kind_item_delete) as Button
+            h.item_text = view!!.findViewById<TextView>(R.id.kind_item_tv) as TextView
+            h.item_btn_delete = view.findViewById<Button>(R.id.kind_item_delete) as Button
             h.item_btn_delete!!.tag = position
             h.item_btn_delete!!.setOnClickListener(this)
             view.tag = h

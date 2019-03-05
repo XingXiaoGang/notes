@@ -28,7 +28,7 @@ class LoginActivity : Activity(), View.OnClickListener, IUiListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        findViewById(R.id.btn_login_qq).setOnClickListener(this)
+        findViewById<View>(R.id.btn_login_qq).setOnClickListener(this)
 
         mRequestCode = intent.getIntExtra(AccountProfileManager.EXTRA_REQUEST, 0)
     }

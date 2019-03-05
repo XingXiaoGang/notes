@@ -82,10 +82,10 @@ class NoteAdapter() : BaseAdapter(), View.OnClickListener {
         } else {
             h = ViewHolder()
             view = inflater?.inflate(R.layout.item_note, null)
-            h.item_img = view!!.findViewById(R.id.item_img) as ImageView
-            h.item_tv_content = view.findViewById(R.id.item_tv_content) as LineTextView
-            h.item_btn_delete = view.findViewById(R.id.item_btndelete) as Button
-            h.item_alarm = view.findViewById(R.id.item_alarm) as ImageView
+            h.item_img = view!!.findViewById(R.id.item_img)
+            h.item_tv_content = view.findViewById(R.id.item_tv_content)
+            h.item_btn_delete = view.findViewById(R.id.item_btndelete)
+            h.item_alarm = view.findViewById(R.id.item_alarm)
             view.tag = h
         }
 

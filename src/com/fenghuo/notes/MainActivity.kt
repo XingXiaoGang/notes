@@ -52,27 +52,27 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mMenuView = findViewById(R.id.material_menu_button) as MaterialMenuView
-        val pagerTab = findViewById(R.id.vp_tab) as ViewPagerTab
-        mViewPager = findViewById(R.id.vp_content) as ViewPager
-        mTabTexts.add(findViewById(R.id.tv_things) as TextView)
-        mTabTexts.add(findViewById(R.id.tv_accounts) as TextView)
-        mTabTexts.add(findViewById(R.id.tv_records) as TextView)
+        mMenuView = findViewById<MaterialMenuView>(R.id.material_menu_button)
+        val pagerTab = findViewById<ViewPagerTab>(R.id.vp_tab)
+        mViewPager = findViewById<ViewPager>(R.id.vp_content)
+        mTabTexts.add(findViewById<TextView>(R.id.tv_things))
+        mTabTexts.add(findViewById<TextView>(R.id.tv_accounts))
+        mTabTexts.add(findViewById<TextView>(R.id.tv_records))
 
-        mMenu = findViewById(R.id.menu) as SlideSectionMenu
-        mGestureFrameLayout = findViewById(R.id.container) as GestureFrameLayout
+        mMenu = findViewById<SlideSectionMenu>(R.id.menu)
+        mGestureFrameLayout = findViewById<GestureFrameLayout>(R.id.container)
         //回调手势
         mGestureFrameLayout!!.setGestureCallBack(this)
         mHandler = Handler(this)
 
-        findViewById(R.id.item_about).setOnClickListener(this)
-        findViewById(R.id.item_backup).setOnClickListener(this)
-        findViewById(R.id.item_recovery).setOnClickListener(this)
-        findViewById(R.id.item_exit).setOnClickListener(this)
-        findViewById(R.id.item_clean_accounts).setOnClickListener(this)
-        findViewById(R.id.item_clean_notes).setOnClickListener(this)
-        findViewById(R.id.item_setpwd).setOnClickListener(this)
-        findViewById(R.id.item_cancel).setOnClickListener(this)
+        findViewById<View>(R.id.item_about).setOnClickListener(this)
+        findViewById<View>(R.id.item_backup).setOnClickListener(this)
+        findViewById<View>(R.id.item_recovery).setOnClickListener(this)
+        findViewById<View>(R.id.item_exit).setOnClickListener(this)
+        findViewById<View>(R.id.item_clean_accounts).setOnClickListener(this)
+        findViewById<View>(R.id.item_clean_notes).setOnClickListener(this)
+        findViewById<View>(R.id.item_setpwd).setOnClickListener(this)
+        findViewById<View>(R.id.item_cancel).setOnClickListener(this)
 
         mAdapter = ContentPageAdapter(supportFragmentManager)
         mViewPager!!.adapter = mAdapter
@@ -85,7 +85,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
         mMenu!!.post { mMenu!!.closeMenu() }
         val preferenceHelper = PreferenceHelper(this)
         if (preferenceHelper.patternPwd != null) {
-            (findViewById(R.id.item_setpwd) as TextView).setText(R.string.del_pwd)
+            (findViewById<View>(R.id.item_setpwd) as TextView).setText(R.string.del_pwd)
         }
     }
 
@@ -411,7 +411,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
                     if (pwd != null && pwd.isNotEmpty()) {
                         val savedPwd = String(pwd)
                         PreferenceHelper(this).setPatternpwd(savedPwd)
-                        (findViewById(R.id.item_setpwd) as TextView).setText(R.string.del_pwd)
+                        (findViewById<TextView>(R.id.item_setpwd) as TextView).setText(R.string.del_pwd)
                         Toast.makeText(applicationContext, R.string.pwd_created, Toast.LENGTH_LONG).show()
                     }
                 }

@@ -13,6 +13,7 @@ import android.widget.AdapterView.OnItemLongClickListener
 import android.widget.GridView
 import com.fenghuo.notes.adapter.NoteAdapter
 import com.fenghuo.notes.bean.Note
+import io.flutter.app.FlutterActivity
 
 
 class ThingsFragment : FragmentExt(), OnClickListener, OnItemClickListener, OnItemLongClickListener {
@@ -24,8 +25,8 @@ class ThingsFragment : FragmentExt(), OnClickListener, OnItemClickListener, OnIt
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         mRootView = inflater.inflate(R.layout.fragment_things, null, false)
-        gv_list = mRootView!!.findViewById(R.id.gv_list) as GridView
-        mRootView!!.findViewById(R.id.add_new_note).setOnClickListener(this)
+        gv_list = mRootView!!.findViewById<GridView>(R.id.gv_list) as GridView
+        mRootView!!.findViewById<View>(R.id.add_new_note).setOnClickListener(this)
         adapter = NoteAdapter(activity)
         gv_list!!.adapter = adapter
 
@@ -60,9 +61,9 @@ class ThingsFragment : FragmentExt(), OnClickListener, OnItemClickListener, OnIt
 
     override fun onClick(arg0: View) {
         when (arg0.id) {
-        // 跳转界面
+            // 跳转界面
             R.id.add_new_note -> {
-                val intent = Intent(activity, AddNoteActivity::class.java)
+                val intent = Intent(activity, FlutterActivity::class.java)
                 startActivity(intent)
             }
         }

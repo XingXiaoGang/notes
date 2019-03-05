@@ -15,7 +15,7 @@ class ContentPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     fun dispatchOnKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         var res = false
-        kotlin.run out@ {
+        kotlin.run out@{
             fm.fragments.forEach {
                 if ((it as FragmentExt).onKeyDown(keyCode, event)) {
                     res = true;

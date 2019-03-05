@@ -56,8 +56,7 @@ class AccountFragment : FragmentExt(), OnClickListener, AdapterView.OnItemLongCl
         list_group?.clear()
         list_all?.clear()
         list_today = accountHelper!!.GetToadyList(accountHelper!!.GetDate())
-        list_month = accountHelper!!.GetMonthList(Date(now.year, now
-                .month, now.date))
+        list_month = accountHelper!!.GetMonthList(Date(now.time))
         list_all = accountHelper!!.GetListAll()
         list_group = ArrayList<GroupAccount>()
 

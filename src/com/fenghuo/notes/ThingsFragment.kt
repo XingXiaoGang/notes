@@ -63,7 +63,7 @@ class ThingsFragment : FragmentExt(), OnClickListener, OnItemClickListener, OnIt
         when (arg0.id) {
             // 跳转界面
             R.id.add_new_note -> {
-                val intent = Intent(activity, FlutterActivity::class.java)
+                val intent = Intent(activity, AddNoteActivity::class.java)
                 startActivity(intent)
             }
         }

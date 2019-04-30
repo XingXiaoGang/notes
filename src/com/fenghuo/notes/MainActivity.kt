@@ -25,14 +25,13 @@ import com.haibison.android.lockpattern.LockPatternActivity
 import com.mine.view.ViewPagerTab
 import com.mine.view.dialog.ConformDialog
 import com.mine.view.gesture.GestureFrameLayout
-import com.mine.view.gesture.GestureHandler
 import com.mine.view.menu.icon.MaterialMenuDrawable
 import com.mine.view.menu.icon.MaterialMenuView
 import com.mine.view.menu.slide_section_menu.SlideSectionMenu
 import java.io.File
 
 
-class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.GestureCallBack, ViewPager.OnPageChangeListener, ViewPagerTab.OnPageChangeListener_vp, AccountProfileManager.ILoginListener, Callback {
+class MainActivity : FragmentActivity(), View.OnClickListener, GestureFrameLayout.GestureCallBack, ViewPager.OnPageChangeListener, ViewPagerTab.OnPageChangeListener_vp, AccountProfileManager.ILoginListener, Callback {
 
     private var mViewPager: ViewPager? = null
     private var mAdapter: ContentPageAdapter? = null
@@ -253,19 +252,12 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureHandler.Ge
         }
     }
 
-    override fun onGestureClick(): Boolean {
+    override fun onTap() {
         closeMenu()
-        return true
     }
 
-    override fun onSlideDown(): Boolean {
+    override fun onSlideDown() {
         openMenu()
-        return true
-    }
-
-    override fun onSlideUp(): Boolean {
-        closeMenu()
-        return true
     }
 
     private fun openMenu(): Boolean {

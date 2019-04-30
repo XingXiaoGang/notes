@@ -100,114 +100,72 @@
         </com.mine.view.ViewPagerTab>
     </RelativeLayout>
 
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_index"
+        android:background="@drawable/note_bg_image" />
+
+    <!--菜单 -->
     <com.mine.view.gesture.GestureFrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/rl_index">
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vp_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/note_bg_image" />
-
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:focusableInTouchMode="true"
+        android:paddingTop="90dp">
 
         <com.mine.view.menu.slide_section_menu.SlideSectionMenu
             android:id="@+id/menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|right"
-            android:background="@color/transparency">
+            android:background="@color/transparency"
+            android:clipChildren="false"
+            android:clipToPadding="false">
 
 
             <TextView
                 android:id="@+id/item_recovery"
-                android:layout_width="120dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/menu_item_bg_selector"
-                android:clickable="true"
-                android:gravity="center"
+                style="@style/menuStyle"
                 android:text="恢复" />
 
             <TextView
                 android:id="@+id/item_backup"
-                android:layout_width="120dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/menu_item_bg_selector"
-                android:clickable="true"
-                android:gravity="center"
+                style="@style/menuStyle"
                 android:text="备份" />
 
             <TextView
                 android:id="@+id/item_setpwd"
-                android:layout_width="120dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/menu_item_bg_selector"
-                android:clickable="true"
-                android:gravity="center"
+                style="@style/menuStyle"
                 android:text="@string/create_pwd" />
 
             <TextView
                 android:id="@+id/item_clean_notes"
-
-                android:layout_width="120dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/menu_item_bg_selector"
-                android:clickable="true"
-                android:gravity="center"
+                style="@style/menuStyle"
                 android:text="清理记事" />
 
             <TextView
                 android:id="@+id/item_clean_accounts"
-                android:layout_width="120dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/menu_item_bg_selector"
-                android:clickable="true"
-                android:gravity="center"
+                style="@style/menuStyle"
                 android:text="清理记账" />
 
             <TextView
                 android:id="@+id/item_about"
-                android:layout_width="120dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/menu_item_bg_selector"
-                android:clickable="true"
-                android:gravity="center"
+                style="@style/menuStyle"
                 android:text="关于" />
 
             <TextView
                 android:id="@+id/item_exit"
-                android:layout_width="120dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/menu_item_bg_selector"
-                android:clickable="true"
-                android:gravity="center"
+                style="@style/menuStyle"
                 android:text="退出" />
 
             <TextView
                 android:id="@+id/item_cancel"
-                android:layout_width="120dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="50dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/menu_item_bg_selector"
-                android:clickable="true"
-                android:gravity="center"
+                style="@style/menuStyle"
                 android:text="@string/cancel" />
 
         </com.mine.view.menu.slide_section_menu.SlideSectionMenu>

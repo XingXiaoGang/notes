@@ -5,15 +5,10 @@ import android.util.Log
 
 import com.fenghuo.notes.R
 import com.fenghuo.utils.FileUtils
-import com.sina.cloudstorage.auth.AWSCredentials
 import com.sina.cloudstorage.auth.BasicAWSCredentials
-import com.sina.cloudstorage.services.scs.SCS
 import com.sina.cloudstorage.services.scs.SCSClient
-import com.sina.cloudstorage.services.scs.model.PutObjectResult
-import com.sina.cloudstorage.services.scs.model.S3Object
 
 import java.io.File
-import java.io.InputStream
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.ScheduledThreadPoolExecutor
 
@@ -35,18 +30,22 @@ object CloudUtils {
         checkKey(key)
 
         mExecutorService!!.submit {
-            val accessKey = Config.AccessKey
-            val secretKey = Config.SecretKey
-            val credentials = BasicAWSCredentials(accessKey, secretKey)
-            val conn = SCSClient(credentials)
+            try {
+                val accessKey = Config.AccessKey
+                val secretKey = Config.SecretKey
+                val credentials = BasicAWSCredentials(accessKey, secretKey)
+                val conn = SCSClient(credentials)
 
-            //delete old if exist
-            conn.deleteObject(buckte, key)
+                //delete old if exist
+                conn.deleteObject(buckte, key)
 
-            //put the new object
-            val putObjectResault = conn.putObject(buckte, key, file)
-            Log.d(TAG, "run: doUpload:" + putObjectResault)
-            handler?.sendEmptyMessage(R.id.file_upload_ok)
+                //put the new object
+                val putObjectResult = conn.putObject(buckte, key, file)
+                handler?.sendEmptyMessage(R.id.file_upload_ok)
+                Log.i(TAG, "run: doUpload:" + putObjectResult)
+            } catch (e: Exception) {
+                Log.i(TAG, "run: doUpload error " + e.message)
+            }
         }
     }
 

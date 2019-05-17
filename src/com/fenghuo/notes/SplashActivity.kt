@@ -3,6 +3,8 @@ package com.fenghuo.notes
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -40,6 +42,15 @@ class SplashActivity : Activity(), Handler.Callback {
         setContentView(view)
 
         mHandler!!.sendEmptyMessageDelayed(R.id.skip_splash, 1500)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        if (Build.VERSION.SDK_INT >= 23 && checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            val strings = arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            requestPermissions(strings, 0)
+        }
     }
 
     override fun onDestroy() {

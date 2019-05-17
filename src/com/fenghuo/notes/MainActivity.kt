@@ -302,22 +302,22 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureFrameLayou
                 if (view.id == R.id.confirm) {
                     mToast!!.ShowMsg(getString(R.string.restoreing), CustomToast.Img_Info)
                     Values.isRestore_database = true
-                    var res = -1
+                    var res: Int
                     if (fileName != null) {
-                        res = mBackupRestore!!.restoreEncyptFile(fileName)
+                        res = mBackupRestore!!.restoreEncryptFile(fileName)
                     } else {
                         res = mBackupRestore!!.restoreLocal()
                     }
-                    if (res == 1) {
+                    if (res == BackupRestoreUtils.SUCCESS) {
                         mToast!!.ShowMsg(getString(R.string.restore_success), CustomToast.Img_Ok)
                         val intent = packageManager.getLaunchIntentForPackage(packageName)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         startActivity(intent)
                     }
-                    if (res == 0) {
+                    if (res == BackupRestoreUtils.ERROR_FILE_NOT_FOUND) {
                         mToast!!.ShowMsg(getString(R.string.no_backup_file), CustomToast.Img_Info)
                     }
-                    if (res == -1) {
+                    if (res == BackupRestoreUtils.ERROR_UNKNOWN) {
                         mToast!!.ShowMsg(getString(R.string.restore_fialed), CustomToast.Img_Ok)
                     }
                     Values.isRestore_database = false
@@ -330,7 +330,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureFrameLayou
     private fun doBackup() {
         if (mBackupRestore == null)
             mBackupRestore = BackupRestoreUtils(this@MainActivity)
-        if (mBackupRestore!!.checkexist()) {
+        if (mBackupRestore!!.isExternalDBExist()) {
             object : ConformDialog(this@MainActivity, getString(R.string.backup_exist)) {
                 override fun onClick(view: View) {
                     if (view.id == R.id.confirm) {
@@ -374,7 +374,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureFrameLayou
                 //先把最新的数据拿出来
                 if (mBackupRestore == null)
                     mBackupRestore = BackupRestoreUtils(this@MainActivity)
-                if (mBackupRestore!!.copyDbFileWithEncypt(tempUploadDbName)) {
+                if (mBackupRestore!!.copyDbFileWithEncrypt(tempUploadDbName)) {
                     //再上传
                     val serverFileName = Config.dbDir + File.separator + AccountProfileManager.getInstance(this).userDbName
                     CloudUtils.doUpload(Config.Buckte, serverFileName, File(tempUploadDbName), mHandler)

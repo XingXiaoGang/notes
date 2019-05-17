@@ -117,7 +117,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureFrameLayou
                     }
                 }.setButtonTextColor(resources.getColor(R.color.text_444444), resources.getColor(R.color.text_444444))
                         .setButtonText(getString(R.string.local_recovery), getString(R.string.cloud_recovery)).show()
-                mMenu!!.closeMenu()
+                closeMenu()
             }
             R.id.item_backup -> {
                 object : ConformDialog(this@MainActivity, getString(R.string.choose_backup_method)) {
@@ -132,7 +132,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureFrameLayou
                     }
                 }.setButtonTextColor(resources.getColor(R.color.text_444444), resources.getColor(R.color.text_444444))
                         .setButtonText(getString(R.string.local_backup), getString(R.string.cloud_backup)).show()
-                mMenu!!.closeMenu()
+                closeMenu()
             }
             R.id.item_setpwd -> {
                 val text = (view as TextView).text.toString()
@@ -142,8 +142,8 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureFrameLayou
                     Toast.makeText(this, R.string.pwd_deleted, Toast.LENGTH_SHORT).show()
                 } else {
                     LockPatternActivity.startToCreatePattern(this, this, Values.CODE_SET_LOCK)
-                    mMenu!!.closeMenu()
                 }
+                closeMenu()
             }
             R.id.item_clean_notes -> {
 
@@ -161,7 +161,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureFrameLayou
                         dismiss()
                     }
                 }.setButtonText(getString(R.string.cancel), getString(R.string.delete)).show()
-                mMenu!!.closeMenu()
+                closeMenu()
             }
             R.id.item_clean_accounts -> {
                 object : ConformDialog(this@MainActivity, getString(R.string.delete_all_account_warning)) {
@@ -178,12 +178,12 @@ class MainActivity : FragmentActivity(), View.OnClickListener, GestureFrameLayou
                         dismiss()
                     }
                 }.setButtonText(getString(R.string.cancel), getString(R.string.delete)).show()
-                mMenu!!.closeMenu()
+                closeMenu()
             }
             R.id.item_about -> {
                 val intent = Intent(this@MainActivity, AboutActivity::class.java)
                 startActivity(intent)
-                mMenu!!.closeMenu()
+                closeMenu()
             }
             R.id.item_exit -> {
                 finish()

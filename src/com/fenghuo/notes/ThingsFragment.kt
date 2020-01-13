@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
@@ -13,25 +12,35 @@ import android.widget.AdapterView.OnItemLongClickListener
 import android.widget.GridView
 import com.fenghuo.notes.adapter.NoteAdapter
 import com.fenghuo.notes.bean.Note
-import io.flutter.app.FlutterActivity
+import com.mine.view.button.FloatingActionButton
 
 
-class ThingsFragment : FragmentExt(), OnClickListener, OnItemClickListener, OnItemLongClickListener {
+class ThingsFragment : FragmentExt(), OnItemClickListener, OnItemLongClickListener {
 
-    private var gv_list: GridView? = null// 列表
+    private var list: GridView? = null// 列表
     private var adapter: NoteAdapter? = null// 适配器
     private var mRootView: View? = null
+    private var saveBtn: FloatingActionButton? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         mRootView = inflater.inflate(R.layout.fragment_things, null, false)
-        gv_list = mRootView!!.findViewById<GridView>(R.id.gv_list) as GridView
-        mRootView!!.findViewById<View>(R.id.add_new_note).setOnClickListener(this)
-        adapter = NoteAdapter(activity)
-        gv_list!!.adapter = adapter
+        list = mRootView!!.findViewById<GridView>(R.id.gv_list) as GridView
 
-        gv_list!!.onItemClickListener = this
-        gv_list!!.onItemLongClickListener = this
+        mRootView?.findViewById<View>(R.id.add_new_note)?.setOnClickListener {
+            val intent = Intent(activity, AddNoteActivity::class.java)
+            startActivity(intent)
+        }
+
+        saveBtn = mRootView?.findViewById(R.id.save)
+        saveBtn?.setOnClickListener { quiteEdit() }
+
+        adapter = NoteAdapter(activity)
+
+        list?.adapter = adapter
+
+        list?.onItemClickListener = this
+        list?.onItemLongClickListener = this
 
         return mRootView
     }
@@ -46,32 +55,22 @@ class ThingsFragment : FragmentExt(), OnClickListener, OnItemClickListener, OnIt
         adapter?.destory()
     }
 
-    override fun onStop() {
-        super.onStop()
-
+    private fun quiteEdit() {
+        adapter!!.quitEdit()
+        saveBtn!!.hide(true)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (adapter!!.isEdit) {
-            adapter!!.quitEdit()
+            quiteEdit()
             return true
         }
         return super.onKeyDown(keyCode, event)
     }
 
-    override fun onClick(arg0: View) {
-        when (arg0.id) {
-            // 跳转界面
-            R.id.add_new_note -> {
-                val intent = Intent(activity, AddNoteActivity::class.java)
-                startActivity(intent)
-            }
-        }
-
-    }
-
     override fun onItemLongClick(arg0: AdapterView<*>, arg1: View, arg2: Int, arg3: Long): Boolean {
         adapter!!.startEdit()
+        saveBtn!!.show(true)
         return true
     }
 
@@ -79,9 +78,9 @@ class ThingsFragment : FragmentExt(), OnClickListener, OnItemClickListener, OnIt
                              arg3: Long) {
         val note: Note? = view.getTag(R.id.tag_1) as Note
         note?.let {
-            val intent_edit = Intent(activity, EditNoteActivity::class.java)
-            intent_edit.putExtra("noteid", it.id)
-            startActivity(intent_edit)
+            val intent = Intent(activity, EditNoteActivity::class.java)
+            intent.putExtra("noteid", it.id)
+            startActivity(intent)
         }
     }
 

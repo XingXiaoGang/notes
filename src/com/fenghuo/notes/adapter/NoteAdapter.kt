@@ -1,5 +1,6 @@
 package com.fenghuo.notes.adapter
 
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -63,6 +64,15 @@ class NoteAdapter() : BaseAdapter(), View.OnClickListener {
     }
 
     override fun onClick(view: View) {
+        AlertDialog.Builder(view.context)
+                .setMessage("確定刪除？")
+                .setNegativeButton("取消", null)
+                .setPositiveButton("确实") { _, _ ->
+                    performDelete(view)
+                }.show()
+    }
+
+    private fun performDelete(view: View) {
         val item: Note = view.getTag(R.id.tag_1) as Note
         // 从列表中移除
         val dbNoteHelper = DBNoteHelper(view.context)
